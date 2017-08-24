@@ -11,8 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, OCBarrageRenderStatus) {
+    OCBarrageRenderStoped = 0,
+    OCBarrageRenderStarted,
+    OCBarrageRenderPaused
+};
+
 @interface OCBarrageRenderView : UIView <CAAnimationDelegate> {
     @protected
+    NSMutableDictionary *_barrageCellStyleClass;
     NSMutableArray<OCBarrageCell *> *_animatingCells;
     NSMutableArray<OCBarrageCell *> *_idleCells;
     dispatch_semaphore_t _animatingCellsLock;
@@ -21,13 +28,16 @@ NS_ASSUME_NONNULL_BEGIN
     UIView *_lowPositionView;
     UIView *_heightPositionView;
     BOOL _autoClear;
+    OCBarrageRenderStatus _renderStatus;
 }
 
 @property (nonatomic, strong, readonly) NSMutableArray<OCBarrageCell *> *animatingCells;
 @property (nonatomic, strong, readonly) NSMutableArray<OCBarrageCell *> *idleCells;
 @property (nonatomic, assign) OCBarrageRenderPositionStyle renderPositionStyle;
+@property (nonatomic, assign, readonly) OCBarrageRenderStatus renderStatus;
 
-- (nullable OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle;
+- (void)resgisterBarrageCellClass:(Class)barrageCellClass withStyle:(OCBarrageStyleType)barrageStyle;
+- (OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle;
 - (void)fireBarrageCell:(OCBarrageCell *)barrageCell;
 
 - (void)start;

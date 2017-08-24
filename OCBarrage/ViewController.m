@@ -83,16 +83,15 @@
     textDescriptor.textFont = [UIFont systemFontOfSize:17.0];
     textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     textDescriptor.strokeWidth = -1;
-    
     textDescriptor.animationDuration = arc4random()%3 + 6;
     
-    [self.barrageManager addBarrageDescriptor:textDescriptor];
+    [self.barrageManager renderBarrageDescriptor:textDescriptor];
     
     _count++;
     if (_count > 10.0) {
         
     } else {
-        [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*10];
+        [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*50];
     }
 }
 

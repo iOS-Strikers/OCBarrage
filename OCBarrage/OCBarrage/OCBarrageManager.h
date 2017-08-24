@@ -14,13 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OCBarrageManager : NSObject {
     @protected
     OCBarrageRenderView *_renderView;
-    NSMutableDictionary *_barrageCellStyleClass;
-    NSDate *_startTime; //如果是nil,表示弹幕渲染不在运行中; 否则,表示开始的时间
-    NSTimeInterval _pausedDuration; // 暂停持续时间
-    NSDate * _pausedTime; // 上次暂停时间; 如果为nil, 说明当前没有暂停
 }
 
 @property (nonatomic, strong, readonly) OCBarrageRenderView *renderView;
+@property (nonatomic, assign, readonly) OCBarrageRenderStatus renderStatus;
 
 - (void)resgisterBarrageCellClass:(Class)barrageCellClass withStyle:(OCBarrageStyleType)barrageStyle;
 
@@ -29,8 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)resume;
 - (void)stop;
 
-- (void)addBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor;
-
+- (void)renderBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor;
 
 @end
 

@@ -11,15 +11,13 @@
 @implementation OCBarrageRenderView
 
 - (void)dealloc {
-    if (_autoClear) {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearIdleCells) object:nil];
-    }
     NSLog(@"%s", __func__);
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _barrageCellStyleClass = [NSMutableDictionary dictionary];
         _animatingCellsLock = dispatch_semaphore_create(1);
         _idleCellsLock = dispatch_semaphore_create(1);
         _lowPositionView = [[UIView alloc] init];
@@ -32,7 +30,11 @@
     return self;
 }
 
-- (nullable OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle {
+- (void)resgisterBarrageCellClass:(Class)barrageCellClass withStyle:(OCBarrageStyleType)barrageStyle {
+    [_barrageCellStyleClass setValue:barrageCellClass forKey:[NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:barrageStyle]]];
+}
+
+- (OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle {
     OCBarrageCell *barrageCell = nil;
     
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
@@ -44,6 +46,8 @@
     }
     if (barrageCell) {
         [self.idleCells removeObject:barrageCell];
+    } else {
+        barrageCell = [self cellWithBarrageStyle:barrageStyle];
     }
     dispatch_semaphore_signal(_idleCellsLock);
     barrageCell.idleTime = 0.0;
@@ -51,11 +55,23 @@
     return barrageCell;
 }
 
-- (void)start {
+- (OCBarrageCell *)cellWithBarrageStyle:(OCBarrageStyleType)barrageStyle {
+    Class barrageCellClass = [_barrageCellStyleClass valueForKey:[NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:barrageStyle]]];
+    if (barrageCellClass == nil || barrageCellClass == NULL) {
+        barrageCellClass = [OCBarrageCell class];
+    }
+    OCBarrageCell *barrageCell = [(OCBarrageCell *)[barrageCellClass alloc] initWithStyle:barrageStyle];
+    
+    return barrageCell;
+}
 
+- (void)start {
+    _renderStatus = OCBarrageRenderStarted;
 }
 
 - (void)puase {
+    _renderStatus = OCBarrageRenderPaused;
+    
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     NSEnumerator *enumerator = [self.animatingCells reverseObjectEnumerator];
     OCBarrageCell *cell = nil;
@@ -68,6 +84,8 @@
 }
 
 - (void)resume {
+    _renderStatus = OCBarrageRenderStarted;
+    
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     NSEnumerator *enumerator = [self.animatingCells reverseObjectEnumerator];
     OCBarrageCell *cell = nil;
@@ -83,6 +101,11 @@
 }
 
 - (void)stop {
+    _renderStatus = OCBarrageRenderStoped;
+    if (_autoClear) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearIdleCells) object:nil];
+    }
+    
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     NSEnumerator *animatingEnumerator = [self.animatingCells reverseObjectEnumerator];
     OCBarrageCell *animatingCell = nil;
@@ -97,20 +120,24 @@
     dispatch_semaphore_signal(_animatingCellsLock);
     
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
-    NSEnumerator *idleEnumerator = [self.animatingCells reverseObjectEnumerator];
-    OCBarrageCell *idleCell = nil;
-    while (idleCell = [idleEnumerator nextObject]){
-        CFTimeInterval pausedTime = [idleCell.layer convertTime:CACurrentMediaTime() fromLayer:nil];
-        idleCell.layer.speed = 0.0;
-        idleCell.layer.timeOffset = pausedTime;
-        [idleCell.layer removeAllAnimations];
-        [idleCell removeFromSuperview];
-    }
     [self.idleCells removeAllObjects];
     dispatch_semaphore_signal(_idleCellsLock);
 }
 
 - (void)fireBarrageCell:(OCBarrageCell *)barrageCell {
+    switch (self.renderStatus) {
+        case OCBarrageRenderStarted: {
+            
+        }
+            break;
+        case OCBarrageRenderPaused: {
+            
+        }
+            break;
+        default:
+            return;
+            break;
+    }
     if (!barrageCell) {
         return;
     }
@@ -218,6 +245,10 @@
 
 #pragma mark ----- CAAnimationDelegate
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    if (self.renderStatus == OCBarrageRenderStoped) {
+        return;
+    }
+    
     OCBarrageCell *animationedCell = nil;
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     for (OCBarrageCell *cell in self.animatingCells) {
@@ -267,7 +298,6 @@
     }
 }
 
-
 #pragma mark ----- getter
 - (NSMutableArray<OCBarrageCell *> *)animatingCells {
     if (!_animatingCells) {
@@ -283,6 +313,10 @@
     }
     
     return _idleCells;
+}
+
+- (OCBarrageRenderStatus)renderStatus {
+    return _renderStatus;
 }
 
 @end
