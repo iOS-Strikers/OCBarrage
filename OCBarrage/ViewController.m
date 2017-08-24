@@ -106,6 +106,8 @@
 
 - (void)stopBarrage {
     [self.barrageManager stop];
+    _count = 0;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addBarrage) object:nil];
 }
 
 @end
