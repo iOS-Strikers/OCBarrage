@@ -29,7 +29,7 @@
         [self.layer addSublayer:self.textlayer];
     }
     
-    if (_textShadowOpen) {
+    if (self.barrageDescriptor.textShadowOpened) {
         self.textlayer.shadowColor = self.barrageDescriptor.shadowColor.CGColor;
         self.textlayer.shadowOffset = self.barrageDescriptor.shadowOffset;
         self.textlayer.shadowRadius = self.barrageDescriptor.shadowRadius;
@@ -57,14 +57,6 @@
     walkAnimation.removedOnCompletion = NO;
     
     [self.layer addAnimation:walkAnimation forKey:kBarrageAnimation];
-}
-
-- (void)openTextShadow {
-    _textShadowOpen = YES;
-}
-
-- (void)closeTextShadow {
-    _textShadowOpen = NO;
 }
 
 - (CATextLayer *)textlayer {

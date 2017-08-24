@@ -13,11 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OCBarrageTextCell : OCBarrageCell {
     @protected
     CATextLayer *_textlayer;
-    BOOL _textShadowOpen;
+    
 }
-
-- (void)openTextShadow;
-- (void)closeTextShadow;
 
 @end
 

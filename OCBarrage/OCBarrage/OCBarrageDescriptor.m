@@ -28,6 +28,15 @@
 }
 
 #pragma mark ----- setter
+- (void)setTextShadowOpened:(BOOL)textShadowOpened {
+    _textShadowOpened = textShadowOpened;
+    
+    if (textShadowOpened) {
+        [_textAttribute removeObjectForKey:NSStrokeColorAttributeName];
+        [_textAttribute removeObjectForKey:NSStrokeWidthAttributeName];
+    }
+}
+
 - (void)setTextFont:(UIFont *)textFont {
     _textFont = textFont;
     
@@ -40,9 +49,24 @@
     [_textAttribute setValue:textColor forKey:NSForegroundColorAttributeName];
 }
 
-- (void)setTextShadow:(NSShadow *)textShadow {
-//    _textShadow = textShadow;
+- (void)setStrokeColor:(UIColor *)strokeColor {
+    _strokeColor =  strokeColor;
     
+    if (_textShadowOpened) {
+        return;
+    }
+    
+    [_textAttribute setValue:strokeColor forKey:NSStrokeColorAttributeName];
+}
+
+- (void)setStrokeWidth:(int)strokeWidth {
+    _strokeWidth = strokeWidth;
+    
+    if (_textShadowOpened) {
+        return;
+    }
+    
+    [_textAttribute setValue:[NSNumber numberWithInt:strokeWidth] forKey:NSStrokeWidthAttributeName];
 }
 
 #pragma mark ----- getter

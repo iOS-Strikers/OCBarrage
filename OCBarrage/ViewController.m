@@ -28,9 +28,15 @@
     [self.barrageManager start];
     [self.view addSubview:self.barrageManager.renderView];
     self.barrageManager.renderView.frame = self.view.bounds;
+    self.barrageManager.renderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    [self addBarrage];
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor grayColor];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(addBarrage) forControlEvents:UIControlEventTouchUpInside];
+    button.frame= CGRectMake(0.0, 0.0, 50.0, 50.0);
+    button.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
+    [self.view addSubview:button];
 }
 
 - (void)addBarrage {
@@ -38,15 +44,16 @@
     textDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
         NSLog(@"descriptor.text = %@", descriptor.text);
     };
-    textDescriptor.text = [NSString stringWithFormat:@"%d", arc4random()%10000+10000];
+//    textDescriptor.text = [NSString stringWithFormat:@"%d", arc4random()%10000+10000];
+    textDescriptor.text = [NSString stringWithFormat:@"你说的啥我看不清"];
     textDescriptor.textColor = [UIColor whiteColor];
     textDescriptor.textFont = [UIFont systemFontOfSize:17.0];
-    
+
     textDescriptor.animationDuration = arc4random()%3 + 6;
     
     [self.barrageManager addBarrageDescriptor:textDescriptor];
     
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01];
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*10];
 }
 
 @end
