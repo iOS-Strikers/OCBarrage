@@ -67,7 +67,15 @@
     barrageCell.idle = NO;
     dispatch_semaphore_signal(_animatingCellsLock);
     
-    switch (barrageCell.barrageDescriptor.positionPriority) {
+    [self addBarrageCell:barrageCell WithPositionPriority:barrageCell.barrageDescriptor.positionPriority];
+    barrageCell.frame = [self calculationBarrageCellFrame:barrageCell];
+    
+    [barrageCell addBarrageAnimationWithDelegate:self];
+    _lastestCell = barrageCell;
+}
+
+- (void)addBarrageCell:(OCBarrageCell *)barrageCell WithPositionPriority:(OCBarragePositionPriority)positionPriority {
+    switch (positionPriority) {
         case OCBarragePositionMiddle: {
             [self insertSubview:barrageCell aboveSubview:_lowPositionView];
         }
@@ -85,7 +93,9 @@
         }
             break;
     }
-    
+}
+
+- (CGRect)calculationBarrageCellFrame:(OCBarrageCell *)barrageCell {
     CGRect cellFrame = barrageCell.bounds;
     cellFrame.origin.x = CGRectGetMaxX(self.frame);
     if (barrageCell.barrageDescriptor.bindingOriginY >= 0.0) {
@@ -123,17 +133,13 @@
         cellFrame.origin.y = 0.0;
     }
     
-    barrageCell.frame = cellFrame;
-    
-    [barrageCell addBarrageAnimationWithDelegate:self];
-    _lastestCell = barrageCell;
+    return cellFrame;
 }
 
 - (void)clearIdleCells {
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
     NSTimeInterval timeInterval = [[NSDate date] timeIntervalSince1970];
     NSEnumerator *enumerator = [self.idleCells reverseObjectEnumerator];
-    
     OCBarrageCell *cell;
     while (cell = [enumerator nextObject]){
         CGFloat time = timeInterval - cell.idleTime;
