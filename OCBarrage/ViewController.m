@@ -32,11 +32,45 @@
     
     self.view.backgroundColor = [UIColor blackColor];
     
+    CGFloat originY = CGRectGetHeight(self.view.frame) - 50.0;
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"开始" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(addBarrage) forControlEvents:UIControlEventTouchUpInside];
-    button.frame= CGRectMake(0.0, 64.0, 50.0, 50.0);
+    button.frame= CGRectMake(0.0, originY, 50.0, 50.0);
     button.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
     [self.view addSubview:button];
+    
+    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button2 setTitle:@"暂停" forState:UIControlStateNormal];
+    [button2 setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button2 addTarget:self action:@selector(pasueBarrage) forControlEvents:UIControlEventTouchUpInside];
+    button2.frame= CGRectMake(55.0, originY, 50.0, 50.0);
+    button2.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
+    [self.view addSubview:button2];
+    
+    UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button3 setTitle:@"继续" forState:UIControlStateNormal];
+    [button3 setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button3 addTarget:self action:@selector(resumeBarrage) forControlEvents:UIControlEventTouchUpInside];
+    button3.frame= CGRectMake(110.0, originY, 50.0, 50.0);
+    button3.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
+    [self.view addSubview:button3];
+    
+    UIButton *button4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button4 setTitle:@"停止" forState:UIControlStateNormal];
+    [button4 setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button4 addTarget:self action:@selector(stopBarrage) forControlEvents:UIControlEventTouchUpInside];
+    button4.frame= CGRectMake(165.0, originY, 50.0, 50.0);
+    button4.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
+    [self.view addSubview:button4];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    NSLog(@"%s", __func__);
 }
 
 - (void)addBarrage {
@@ -54,13 +88,24 @@
     
     [self.barrageManager addBarrageDescriptor:textDescriptor];
     
-    
     _count++;
     if (_count > 10.0) {
         
     } else {
         [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*10];
     }
+}
+
+- (void)pasueBarrage {
+    [self.barrageManager puase];
+}
+
+- (void)resumeBarrage {
+    [self.barrageManager resume];
+}
+
+- (void)stopBarrage {
+    [self.barrageManager stop];
 }
 
 @end

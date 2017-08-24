@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OCBarrageCell : UIView {
     @protected
     OCBarrageStyleType _cellStyle;
-    
 }
 
 @property (nonatomic, assign, getter=isIdle) BOOL idle;//是否是空闲状态

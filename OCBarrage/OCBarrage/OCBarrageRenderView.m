@@ -14,6 +14,7 @@
     if (_autoClear) {
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearIdleCells) object:nil];
     }
+    NSLog(@"%s", __func__);
 }
 
 - (instancetype)init {
@@ -48,6 +49,65 @@
     barrageCell.idleTime = 0.0;
     
     return barrageCell;
+}
+
+- (void)start {
+
+}
+
+- (void)puase {
+    dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
+    NSEnumerator *enumerator = [self.animatingCells reverseObjectEnumerator];
+    OCBarrageCell *cell = nil;
+    while (cell = [enumerator nextObject]){
+        CFTimeInterval pausedTime = [cell.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+        cell.layer.speed = 0.0;
+        cell.layer.timeOffset = pausedTime;
+    }
+    dispatch_semaphore_signal(_animatingCellsLock);
+}
+
+- (void)resume {
+    dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
+    NSEnumerator *enumerator = [self.animatingCells reverseObjectEnumerator];
+    OCBarrageCell *cell = nil;
+    while (cell = [enumerator nextObject]){
+        CFTimeInterval pausedTime = cell.layer.timeOffset;
+        cell.layer.speed = 1.0;
+        cell.layer.timeOffset = 0.0;
+        cell.layer.beginTime = 0.0;
+        CFTimeInterval timeSincePause = [cell.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        cell.layer.beginTime = timeSincePause;
+    }
+    dispatch_semaphore_signal(_animatingCellsLock);
+}
+
+- (void)stop {
+    dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
+    NSEnumerator *animatingEnumerator = [self.animatingCells reverseObjectEnumerator];
+    OCBarrageCell *animatingCell = nil;
+    while (animatingCell = [animatingEnumerator nextObject]){
+        CFTimeInterval pausedTime = [animatingCell.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+        animatingCell.layer.speed = 0.0;
+        animatingCell.layer.timeOffset = pausedTime;
+        [animatingCell.layer removeAllAnimations];
+        [animatingCell removeFromSuperview];
+    }
+    [self.animatingCells removeAllObjects];
+    dispatch_semaphore_signal(_animatingCellsLock);
+    
+    dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
+    NSEnumerator *idleEnumerator = [self.animatingCells reverseObjectEnumerator];
+    OCBarrageCell *idleCell = nil;
+    while (idleCell = [idleEnumerator nextObject]){
+        CFTimeInterval pausedTime = [idleCell.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+        idleCell.layer.speed = 0.0;
+        idleCell.layer.timeOffset = pausedTime;
+        [idleCell.layer removeAllAnimations];
+        [idleCell removeFromSuperview];
+    }
+    [self.idleCells removeAllObjects];
+    dispatch_semaphore_signal(_idleCellsLock);
 }
 
 - (void)fireBarrageCell:(OCBarrageCell *)barrageCell {
@@ -104,8 +164,8 @@
         switch (self.renderPositionStyle) {
             case OCBarrageRenderPositionRandom: {
                 CGFloat maxY = CGRectGetHeight(self.bounds) - CGRectGetHeight(cellFrame);
-                NSInteger originY = floorl(maxY);
-                cellFrame.origin.y = arc4random()%originY;
+                int originY = floorl(maxY);
+                cellFrame.origin.y = arc4random_uniform(originY);
             }
                 break;
             case OCBarrageRenderPositionIncrease: {

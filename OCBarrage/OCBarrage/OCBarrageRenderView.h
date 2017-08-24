@@ -30,6 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle;
 - (void)fireBarrageCell:(OCBarrageCell *)barrageCell;
 
+- (void)start;
+- (void)puase;
+- (void)resume;
+- (void)stop;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

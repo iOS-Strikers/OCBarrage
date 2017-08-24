@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)start;
 - (void)puase;
+- (void)resume;
 - (void)stop;
 
 - (void)addBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor;

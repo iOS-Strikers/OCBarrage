@@ -10,6 +10,11 @@
 
 @implementation OCBarrageManager
 
+- (void)dealloc {
+    [_renderView stop];
+    NSLog(@"%s", __func__);
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -27,16 +32,23 @@
 - (void)start {
     _startTime = [NSDate date];
     _pausedTime = nil;
+    [self.renderView start];
 }
 
 - (void)puase {
     _startTime = nil;
     _pausedTime = [NSDate date];
+    [self.renderView puase];
+}
+
+- (void)resume {
+    [self.renderView resume];
 }
 
 - (void)stop {
     _startTime = nil;
     _pausedTime = nil;
+    [self.renderView stop];
 }
 
 - (void)addBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor {
