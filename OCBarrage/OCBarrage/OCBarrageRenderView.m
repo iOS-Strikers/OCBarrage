@@ -70,6 +70,9 @@
 }
 
 - (void)puase {
+    if (_renderStatus != OCBarrageRenderStarted) {
+        return;
+    }
     _renderStatus = OCBarrageRenderPaused;
     
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
@@ -84,6 +87,9 @@
 }
 
 - (void)resume {
+    if (_renderStatus != OCBarrageRenderPaused) {
+        return;
+    }
     _renderStatus = OCBarrageRenderStarted;
     
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);

@@ -25,7 +25,6 @@
     
     self.barrageManager = [[OCBarrageManager alloc] init];
     [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withStyle:OCBarrageStyleText];
-    [self.barrageManager start];
     [self.view addSubview:self.barrageManager.renderView];
     self.barrageManager.renderView.frame = self.view.bounds;
     self.barrageManager.renderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -74,6 +73,8 @@
 }
 
 - (void)addBarrage {
+    [self.barrageManager start];
+    
     OCBarrageTextDescriptor *textDescriptor = [[OCBarrageTextDescriptor alloc] init];
     textDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
         NSLog(@"descriptor.text = %@", descriptor.text);
@@ -89,7 +90,7 @@
     
     _count++;
     if (_count > 10.0) {
-        
+        _count = 0;
     } else {
         [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*50];
     }
