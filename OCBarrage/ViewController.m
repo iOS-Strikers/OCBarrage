@@ -44,8 +44,7 @@
     textDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
         NSLog(@"descriptor.text = %@", descriptor.text);
     };
-//    textDescriptor.text = [NSString stringWithFormat:@"%d", arc4random()%10000+10000];
-    textDescriptor.text = [NSString stringWithFormat:@"你说的啥我看不清"];
+    textDescriptor.text = [NSString stringWithFormat:@"~全是弹幕~"];
     textDescriptor.textColor = [UIColor whiteColor];
     textDescriptor.textFont = [UIFont systemFontOfSize:17.0];
     textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
@@ -55,7 +54,7 @@
     
     [self.barrageManager addBarrageDescriptor:textDescriptor];
     
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*1];
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01/100];
 }
 
 @end
