@@ -10,6 +10,11 @@
 
 @implementation OCBarrageRenderView
 
+- (void)dealloc {
+    [_autoClearTime invalidate];
+    _autoClearTime = nil;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -20,6 +25,8 @@
         _heightPositionView = [[UIView alloc] init];
         [self addSubview:_heightPositionView];
         self.layer.masksToBounds = YES;
+        
+        _autoClearTime = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(clearIdleCells) userInfo:nil repeats:YES];
     }
     
     return self;
@@ -39,6 +46,7 @@
         [self.idleCells removeObject:barrageCell];
     }
     dispatch_semaphore_signal(_idleCellsLock);
+    barrageCell.idleTime = 0.0;
     
     return barrageCell;
 }
@@ -122,6 +130,17 @@
     _lastestCell = barrageCell;
 }
 
+- (void)clearIdleCells {
+    dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSince1970];
+    for (OCBarrageCell *cell in self.idleCells) {
+        if ((timeInterval - cell.idleTime) >= 5.0 && cell.idleTime > 0) {
+            [self.idleCells removeObject:cell];
+        }
+    }
+    dispatch_semaphore_signal(_idleCellsLock);
+}
+
 #pragma mark ----- CAAnimationDelegate
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     OCBarrageCell *animationedCell = nil;
@@ -143,6 +162,7 @@
     [animationedCell prepareForReuse];
 
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
+    animationedCell.idleTime = [[NSDate date] timeIntervalSince1970];
     [self.idleCells addObject:animationedCell];
     dispatch_semaphore_signal(_idleCellsLock);
 }

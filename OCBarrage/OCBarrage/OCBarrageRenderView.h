@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
     OCBarrageCell *_lastestCell;
     UIView *_lowPositionView;
     UIView *_heightPositionView;
+    NSTimer *_autoClearTime;
 }
 
 @property (nonatomic, strong, readonly) NSMutableArray<OCBarrageCell *> *animatingCells;

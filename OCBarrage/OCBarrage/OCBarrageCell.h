@@ -16,9 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OCBarrageCell : UIView {
     @protected
     OCBarrageStyleType _cellStyle;
+    
 }
 
 @property (nonatomic, assign, getter=isIdle) BOOL idle;//是否是空闲状态
+@property (nonatomic, assign) NSTimeInterval idleTime;//开始闲置的时间, 闲置超过5秒的, 自动回收内存
 @property (nonatomic, assign, readonly) OCBarrageStyleType cellStyle;
 @property (nonatomic, strong, nullable) OCBarrageDescriptor *barrageDescriptor;
 @property (nonatomic, strong, readonly) CAAnimation *barrageAnimation;
