@@ -21,9 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
     UIView *_lowPositionView;
     UIView *_heightPositionView;
 }
+
 @property (nonatomic, strong, readonly) NSMutableArray<OCBarrageCell *> *animatingCells;
 @property (nonatomic, strong, readonly) NSMutableArray<OCBarrageCell *> *idleCells;
 @property (nonatomic, assign) OCBarrageRenderPositionStyle renderPositionStyle;
+
 - (nullable OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle;
 - (void)fireBarrageCell:(OCBarrageCell *)barrageCell;
 

@@ -85,6 +85,12 @@
         cellFrame.origin.y = barrageCell.barrageDescriptor.bindingOriginY;
     } else {
         switch (self.renderPositionStyle) {
+            case OCBarrageRenderPositionRandom: {
+                CGFloat maxY = CGRectGetHeight(self.bounds) - CGRectGetHeight(cellFrame);
+                NSInteger originY = floorl(maxY);
+                cellFrame.origin.y = arc4random()%originY;
+            }
+                break;
             case OCBarrageRenderPositionIncrease: {
                 if (_lastestCell) {
                     CGRect lastestFrame = _lastestCell.frame;
@@ -95,15 +101,16 @@
             }
                 break;
             default: {
-                CGFloat maxY = CGRectGetHeight(self.bounds) - CGRectGetHeight(cellFrame);
-                NSInteger originY = floorl(maxY);
-                cellFrame.origin.y = arc4random()%originY;
+                CGFloat renderViewHeight = CGRectGetHeight(self.bounds);
+                CGFloat cellHeight = CGRectGetHeight(barrageCell.bounds);
+                int trackNumber = floorf(renderViewHeight/cellHeight);
+                cellFrame.origin.y = (arc4random()%(trackNumber+1))*cellHeight;
             }
                 break;
         }
     }
     
-    if (CGRectGetMaxY(cellFrame) > CGRectGetMaxY(self.superview.bounds)) {
+    if (CGRectGetMaxY(cellFrame) > CGRectGetHeight(self.bounds)) {
         cellFrame.origin.y = 0.0; //超过底部, 回到顶部
     } else if (cellFrame.origin.y  < 0) {
         cellFrame.origin.y = 0.0;

@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, OCBarrageStyleType) {
     OCBarrageStyleTextAndBackgroundImage
 };
 
-typedef void(^OCBarrageTouchAction)(__weak OCBarrageDescriptor  *descriptor);
+typedef void(^OCBarrageTouchAction)(__weak OCBarrageDescriptor *descriptor);
 
 typedef NS_ENUM(NSInteger, OCBarragePositionPriority) {
     OCBarragePositionLow = 0,
@@ -27,9 +27,9 @@ typedef NS_ENUM(NSInteger, OCBarragePositionPriority) {
 };
 
 typedef NS_ENUM(NSInteger, OCBarrageRenderPositionStyle) {//新加的cell的y坐标的类型
-    OCBarrageRenderPositionRandom = 0, // y坐标随机
-    OCBarrageRenderPositionIncrease, //y坐标递增
-    OCBarrageRenderPositionFollow // 不与前一条弹幕重叠的情况下渲染在同一行
+    OCBarrageRenderPositionRandomTracks = 0, //将OCBarrageRenderView分成几条轨道, 随机选一条展示
+    OCBarrageRenderPositionRandom, // y坐标随机
+    OCBarrageRenderPositionIncrease, //y坐标递增, 循环
 };
 
 #endif /* OCBarrageHeader_h */
