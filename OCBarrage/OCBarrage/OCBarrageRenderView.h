@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, OCBarrageRenderStatus) {
 @property (nonatomic, assign, readonly) OCBarrageRenderStatus renderStatus;
 
 - (void)resgisterBarrageCellClass:(Class)barrageCellClass withStyle:(OCBarrageStyleType)barrageStyle;
-- (OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle;
+- (nullable OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle;
 - (void)fireBarrageCell:(OCBarrageCell *)barrageCell;
 
 - (void)start;

@@ -64,6 +64,8 @@
     button4.frame= CGRectMake(165.0, originY, 50.0, 50.0);
     button4.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
     [self.view addSubview:button4];
+    
+    [self.barrageManager start];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -73,8 +75,6 @@
 }
 
 - (void)addBarrage {
-    [self.barrageManager start];
-    
     OCBarrageTextDescriptor *textDescriptor = [[OCBarrageTextDescriptor alloc] init];
     textDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
         NSLog(@"descriptor.text = %@", descriptor.text);
@@ -85,15 +85,17 @@
     textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     textDescriptor.strokeWidth = -1;
     textDescriptor.animationDuration = arc4random()%3 + 6;
+    textDescriptor.barrageStyle = OCBarrageStyleText;
     
     [self.barrageManager renderBarrageDescriptor:textDescriptor];
     
     _count++;
-    if (_count > 10.0) {
-        _count = 0;
-    } else {
-        [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*50];
-    }
+//    if (_count > 10.0) {
+//        _count = 0;
+//    } else {
+//        
+//    }
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01/10];
 }
 
 - (void)pasueBarrage {

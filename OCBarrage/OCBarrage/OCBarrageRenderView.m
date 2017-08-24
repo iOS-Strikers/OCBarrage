@@ -34,7 +34,7 @@
     [_barrageCellStyleClass setValue:barrageCellClass forKey:[NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:barrageStyle]]];
 }
 
-- (OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle {
+- (nullable OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle {
     OCBarrageCell *barrageCell = nil;
     
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
@@ -46,19 +46,19 @@
     }
     if (barrageCell) {
         [self.idleCells removeObject:barrageCell];
+        barrageCell.idleTime = 0.0;
     } else {
         barrageCell = [self cellWithBarrageStyle:barrageStyle];
     }
     dispatch_semaphore_signal(_idleCellsLock);
-    barrageCell.idleTime = 0.0;
     
     return barrageCell;
 }
 
 - (OCBarrageCell *)cellWithBarrageStyle:(OCBarrageStyleType)barrageStyle {
     Class barrageCellClass = [_barrageCellStyleClass valueForKey:[NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:barrageStyle]]];
-    if (barrageCellClass == nil || barrageCellClass == NULL) {
-        barrageCellClass = [OCBarrageCell class];
+    if (barrageCellClass == nil) {
+        return nil;
     }
     OCBarrageCell *barrageCell = [(OCBarrageCell *)[barrageCellClass alloc] initWithStyle:barrageStyle];
     
@@ -81,7 +81,6 @@
         }
             break;
     }
-    
 }
 
 - (void)puase {
