@@ -11,6 +11,7 @@
 @implementation OCBarrageManager
 
 - (void)dealloc {
+    NSLog(@"%s", __func__);
     [_renderView stop];
 }
 

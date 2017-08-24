@@ -66,14 +66,39 @@
 }
 
 - (void)start {
-    _renderStatus = OCBarrageRenderStarted;
+    switch (self.renderStatus) {
+        case OCBarrageRenderStarted: {
+            return;
+        }
+            break;
+        case OCBarrageRenderPaused: {
+            [self resume];
+            return;
+        }
+            break;
+        default: {
+            _renderStatus = OCBarrageRenderStarted;
+        }
+            break;
+    }
+    
 }
 
 - (void)puase {
-    if (_renderStatus != OCBarrageRenderStarted) {
-        return;
+    switch (self.renderStatus) {
+        case OCBarrageRenderStarted: {
+            _renderStatus = OCBarrageRenderPaused;
+        }
+            break;
+        case OCBarrageRenderPaused: {
+            return;
+        }
+            break;
+        default: {
+            return;
+        }
+            break;
     }
-    _renderStatus = OCBarrageRenderPaused;
     
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     NSEnumerator *enumerator = [self.animatingCells reverseObjectEnumerator];
@@ -87,10 +112,20 @@
 }
 
 - (void)resume {
-    if (_renderStatus != OCBarrageRenderPaused) {
-        return;
+    switch (self.renderStatus) {
+        case OCBarrageRenderStarted: {
+            return;
+        }
+            break;
+        case OCBarrageRenderPaused: {
+            _renderStatus = OCBarrageRenderStarted;
+        }
+            break;
+        default: {
+            return;
+        }
+            break;
     }
-    _renderStatus = OCBarrageRenderStarted;
     
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     NSEnumerator *enumerator = [self.animatingCells reverseObjectEnumerator];
@@ -107,7 +142,21 @@
 }
 
 - (void)stop {
-    _renderStatus = OCBarrageRenderStoped;
+    switch (self.renderStatus) {
+        case OCBarrageRenderStarted: {
+            _renderStatus = OCBarrageRenderStoped;
+        }
+            break;
+        case OCBarrageRenderPaused: {
+            _renderStatus = OCBarrageRenderStoped;
+        }
+            break;
+        default: {
+            return;
+        }
+            break;
+    }
+    
     if (_autoClear) {
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearIdleCells) object:nil];
     }
@@ -138,6 +187,7 @@
             break;
         case OCBarrageRenderPaused: {
             
+            return;
         }
             break;
         default:
