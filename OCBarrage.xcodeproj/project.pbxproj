@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57969F4F1F4ECC8C0028C955 /* RootViewController.m */; };
 		57D513E71F4E964300B2E8A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513E61F4E964300B2E8A7 /* main.m */; };
 		57D513EA1F4E964300B2E8A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513E91F4E964300B2E8A7 /* AppDelegate.m */; };
 		57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513EC1F4E964300B2E8A7 /* ViewController.m */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		57969F4E1F4ECC8C0028C955 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		57969F4F1F4ECC8C0028C955 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		57D513E21F4E964300B2E8A7 /* OCBarrage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCBarrage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D513E61F4E964300B2E8A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		57D513E81F4E964300B2E8A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,6 +126,8 @@
 				57D514181F4E967700B2E8A7 /* OCBarrage */,
 				57D513E81F4E964300B2E8A7 /* AppDelegate.h */,
 				57D513E91F4E964300B2E8A7 /* AppDelegate.m */,
+				57969F4E1F4ECC8C0028C955 /* RootViewController.h */,
+				57969F4F1F4ECC8C0028C955 /* RootViewController.m */,
 				57D513EB1F4E964300B2E8A7 /* ViewController.h */,
 				57D513EC1F4E964300B2E8A7 /* ViewController.m */,
 				57D513EE1F4E964300B2E8A7 /* Main.storyboard */,
@@ -318,6 +323,7 @@
 				57D5142A1F4E967700B2E8A7 /* OCBarrageTextCell.m in Sources */,
 				57D514291F4E967700B2E8A7 /* OCBarrageRenderView.m in Sources */,
 				57D514261F4E967700B2E8A7 /* OCBarrageCell.m in Sources */,
+				57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */,
 				57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */,
 				57D5142B1F4E967700B2E8A7 /* OCBarrageTextDescriptor.m in Sources */,
 				57D514271F4E967700B2E8A7 /* OCBarrageDescriptor.m in Sources */,

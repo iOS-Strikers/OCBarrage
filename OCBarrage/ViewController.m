@@ -34,7 +34,7 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self action:@selector(addBarrage) forControlEvents:UIControlEventTouchUpInside];
-    button.frame= CGRectMake(0.0, 0.0, 50.0, 50.0);
+    button.frame= CGRectMake(0.0, 64.0, 50.0, 50.0);
     button.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
     [self.view addSubview:button];
 }
@@ -54,7 +54,13 @@
     
     [self.barrageManager addBarrageDescriptor:textDescriptor];
     
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01/100];
+    
+    _count++;
+    if (_count > 10.0) {
+        
+    } else {
+        [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*10];
+    }
 }
 
 @end
