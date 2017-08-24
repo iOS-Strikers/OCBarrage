@@ -10,10 +10,10 @@
 
 @implementation OCBarrageCell
 
-- (instancetype)initWithStyle:(OCBarrageStyleType)barrageStyle {
+- (instancetype)initWithBarrageIndentifier:(NSString *)barrageIndentifier {
     self = [super init];
     if (self) {
-        _cellStyle = barrageStyle;
+        _barrageIndentifier = barrageIndentifier;
     }
     
     return self;
@@ -56,8 +56,8 @@
     return [self.layer animationForKey:kBarrageAnimation];
 }
 
-- (OCBarrageStyleType)cellStyle {
-    return _cellStyle;
+- (NSString *)barrageIndentifier {
+    return _barrageIndentifier;
 }
 
 

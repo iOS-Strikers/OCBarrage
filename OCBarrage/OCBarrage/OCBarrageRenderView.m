@@ -30,16 +30,16 @@
     return self;
 }
 
-- (void)resgisterBarrageCellClass:(Class)barrageCellClass withStyle:(OCBarrageStyleType)barrageStyle {
-    [_barrageCellStyleClass setValue:barrageCellClass forKey:[NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:barrageStyle]]];
+- (void)resgisterBarrageCellClass:(Class)barrageCellClass withBarrageIndentifier:(NSString *)barrageIndentifier {
+    [_barrageCellStyleClass setValue:barrageCellClass forKey:barrageIndentifier];
 }
 
-- (nullable OCBarrageCell *)cellWithStyle:(OCBarrageStyleType)barrageStyle {
+- (nullable OCBarrageCell *)cellWithBarrageIndentifier:(NSString *)barrageIndentifier {
     OCBarrageCell *barrageCell = nil;
     
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
     for (OCBarrageCell *cell in self.idleCells) {
-        if (cell.cellStyle == barrageStyle) {
+        if (cell.barrageIndentifier == barrageIndentifier) {
             barrageCell = cell;
             break;
         }
@@ -48,19 +48,19 @@
         [self.idleCells removeObject:barrageCell];
         barrageCell.idleTime = 0.0;
     } else {
-        barrageCell = [self cellWithBarrageStyle:barrageStyle];
+        barrageCell = [self newCellWithBarrageIndentifier:barrageIndentifier];
     }
     dispatch_semaphore_signal(_idleCellsLock);
     
     return barrageCell;
 }
 
-- (OCBarrageCell *)cellWithBarrageStyle:(OCBarrageStyleType)barrageStyle {
-    Class barrageCellClass = [_barrageCellStyleClass valueForKey:[NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:barrageStyle]]];
+- (OCBarrageCell *)newCellWithBarrageIndentifier:(NSString *)barrageIndentifier {
+    Class barrageCellClass = [_barrageCellStyleClass valueForKey:barrageIndentifier];
     if (barrageCellClass == nil) {
         return nil;
     }
-    OCBarrageCell *barrageCell = [(OCBarrageCell *)[barrageCellClass alloc] initWithStyle:barrageStyle];
+    OCBarrageCell *barrageCell = [(OCBarrageCell *)[barrageCellClass alloc] initWithBarrageIndentifier:barrageIndentifier];
     
     return barrageCell;
 }

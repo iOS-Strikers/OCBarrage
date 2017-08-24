@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.barrageManager = [[OCBarrageManager alloc] init];
-    [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withStyle:OCBarrageStyleText];
+    [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withBarrageIndentifier:@"OCBarrageStyleText"];
     [self.view addSubview:self.barrageManager.renderView];
     self.barrageManager.renderView.frame = self.view.bounds;
     self.barrageManager.renderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -85,7 +85,7 @@
     textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     textDescriptor.strokeWidth = -1;
     textDescriptor.animationDuration = arc4random()%3 + 6;
-    textDescriptor.barrageStyle = OCBarrageStyleText;
+    textDescriptor.barrageIndentifier = @"OCBarrageStyleText";
     
     [self.barrageManager renderBarrageDescriptor:textDescriptor];
     
@@ -95,7 +95,7 @@
 //    } else {
 //        
 //    }
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01/10];
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*2];
 }
 
 - (void)pasueBarrage {

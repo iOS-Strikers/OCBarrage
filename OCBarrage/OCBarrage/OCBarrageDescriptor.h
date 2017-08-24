@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableDictionary *_textAttribute;
 }
 
-@property (nonatomic, assign) OCBarrageStyleType barrageStyle;
+@property (nonatomic, copy, nullable) NSString *barrageIndentifier;
 @property (nonatomic, assign) OCBarragePositionPriority positionPriority;//显示位置normal型的渲染在low型的上面, height型的渲染在normal上面
 @property (nonatomic, assign) CGFloat animationDuration;
 

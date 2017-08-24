@@ -10,6 +10,4 @@
 
 @interface OCBarrageTextDescriptor : OCBarrageDescriptor
 
-
-
 @end

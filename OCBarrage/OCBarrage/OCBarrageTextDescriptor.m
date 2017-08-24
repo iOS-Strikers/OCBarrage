@@ -12,7 +12,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.barrageStyle = OCBarrageStyleText;
+        
     }
     
     return self;

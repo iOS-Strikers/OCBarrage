@@ -12,10 +12,6 @@
 #define kBarrageAnimation @"kBarrageAnimation"
 @class OCBarrageDescriptor;
 
-typedef NS_ENUM(NSInteger, OCBarrageStyleType) {
-    OCBarrageStyleText = 0,
-    OCBarrageStyleTextAndBackgroundImage
-};
 
 typedef void(^OCBarrageTouchAction)(__weak OCBarrageDescriptor *descriptor);
 
