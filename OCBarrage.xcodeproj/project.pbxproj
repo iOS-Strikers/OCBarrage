@@ -15,6 +15,12 @@
 		57D513F51F4E964300B2E8A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57D513F31F4E964300B2E8A7 /* LaunchScreen.storyboard */; };
 		57D514001F4E964300B2E8A7 /* OCBarrageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513FF1F4E964300B2E8A7 /* OCBarrageTests.m */; };
 		57D5140B1F4E964300B2E8A7 /* OCBarrageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D5140A1F4E964300B2E8A7 /* OCBarrageUITests.m */; };
+		57D514261F4E967700B2E8A7 /* OCBarrageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D5141A1F4E967700B2E8A7 /* OCBarrageCell.m */; };
+		57D514271F4E967700B2E8A7 /* OCBarrageDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D5141C1F4E967700B2E8A7 /* OCBarrageDescriptor.m */; };
+		57D514281F4E967700B2E8A7 /* OCBarrageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D5141F1F4E967700B2E8A7 /* OCBarrageManager.m */; };
+		57D514291F4E967700B2E8A7 /* OCBarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D514211F4E967700B2E8A7 /* OCBarrageRenderView.m */; };
+		57D5142A1F4E967700B2E8A7 /* OCBarrageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D514231F4E967700B2E8A7 /* OCBarrageTextCell.m */; };
+		57D5142B1F4E967700B2E8A7 /* OCBarrageTextDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D514251F4E967700B2E8A7 /* OCBarrageTextDescriptor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +57,19 @@
 		57D514061F4E964300B2E8A7 /* OCBarrageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OCBarrageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D5140A1F4E964300B2E8A7 /* OCBarrageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBarrageUITests.m; sourceTree = "<group>"; };
 		57D5140C1F4E964300B2E8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57D514191F4E967700B2E8A7 /* OCBarrageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageCell.h; sourceTree = "<group>"; };
+		57D5141A1F4E967700B2E8A7 /* OCBarrageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageCell.m; sourceTree = "<group>"; };
+		57D5141B1F4E967700B2E8A7 /* OCBarrageDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageDescriptor.h; sourceTree = "<group>"; };
+		57D5141C1F4E967700B2E8A7 /* OCBarrageDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageDescriptor.m; sourceTree = "<group>"; };
+		57D5141D1F4E967700B2E8A7 /* OCBarrageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageHeader.h; sourceTree = "<group>"; };
+		57D5141E1F4E967700B2E8A7 /* OCBarrageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageManager.h; sourceTree = "<group>"; };
+		57D5141F1F4E967700B2E8A7 /* OCBarrageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageManager.m; sourceTree = "<group>"; };
+		57D514201F4E967700B2E8A7 /* OCBarrageRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageRenderView.h; sourceTree = "<group>"; };
+		57D514211F4E967700B2E8A7 /* OCBarrageRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageRenderView.m; sourceTree = "<group>"; };
+		57D514221F4E967700B2E8A7 /* OCBarrageTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTextCell.h; sourceTree = "<group>"; };
+		57D514231F4E967700B2E8A7 /* OCBarrageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTextCell.m; sourceTree = "<group>"; };
+		57D514241F4E967700B2E8A7 /* OCBarrageTextDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTextDescriptor.h; sourceTree = "<group>"; };
+		57D514251F4E967700B2E8A7 /* OCBarrageTextDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTextDescriptor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +120,7 @@
 		57D513E41F4E964300B2E8A7 /* OCBarrage */ = {
 			isa = PBXGroup;
 			children = (
+				57D514181F4E967700B2E8A7 /* OCBarrage */,
 				57D513E81F4E964300B2E8A7 /* AppDelegate.h */,
 				57D513E91F4E964300B2E8A7 /* AppDelegate.m */,
 				57D513EB1F4E964300B2E8A7 /* ViewController.h */,
@@ -138,6 +158,26 @@
 				57D5140C1F4E964300B2E8A7 /* Info.plist */,
 			);
 			path = OCBarrageUITests;
+			sourceTree = "<group>";
+		};
+		57D514181F4E967700B2E8A7 /* OCBarrage */ = {
+			isa = PBXGroup;
+			children = (
+				57D514191F4E967700B2E8A7 /* OCBarrageCell.h */,
+				57D5141A1F4E967700B2E8A7 /* OCBarrageCell.m */,
+				57D5141B1F4E967700B2E8A7 /* OCBarrageDescriptor.h */,
+				57D5141C1F4E967700B2E8A7 /* OCBarrageDescriptor.m */,
+				57D5141D1F4E967700B2E8A7 /* OCBarrageHeader.h */,
+				57D5141E1F4E967700B2E8A7 /* OCBarrageManager.h */,
+				57D5141F1F4E967700B2E8A7 /* OCBarrageManager.m */,
+				57D514201F4E967700B2E8A7 /* OCBarrageRenderView.h */,
+				57D514211F4E967700B2E8A7 /* OCBarrageRenderView.m */,
+				57D514221F4E967700B2E8A7 /* OCBarrageTextCell.h */,
+				57D514231F4E967700B2E8A7 /* OCBarrageTextCell.m */,
+				57D514241F4E967700B2E8A7 /* OCBarrageTextDescriptor.h */,
+				57D514251F4E967700B2E8A7 /* OCBarrageTextDescriptor.m */,
+			);
+			path = OCBarrage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +247,7 @@
 				TargetAttributes = {
 					57D513E11F4E964300B2E8A7 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 4K5N79DF8Y;
 						ProvisioningStyle = Automatic;
 					};
 					57D513FA1F4E964300B2E8A7 = {
@@ -273,7 +314,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57D514281F4E967700B2E8A7 /* OCBarrageManager.m in Sources */,
+				57D5142A1F4E967700B2E8A7 /* OCBarrageTextCell.m in Sources */,
+				57D514291F4E967700B2E8A7 /* OCBarrageRenderView.m in Sources */,
+				57D514261F4E967700B2E8A7 /* OCBarrageCell.m in Sources */,
 				57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */,
+				57D5142B1F4E967700B2E8A7 /* OCBarrageTextDescriptor.m in Sources */,
+				57D514271F4E967700B2E8A7 /* OCBarrageDescriptor.m in Sources */,
 				57D513EA1F4E964300B2E8A7 /* AppDelegate.m in Sources */,
 				57D513E71F4E964300B2E8A7 /* main.m in Sources */,
 			);
@@ -371,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -414,7 +461,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -426,9 +473,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4K5N79DF8Y;
 				INFOPLIST_FILE = OCBarrage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.quanmin.OCBarrage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lfc.OCBarrage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -437,9 +486,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4K5N79DF8Y;
 				INFOPLIST_FILE = OCBarrage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.quanmin.OCBarrage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lfc.OCBarrage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
