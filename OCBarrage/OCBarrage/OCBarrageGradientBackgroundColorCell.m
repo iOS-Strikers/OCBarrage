@@ -22,8 +22,6 @@
 - (void)updateSubviewsData {
     [self updateTextlayerContentAndBounds];
     [self addGradientLayer];
-    _gradientLayer = nil;
-    _textlayer = nil;
 }
 
 - (void)layoutSubviews {
@@ -53,6 +51,8 @@
     [self.layer insertSublayer:gradientLayer atIndex:0];
     
     [self convertContentToImageWithSize:gradientLayer.frame.size];
+    _gradientLayer = nil;
+    _textlayer = nil;
 }
 
 

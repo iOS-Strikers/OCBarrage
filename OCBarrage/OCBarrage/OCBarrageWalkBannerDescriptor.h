@@ -1,5 +1,5 @@
 //
-//  OCBarrageGradientBackgroundColorDescriptor.h
+//  OCBarrageWalkBannerDescriptor.h
 //  OCBarrage
 //
 //  Created by QMTV on 2017/8/25.
@@ -10,9 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OCBarrageGradientBackgroundColorDescriptor : OCBarrageTextDescriptor
-
-@property (nonatomic, strong, nullable) UIColor *gradientColor;
+@interface OCBarrageWalkBannerDescriptor : OCBarrageTextDescriptor
 
 @end
 

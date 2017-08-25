@@ -9,6 +9,8 @@
 #import "OCBarrageTextCell.h"
 #import "OCBarrageGradientBackgroundColorDescriptor.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface OCBarrageGradientBackgroundColorCell : OCBarrageTextCell {
     CAGradientLayer *_gradientLayer;
 }
@@ -16,3 +18,5 @@
 @property (nonatomic, strong, nullable) OCBarrageGradientBackgroundColorDescriptor *gradientDescriptor;
 
 @end
+
+NS_ASSUME_NONNULL_END
