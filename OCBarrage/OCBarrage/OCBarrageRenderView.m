@@ -274,6 +274,7 @@
                 CGFloat cellHeight = CGRectGetHeight(barrageCell.bounds);
                 int trackCount = floorf(renderViewHeight/cellHeight);
                 int trackIndex = arc4random_uniform(trackCount);
+                
                 OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(barrageCell.barrageIndentifier, trackIndex)];
                 if (trackInfo && trackInfo.nextAvailableTime > CACurrentMediaTime()) {//当前行暂不可用
                     NSMutableArray *availableTrackInfos = [NSMutableArray array];
@@ -285,6 +286,18 @@
                     if (availableTrackInfos.count > 0) {
                         OCBarrageTrackInfo *randomInfo = [availableTrackInfos objectAtIndex:arc4random_uniform((int)availableTrackInfos.count)];
                         trackIndex = randomInfo.trackIndex;
+                    } else {
+                        if (_trackNextAvailableTime.count < trackIndex) {//刚开始不是每一条轨道都跑过弹幕, 还有空轨道
+                            NSMutableArray *numberArray = [NSMutableArray array];
+                            for (int index = 0; index < trackIndex; index++) {
+                                OCBarrageTrackInfo *emptyTrackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(barrageCell.barrageIndentifier, index)];
+                                if (!emptyTrackInfo) {
+                                    [numberArray addObject:[NSNumber numberWithInt:index]];
+                                }
+                            }
+                            trackIndex = [[numberArray objectAtIndex:arc4random_uniform((int)numberArray.count)] intValue];
+                        }
+                        //真的是没有可用的轨道了
                     }
                 }
                 barrageCell.trackIndex = trackIndex;

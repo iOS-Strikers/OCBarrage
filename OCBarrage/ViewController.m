@@ -32,8 +32,8 @@
 //    [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withBarrageIndentifier:@"OCBarrageStyleText"];
     [self.barrageManager resgisterBarrageCellClass:[OCBarrageGradientBackgroundColorCell class] withBarrageIndentifier:@"OCBarrageGradientBackgroundColorDescriptor"];
     [self.view addSubview:self.barrageManager.renderView];
-    self.barrageManager.renderView.bounds = CGRectMake(0.0, 64.0, self.view.frame.size.width, self.view.frame.size.height - 64.0);
-    self.barrageManager.renderView.center = self.view.center;
+    self.barrageManager.renderView.frame = CGRectMake(0.0, 64.0, self.view.frame.size.width, self.view.frame.size.height - 64.0);
+//    self.barrageManager.renderView.center = self.view.center;
     self.barrageManager.renderView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.1];
     self.barrageManager.renderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
