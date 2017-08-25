@@ -18,7 +18,6 @@ typedef NS_ENUM(NSInteger, OCBarrageRenderStatus) {
 };
 
 @interface OCBarrageRenderView : UIView <CAAnimationDelegate> {
-    @protected
     NSMutableDictionary *_barrageCellStyleClass;
     NSMutableArray<OCBarrageCell *> *_animatingCells;
     NSMutableArray<OCBarrageCell *> *_idleCells;
@@ -29,6 +28,7 @@ typedef NS_ENUM(NSInteger, OCBarrageRenderStatus) {
     UIView *_heightPositionView;
     BOOL _autoClear;
     OCBarrageRenderStatus _renderStatus;
+    NSMutableDictionary *_trackNextAvailableTime;
 }
 
 @property (nonatomic, strong, readonly) NSMutableArray<OCBarrageCell *> *animatingCells;

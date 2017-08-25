@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57969F4F1F4ECC8C0028C955 /* RootViewController.m */; };
+		57B4CEEF1F4FBC52001BF31F /* OCBarrageTrackInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B4CEEE1F4FBC52001BF31F /* OCBarrageTrackInfo.m */; };
 		57D513E71F4E964300B2E8A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513E61F4E964300B2E8A7 /* main.m */; };
 		57D513EA1F4E964300B2E8A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513E91F4E964300B2E8A7 /* AppDelegate.m */; };
 		57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513EC1F4E964300B2E8A7 /* ViewController.m */; };
@@ -44,6 +45,8 @@
 /* Begin PBXFileReference section */
 		57969F4E1F4ECC8C0028C955 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		57969F4F1F4ECC8C0028C955 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		57B4CEED1F4FBC52001BF31F /* OCBarrageTrackInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTrackInfo.h; sourceTree = "<group>"; };
+		57B4CEEE1F4FBC52001BF31F /* OCBarrageTrackInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTrackInfo.m; sourceTree = "<group>"; };
 		57D513E21F4E964300B2E8A7 /* OCBarrage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCBarrage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D513E61F4E964300B2E8A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		57D513E81F4E964300B2E8A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -175,6 +178,8 @@
 				57D5141D1F4E967700B2E8A7 /* OCBarrageHeader.h */,
 				57D5141E1F4E967700B2E8A7 /* OCBarrageManager.h */,
 				57D5141F1F4E967700B2E8A7 /* OCBarrageManager.m */,
+				57B4CEED1F4FBC52001BF31F /* OCBarrageTrackInfo.h */,
+				57B4CEEE1F4FBC52001BF31F /* OCBarrageTrackInfo.m */,
 				57D514201F4E967700B2E8A7 /* OCBarrageRenderView.h */,
 				57D514211F4E967700B2E8A7 /* OCBarrageRenderView.m */,
 				57D514221F4E967700B2E8A7 /* OCBarrageTextCell.h */,
@@ -328,6 +333,7 @@
 				57D5142B1F4E967700B2E8A7 /* OCBarrageTextDescriptor.m in Sources */,
 				57D514271F4E967700B2E8A7 /* OCBarrageDescriptor.m in Sources */,
 				57D513EA1F4E964300B2E8A7 /* AppDelegate.m in Sources */,
+				57B4CEEF1F4FBC52001BF31F /* OCBarrageTrackInfo.m in Sources */,
 				57D513E71F4E964300B2E8A7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

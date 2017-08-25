@@ -12,7 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OCBarrageManager : NSObject {
-    @protected
     OCBarrageRenderView *_renderView;
 }
 

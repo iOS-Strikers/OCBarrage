@@ -95,7 +95,7 @@
 //    } else {
 //        
 //    }
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*2];
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*50];
 }
 
 - (void)pasueBarrage {

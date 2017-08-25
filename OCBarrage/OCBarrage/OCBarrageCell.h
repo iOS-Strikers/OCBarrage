@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol OCBarrageCellDelegate;
 
 @interface OCBarrageCell : UIView {
-    @protected
     NSString *_barrageIndentifier;
 }
 
@@ -23,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *barrageIndentifier;
 @property (nonatomic, strong, nullable) OCBarrageDescriptor *barrageDescriptor;
 @property (nonatomic, strong, readonly) CAAnimation *barrageAnimation;
+@property (nonatomic, assign) int trackIndex;
 
 - (instancetype)initWithBarrageIndentifier:(NSString *)barrageIndentifier;
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate;

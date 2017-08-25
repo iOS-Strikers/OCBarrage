@@ -14,6 +14,7 @@
     self = [super init];
     if (self) {
         _barrageIndentifier = barrageIndentifier;
+        _trackIndex = -1;
     }
     
     return self;
@@ -25,6 +26,7 @@
     if (!_idle) {
         _idle = YES;
     }
+    _trackIndex = -1;
 }
 
 - (void)sizeToFit {

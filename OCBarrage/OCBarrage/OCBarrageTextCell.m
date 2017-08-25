@@ -55,6 +55,7 @@
     walkAnimation.repeatCount = 1;
     walkAnimation.delegate =  animationDelegate;
     walkAnimation.removedOnCompletion = NO;
+    walkAnimation.fillMode = kCAFillModeForwards;
     
     [self.layer addAnimation:walkAnimation forKey:kBarrageAnimation];
 }

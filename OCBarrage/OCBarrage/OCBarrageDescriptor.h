@@ -13,7 +13,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OCBarrageDescriptor : NSObject {
-    @protected
     NSMutableDictionary *_textAttribute;
 }
 
