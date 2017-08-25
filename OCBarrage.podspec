@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "OCBarrage"
   s.version      = "0.0.1"
-  s.summary      = "OCBarrage is a high performance barrage render engine. iOS高性能弹幕库, 同时渲染2000条也不卡, 轻量, 可拓展, 高度自定义动画, 超高性能, 简单易上手."
+  s.summary      = "OCBarrage is a high performance barrage render engine. Lightweight, scalable, highly custom animated, ultra high performance, simple and easy to use"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/w1531724247/OCBarrage.git", :tag => 0.0.1}
+  s.source       = { :git => "https://github.com/w1531724247/OCBarrage.git", :tag => "0.0.1"}
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
