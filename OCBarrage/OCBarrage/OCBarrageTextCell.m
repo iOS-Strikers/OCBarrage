@@ -40,11 +40,6 @@
     self.textlayer.frame = CGRectMake(0.0, 0.0, [self.textDescriptor.attributeText size].width, [self.textDescriptor.attributeText size].height);
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-}
-
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate {
     if (!self.superview) {
         return;

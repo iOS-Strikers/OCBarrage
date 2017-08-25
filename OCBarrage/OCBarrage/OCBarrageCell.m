@@ -29,6 +29,24 @@
     _trackIndex = -1;
 }
 
+- (void)convertContentToImageWithSize:(CGSize)contentSize {
+    UIGraphicsBeginImageContextWithOptions(contentSize, 0.0, [UIScreen mainScreen].scale);
+    //self为需要截屏的UI控件 即通过改变此参数可以截取特定的UI控件
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image= UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [self.layer setContents:(__bridge id)image.CGImage];
+    
+    [self removeAllSublayers];
+}
+
+- (void)removeAllSublayers {
+    for (CALayer *subLayer in self.layer.sublayers) {
+        [subLayer removeFromSuperlayer];
+    }
+}
+
 - (void)sizeToFit {
     CGFloat height = 0.0;
     CGFloat width = 0.0;
@@ -46,8 +64,8 @@
     if (width == 0 || height == 0) {
         CGImageRef content = (__bridge CGImageRef)self.layer.contents;
         UIImage *image = [UIImage imageWithCGImage:content];
-        width = image.size.width;
-        height = image.size.height;
+        width = image.size.width/[UIScreen mainScreen].scale;
+        height = image.size.height/[UIScreen mainScreen].scale;
     }
     
     self.bounds = CGRectMake(0.0, 0.0, width, height);

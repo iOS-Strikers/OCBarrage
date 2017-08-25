@@ -101,9 +101,10 @@
         _count = 0;
         self.title = [NSString stringWithFormat:@"现在有 %ld 条弹幕在运动", self.barrageManager.renderView.animatingCells.count];
     } else {
-        [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01];
+        
     }
-
+    
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.1];
 }
 
 - (void)startBarrage {

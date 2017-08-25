@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBarrageIndentifier:(NSString *)barrageIndentifier;
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate;
 - (void)updateSubviewsData;
+- (void)convertContentToImageWithSize:(CGSize)contentSize;
 - (void)sizeToFit;//设置好数据之后调用一下自动计算bounds
 - (void)prepareForReuse;
 
