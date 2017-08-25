@@ -20,11 +20,10 @@
 }
 
 - (void)updateSubviewsData {
-    [super updateSubviewsData];
+    [self updateTextlayerContentAndBounds];
     [self addGradientLayer];
-    
-    _textlayer = nil;
     _gradientLayer = nil;
+    _textlayer = nil;
 }
 
 - (void)layoutSubviews {
@@ -46,13 +45,13 @@
     gradientLayer.frame = CGRectMake(0.0, 0.0, _textlayer.frame.size.width + 20.0, _textlayer.frame.size.height);
     
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:gradientLayer.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerTopLeft cornerRadii:gradientLayer.bounds.size];
-    
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = gradientLayer.bounds;
     maskLayer.path = maskPath.CGPath;
     gradientLayer.mask = maskLayer;
     _gradientLayer = gradientLayer;
     [self.layer insertSublayer:gradientLayer atIndex:0];
+    
     [self convertContentToImageWithSize:gradientLayer.frame.size];
 }
 

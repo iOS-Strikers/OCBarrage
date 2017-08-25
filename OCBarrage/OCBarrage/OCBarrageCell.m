@@ -42,8 +42,10 @@
 }
 
 - (void)removeAllSublayers {
-    for (CALayer *subLayer in self.layer.sublayers) {
-        [subLayer removeFromSuperlayer];
+    NSEnumerator *enumerator = [self.layer.sublayers reverseObjectEnumerator];
+    CALayer *sublayer = nil;
+    while (sublayer = [enumerator nextObject]){
+        [sublayer removeFromSuperlayer];
     }
 }
 

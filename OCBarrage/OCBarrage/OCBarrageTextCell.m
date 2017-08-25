@@ -25,7 +25,14 @@
 }
 
 - (void)updateSubviewsData {
+    [self updateTextlayerContentAndBounds];
+    [self convertContentToImageWithSize:_textlayer.frame.size];
+    _textlayer = nil;
+}
+
+- (void)updateTextlayerContentAndBounds; {
     if (!_textlayer) {
+        self.layer.contents = nil;
         [self.layer addSublayer:self.textlayer];
     }
     

@@ -92,7 +92,7 @@
     textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     textDescriptor.strokeWidth = -1;
     textDescriptor.animationDuration = arc4random()%3 + 6;
-    textDescriptor.barrageIndentifier = @"OCBarrageGradientBackgroundColorDescriptor";
+    textDescriptor.barrageIndentifier = @"OCBarrageGradientBackgroundColorDescriptor";//@"OCBarrageGradientBackgroundColorDescriptor";
     textDescriptor.gradientColor = [UIColor colorWithRed:arc4random_uniform(256.0)/255.0 green:arc4random_uniform(256.0)/255.0 blue:arc4random_uniform(256.0)/255.0 alpha:1.0];
     [self.barrageManager renderBarrageDescriptor:textDescriptor];
     
