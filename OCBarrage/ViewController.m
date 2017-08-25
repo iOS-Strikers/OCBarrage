@@ -100,7 +100,7 @@
 //    if (_count >= 1.0) {
 //        _count = 0;
 //    } else {
-        [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.1];
+        [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01];
 //    }
     
 }

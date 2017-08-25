@@ -13,7 +13,7 @@
 - (instancetype)initWithBarrageIndentifier:(NSString *)barrageIndentifier {
     self = [super initWithBarrageIndentifier:barrageIndentifier];
     if (self) {
-        
+        self.layer.contentsScale = [UIScreen mainScreen].scale;
     }
     
     return self;
@@ -31,6 +31,16 @@
     _textlayer.frame = _gradientLayer.frame;
 }
 
+- (void)didMoveToSuperview {
+    [super didMoveToSuperview];
+    
+    [_textlayer removeFromSuperlayer];
+    [_gradientLayer removeFromSuperlayer];
+    _textlayer = nil;
+    _gradientLayer = nil;
+}
+
+
 - (void)addGradientLayer {
     if (!self.gradientColor) {
         return;
@@ -43,26 +53,24 @@
         gradientLayer.startPoint = CGPointMake(0, 0);
         gradientLayer.endPoint = CGPointMake(1.0, 0);
         gradientLayer.frame = CGRectMake(0.0, 0.0, _textlayer.frame.size.width + 20.0, _textlayer.frame.size.height);
-        
+        self.cellFrame = gradientLayer.frame;
         UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:gradientLayer.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerTopLeft cornerRadii:gradientLayer.bounds.size];
-        
-        _gradientLayer = gradientLayer;
-        [self.layer insertSublayer:gradientLayer atIndex:0];
         
         CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
         maskLayer.frame = gradientLayer.bounds;
         maskLayer.path = maskPath.CGPath;
         gradientLayer.mask = maskLayer;
         
-//        UIGraphicsBeginImageContext(gradientLayer.frame.size);
-//        //self为需要截屏的UI控件 即通过改变此参数可以截取特定的UI控件
-//        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-//        UIImage *image= UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-//        //至此已拿到image
-//        UIImageView *imaView = [[UIImageView alloc] initWithImage:image];
-//        imaView.frame = CGRectMake(0, 100, 100.0, 100.0);
-//        [[UIApplication sharedApplication].keyWindow addSubview:imaView];
+        _gradientLayer = gradientLayer;
+        [self.layer insertSublayer:gradientLayer atIndex:0];
+        
+        UIGraphicsBeginImageContextWithOptions(gradientLayer.frame.size, 0.0, [UIScreen mainScreen].scale);
+        //self为需要截屏的UI控件 即通过改变此参数可以截取特定的UI控件
+        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image= UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [self.layer setContents:(id)image.CGImage];
     }
 }
 
