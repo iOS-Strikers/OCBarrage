@@ -7,9 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "OCBarrageHeader.h"
-#import "OCBarrageTextDescriptor.h"
-#import "OCBarrageTextCell.h"
+#import "OCBarrage.h"
 #import "OCBarrageGradientBackgroundColorDescriptor.h"
 #import "OCBarrageGradientBackgroundColorCell.h"
 
