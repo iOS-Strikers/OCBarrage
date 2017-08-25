@@ -37,12 +37,12 @@
     }
     
     [self.textlayer setString:self.textDescriptor.attributeText];
+    self.textlayer.frame = CGRectMake(0.0, 0.0, [self.textDescriptor.attributeText size].width, [self.textDescriptor.attributeText size].height);
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.textlayer.frame = CGRectMake(0.0, 0.0, [self.textDescriptor.attributeText size].width, [self.textDescriptor.attributeText size].height);
 }
 
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate {
@@ -69,6 +69,7 @@
     if (!_textlayer) {
         _textlayer = [[CATextLayer alloc] init];
         _textlayer.contentsScale = [UIScreen mainScreen].scale;
+        _textlayer.alignmentMode = @"center";
     }
     
     return _textlayer;

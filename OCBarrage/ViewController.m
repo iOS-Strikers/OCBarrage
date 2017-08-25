@@ -97,12 +97,12 @@
     [self.barrageManager renderBarrageDescriptor:textDescriptor];
     
     _count++;
-//    if (_count > 10.0) {
+//    if (_count >= 1.0) {
 //        _count = 0;
 //    } else {
-//        
+        [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.1];
 //    }
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.5];
+    
 }
 
 - (void)pasueBarrage {
