@@ -13,6 +13,6 @@
 @property (nonatomic, assign) int trackIndex;
 @property (nonatomic, copy) NSString *trackIdentifier;
 @property (nonatomic, assign) CFTimeInterval nextAvailableTime;//下次可用的时间
-@property (nonatomic, assign) NSInteger barrageCount;//下次可用的时间
+@property (nonatomic, assign) NSInteger barrageCount;//当前行的弹幕数量
 
 @end

@@ -55,6 +55,9 @@
         barrageCell = [self newCellWithBarrageIndentifier:barrageIndentifier];
     }
     dispatch_semaphore_signal(_idleCellsLock);
+    if (![barrageCell isKindOfClass:[OCBarrageCell class]]) {
+        return nil;
+    }
     
     return barrageCell;
 }
@@ -215,7 +218,8 @@
     dispatch_semaphore_signal(_animatingCellsLock);
     
     [self addBarrageCell:barrageCell WithPositionPriority:barrageCell.barrageDescriptor.positionPriority];
-    barrageCell.frame = [self calculationBarrageCellFrame:barrageCell];
+    CGRect cellFrame = [self calculationBarrageCellFrame:barrageCell];
+    barrageCell.frame = cellFrame;
     [barrageCell addBarrageAnimationWithDelegate:self];
     [self recordTrackInfoWithBarrageCell:barrageCell];
     

@@ -54,8 +54,10 @@
     }
     
     OCBarrageCell *barrageCell = [self.renderView cellWithBarrageIndentifier:barrageDescriptor.barrageIndentifier];
+    if (!barrageCell) {
+        return;
+    }
     barrageCell.barrageDescriptor = barrageDescriptor;
-    
     [self.renderView fireBarrageCell:barrageCell];
 }
 

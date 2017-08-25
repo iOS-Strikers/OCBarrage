@@ -7,13 +7,15 @@
 //
 
 #import "OCBarrageCell.h"
+#import "OCBarrageTextDescriptor.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OCBarrageTextCell : OCBarrageCell {
     CATextLayer *_textlayer;
-    
 }
+
+@property (nonatomic, strong) OCBarrageTextDescriptor *textDescriptor;
 
 @end
 

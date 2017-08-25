@@ -29,15 +29,20 @@
         [self.layer addSublayer:self.textlayer];
     }
     
-    if (self.barrageDescriptor.textShadowOpened) {
-        self.textlayer.shadowColor = self.barrageDescriptor.shadowColor.CGColor;
-        self.textlayer.shadowOffset = self.barrageDescriptor.shadowOffset;
-        self.textlayer.shadowRadius = self.barrageDescriptor.shadowRadius;
-        self.textlayer.shadowOpacity = self.barrageDescriptor.shadowOpacity;
+    if (self.textDescriptor.textShadowOpened) {
+        self.textlayer.shadowColor = self.textDescriptor.shadowColor.CGColor;
+        self.textlayer.shadowOffset = self.textDescriptor.shadowOffset;
+        self.textlayer.shadowRadius = self.textDescriptor.shadowRadius;
+        self.textlayer.shadowOpacity = self.textDescriptor.shadowOpacity;
     }
     
-    [self.textlayer setString:self.barrageDescriptor.attributeText];
-    self.textlayer.frame = CGRectMake(0.0, 0.0, [self.barrageDescriptor.attributeText size].width, [self.barrageDescriptor.attributeText size].height);
+    [self.textlayer setString:self.textDescriptor.attributeText];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.textlayer.frame = CGRectMake(0.0, 0.0, [self.textDescriptor.attributeText size].width, [self.textDescriptor.attributeText size].height);
 }
 
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate {
@@ -67,6 +72,11 @@
     }
     
     return _textlayer;
+}
+
+- (void)setBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor {
+    [super setBarrageDescriptor:barrageDescriptor];
+    self.textDescriptor = (OCBarrageTextDescriptor *)barrageDescriptor;
 }
 
 @end

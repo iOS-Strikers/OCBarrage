@@ -10,6 +10,8 @@
 #import "OCBarrageManager.h"
 #import "OCBarrageTextDescriptor.h"
 #import "OCBarrageTextCell.h"
+#import "OCBarrageGradientBackgroundColorDescriptor.h"
+#import "OCBarrageGradientBackgroundColorCell.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) CATextLayer *textlayer;
@@ -27,7 +29,8 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.barrageManager = [[OCBarrageManager alloc] init];
-    [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withBarrageIndentifier:@"OCBarrageStyleText"];
+//    [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withBarrageIndentifier:@"OCBarrageStyleText"];
+    [self.barrageManager resgisterBarrageCellClass:[OCBarrageGradientBackgroundColorCell class] withBarrageIndentifier:@"OCBarrageGradientBackgroundColorDescriptor"];
     [self.view addSubview:self.barrageManager.renderView];
     self.barrageManager.renderView.bounds = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
     self.barrageManager.renderView.center = self.view.center;
@@ -79,9 +82,9 @@
 }
 
 - (void)addBarrage {
-    OCBarrageTextDescriptor *textDescriptor = [[OCBarrageTextDescriptor alloc] init];
+    OCBarrageGradientBackgroundColorDescriptor *textDescriptor = [[OCBarrageGradientBackgroundColorDescriptor alloc] init];
     textDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
-        NSLog(@"descriptor.text = %@", descriptor.text);
+        
     };
     textDescriptor.text = [NSString stringWithFormat:@"~全是弹幕~"];
     textDescriptor.textColor = [UIColor whiteColor];
@@ -89,8 +92,8 @@
     textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     textDescriptor.strokeWidth = -1;
     textDescriptor.animationDuration = arc4random()%3 + 6;
-    textDescriptor.barrageIndentifier = @"OCBarrageStyleText";
-    
+    textDescriptor.barrageIndentifier = @"OCBarrageGradientBackgroundColorDescriptor";
+    textDescriptor.gradientColor = [UIColor colorWithRed:arc4random_uniform(256.0)/255.0 green:arc4random_uniform(256.0)/255.0 blue:arc4random_uniform(256.0)/255.0 alpha:1.0];
     [self.barrageManager renderBarrageDescriptor:textDescriptor];
     
     _count++;
@@ -99,7 +102,7 @@
 //    } else {
 //        
 //    }
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.1/10];
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.5];
 }
 
 - (void)pasueBarrage {

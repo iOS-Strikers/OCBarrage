@@ -30,6 +30,8 @@
 }
 
 - (void)sizeToFit {
+    [self layoutSubviews];
+    
     CGFloat height = 0.0;
     CGFloat width = 0.0;
     for (CALayer *sublayer in self.layer.sublayers) {
