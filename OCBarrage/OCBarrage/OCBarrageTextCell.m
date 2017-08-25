@@ -32,7 +32,6 @@
 
 - (void)updateTextlayerContentAndBounds; {
     if (!_textlayer) {
-        self.layer.contents = nil;
         [self.layer addSublayer:self.textlayer];
     }
     

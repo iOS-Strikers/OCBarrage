@@ -207,7 +207,7 @@
     if (![barrageCell isKindOfClass:[OCBarrageCell class]]) {
         return;
     }
-    
+    [barrageCell clearContents];
     [barrageCell updateSubviewsData];
     [barrageCell sizeToFit];
     
