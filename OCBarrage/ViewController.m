@@ -32,9 +32,9 @@
 //    [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withBarrageIndentifier:@"OCBarrageStyleText"];
     [self.barrageManager resgisterBarrageCellClass:[OCBarrageGradientBackgroundColorCell class] withBarrageIndentifier:@"OCBarrageGradientBackgroundColorDescriptor"];
     [self.view addSubview:self.barrageManager.renderView];
-    self.barrageManager.renderView.frame = CGRectMake(0.0, 64.0, self.view.frame.size.width, self.view.frame.size.height - 64.0);
+    self.barrageManager.renderView.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
 //    self.barrageManager.renderView.center = self.view.center;
-    self.barrageManager.renderView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.1];
+//    self.barrageManager.renderView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.1];
     self.barrageManager.renderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     self.view.backgroundColor = [UIColor blackColor];
@@ -86,25 +86,25 @@
     textDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
         
     };
-    textDescriptor.text = [NSString stringWithFormat:@"~全是弹幕~"];
+    textDescriptor.text = [NSString stringWithFormat:@"~全民直播~"];
     textDescriptor.textColor = [UIColor whiteColor];
     textDescriptor.textFont = [UIFont systemFontOfSize:17.0];
     textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     textDescriptor.strokeWidth = -1;
-    textDescriptor.animationDuration = arc4random()%3 + 6;
+    textDescriptor.animationDuration = arc4random()%3 + 10;
     textDescriptor.barrageIndentifier = @"OCBarrageGradientBackgroundColorDescriptor";//@"OCBarrageGradientBackgroundColorDescriptor";
     textDescriptor.gradientColor = [UIColor colorWithRed:arc4random_uniform(256.0)/255.0 green:arc4random_uniform(256.0)/255.0 blue:arc4random_uniform(256.0)/255.0 alpha:1.0];
     [self.barrageManager renderBarrageDescriptor:textDescriptor];
     
     _count++;
-    if (_count >= 1.0) {
+    if (_count >= 2.0) {
         _count = 0;
-        self.title = [NSString stringWithFormat:@"现在有 %ld 条弹幕在运动", self.barrageManager.renderView.animatingCells.count];
+        self.title = [NSString stringWithFormat:@"现在有 %ld 条弹幕", (unsigned long)self.barrageManager.renderView.animatingCells.count];
     } else {
         
     }
     
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.1];
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01];
 }
 
 - (void)startBarrage {
