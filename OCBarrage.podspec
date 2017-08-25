@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "OCBarrage"
   s.version      = "0.0.1"
-  s.summary      = "OCBarrage is a high performance barrage render engine. Lightweight, scalable, highly custom animated, ultra high performance, simple and easy to use"
+  s.summary      = "OCBarrage is a high performance barrage render engine."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = %{
-    OCBarrage is a high performance barrage render engine.
+    OCBarrage is a high performance barrage render engine. Lightweight, scalable, highly custom animated, ultra high performance, simple and easy to use
     }
 
   s.homepage     = "https://github.com/w1531724247/OCBarrage"

@@ -14,5 +14,7 @@
 #import "OCBarrageRenderView.h"
 #import "OCBarrageDescriptor.h"
 #import "OCBarrageCell.h"
+#import "OCBarrageTextDescriptor.h"
+#import "OCBarrageTextCell.h"
 
 #endif /* OCBarrage_h */
