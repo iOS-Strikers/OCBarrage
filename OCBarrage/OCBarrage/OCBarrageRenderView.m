@@ -350,6 +350,7 @@
             trackInfo.trackIndex = barrageCell.trackIndex;
         }
         trackInfo.barrageCount++;
+
         trackInfo.nextAvailableTime = CGRectGetWidth(barrageCell.bounds);
         CGFloat distanceX = fabs(toPoint.x - fromPoint.x);
         CGFloat distanceY = fabs(toPoint.y - fromPoint.y);

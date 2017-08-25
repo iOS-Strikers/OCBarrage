@@ -18,6 +18,9 @@
 @end
 
 @implementation ViewController
+- (void)dealloc {
+    NSLog(@"%s", __func__);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,7 +29,9 @@
     self.barrageManager = [[OCBarrageManager alloc] init];
     [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withBarrageIndentifier:@"OCBarrageStyleText"];
     [self.view addSubview:self.barrageManager.renderView];
-    self.barrageManager.renderView.frame = self.view.bounds;
+    self.barrageManager.renderView.bounds = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
+    self.barrageManager.renderView.center = self.view.center;
+    self.barrageManager.renderView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.1];
     self.barrageManager.renderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     self.view.backgroundColor = [UIColor blackColor];
@@ -70,8 +75,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
-    NSLog(@"%s", __func__);
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addBarrage) object:nil];
 }
 
 - (void)addBarrage {
@@ -95,7 +99,7 @@
 //    } else {
 //        
 //    }
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01*50];
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.1/10];
 }
 
 - (void)pasueBarrage {
