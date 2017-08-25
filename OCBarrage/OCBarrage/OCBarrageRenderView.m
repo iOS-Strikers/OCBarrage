@@ -287,7 +287,7 @@
                         OCBarrageTrackInfo *randomInfo = [availableTrackInfos objectAtIndex:arc4random_uniform((int)availableTrackInfos.count)];
                         trackIndex = randomInfo.trackIndex;
                     } else {
-                        if (_trackNextAvailableTime.count < trackIndex) {//刚开始不是每一条轨道都跑过弹幕, 还有空轨道
+                        if (_trackNextAvailableTime.count < trackCount) {//刚开始不是每一条轨道都跑过弹幕, 还有空轨道
                             NSMutableArray *numberArray = [NSMutableArray array];
                             for (int index = 0; index < trackIndex; index++) {
                                 OCBarrageTrackInfo *emptyTrackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(barrageCell.barrageIndentifier, index)];
@@ -295,7 +295,9 @@
                                     [numberArray addObject:[NSNumber numberWithInt:index]];
                                 }
                             }
-                            trackIndex = [[numberArray objectAtIndex:arc4random_uniform((int)numberArray.count)] intValue];
+                            if (numberArray.count > 0) {
+                                trackIndex = [[numberArray objectAtIndex:arc4random_uniform((int)numberArray.count)] intValue];
+                            }
                         }
                         //真的是没有可用的轨道了
                     }
