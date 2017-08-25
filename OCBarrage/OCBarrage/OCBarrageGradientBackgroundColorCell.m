@@ -21,8 +21,9 @@
 
 - (void)updateSubviewsData {
     [super updateSubviewsData];
-    self.gradientColor = self.gradientDescriptor.gradientColor;
+    
     [self addGradientLayer];
+    _textlayer.backgroundColor = [UIColor blackColor].CGColor;
 }
 
 - (void)layoutSubviews {
@@ -40,38 +41,34 @@
     _gradientLayer = nil;
 }
 
-
 - (void)addGradientLayer {
-    if (!self.gradientColor) {
+    if (!self.gradientDescriptor.gradientColor) {
         return;
     }
     
-    if (!_gradientLayer) {
-        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-        gradientLayer.colors = @[(__bridge id)[self.gradientColor colorWithAlphaComponent:0.8].CGColor, (__bridge id)[self.gradientColor colorWithAlphaComponent:0.0].CGColor];
-        gradientLayer.locations = @[@0.2, @1.0];
-        gradientLayer.startPoint = CGPointMake(0, 0);
-        gradientLayer.endPoint = CGPointMake(1.0, 0);
-        gradientLayer.frame = CGRectMake(0.0, 0.0, _textlayer.frame.size.width + 20.0, _textlayer.frame.size.height);
-        self.cellFrame = gradientLayer.frame;
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:gradientLayer.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerTopLeft cornerRadii:gradientLayer.bounds.size];
-        
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-        maskLayer.frame = gradientLayer.bounds;
-        maskLayer.path = maskPath.CGPath;
-        gradientLayer.mask = maskLayer;
-        
-        _gradientLayer = gradientLayer;
-        [self.layer insertSublayer:gradientLayer atIndex:0];
-        
-        UIGraphicsBeginImageContextWithOptions(gradientLayer.frame.size, 0.0, [UIScreen mainScreen].scale);
-        //self为需要截屏的UI控件 即通过改变此参数可以截取特定的UI控件
-        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *image= UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        [self.layer setContents:(id)image.CGImage];
-    }
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)[self.gradientDescriptor.gradientColor colorWithAlphaComponent:0.8].CGColor, (__bridge id)[self.gradientDescriptor.gradientColor colorWithAlphaComponent:0.0].CGColor];
+    gradientLayer.locations = @[@0.2, @1.0];
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1.0, 0);
+    gradientLayer.frame = CGRectMake(0.0, 0.0, _textlayer.frame.size.width + 20.0, _textlayer.frame.size.height);
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:gradientLayer.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerTopLeft cornerRadii:gradientLayer.bounds.size];
+    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = gradientLayer.bounds;
+    maskLayer.path = maskPath.CGPath;
+    gradientLayer.mask = maskLayer;
+    _gradientLayer = gradientLayer;
+    [self.layer insertSublayer:gradientLayer atIndex:0];
+    
+    UIGraphicsBeginImageContextWithOptions(gradientLayer.frame.size, 0.0, [UIScreen mainScreen].scale);
+    //self为需要截屏的UI控件 即通过改变此参数可以截取特定的UI控件
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image= UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [self.layer setContents:(id)image.CGImage];
 }
 
 - (void)setBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor {

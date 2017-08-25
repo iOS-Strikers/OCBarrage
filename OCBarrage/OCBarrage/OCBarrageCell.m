@@ -30,8 +30,6 @@
 }
 
 - (void)sizeToFit {
-    [self layoutSubviews];
-    
     CGFloat height = 0.0;
     CGFloat width = 0.0;
     for (CALayer *sublayer in self.layer.sublayers) {
@@ -43,6 +41,13 @@
         if (maxX > width) {
             width = maxX;
         }
+    }
+    
+    if (width == 0 || height == 0) {
+        CGImageRef content = (__bridge CGImageRef)self.layer.contents;
+        UIImage *image = [UIImage imageWithCGImage:content];
+        width = image.size.width;
+        height = image.size.height;
     }
     
     self.bounds = CGRectMake(0.0, 0.0, width, height);

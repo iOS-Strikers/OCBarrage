@@ -14,6 +14,5 @@
 }
 
 @property (nonatomic, strong, nullable) OCBarrageGradientBackgroundColorDescriptor *gradientDescriptor;
-@property (nonatomic, strong, nullable) UIColor *gradientColor;
-@property (nonatomic, assign) CGRect cellFrame;
+
 @end

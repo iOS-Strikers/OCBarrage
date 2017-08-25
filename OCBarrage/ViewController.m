@@ -32,7 +32,7 @@
 //    [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withBarrageIndentifier:@"OCBarrageStyleText"];
     [self.barrageManager resgisterBarrageCellClass:[OCBarrageGradientBackgroundColorCell class] withBarrageIndentifier:@"OCBarrageGradientBackgroundColorDescriptor"];
     [self.view addSubview:self.barrageManager.renderView];
-    self.barrageManager.renderView.bounds = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
+    self.barrageManager.renderView.bounds = CGRectMake(0.0, 64.0, self.view.frame.size.width, self.view.frame.size.height - 64.0);
     self.barrageManager.renderView.center = self.view.center;
     self.barrageManager.renderView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.1];
     self.barrageManager.renderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -44,7 +44,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"开始" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(addBarrage) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(startBarrage) forControlEvents:UIControlEventTouchUpInside];
     button.frame= CGRectMake(0.0, originY, 50.0, 50.0);
     button.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
     [self.view addSubview:button];
@@ -97,12 +97,18 @@
     [self.barrageManager renderBarrageDescriptor:textDescriptor];
     
     _count++;
-//    if (_count >= 1.0) {
-//        _count = 0;
-//    } else {
+    if (_count >= 1.0) {
+        _count = 0;
+        self.title = [NSString stringWithFormat:@"现在有 %ld 条弹幕在运动", self.barrageManager.renderView.animatingCells.count];
+    } else {
         [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.01];
-//    }
-    
+    }
+
+}
+
+- (void)startBarrage {
+    [self.barrageManager start];
+    [self addBarrage];
 }
 
 - (void)pasueBarrage {
