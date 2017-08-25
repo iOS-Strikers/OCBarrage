@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57969F4F1F4ECC8C0028C955 /* RootViewController.m */; };
+		579E330C1F507BF70073C5DC /* OCBarrageGradientBackgroundColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E33051F507BF70073C5DC /* OCBarrageGradientBackgroundColorCell.m */; };
+		579E330D1F507BF70073C5DC /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E33071F507BF70073C5DC /* OCBarrageGradientBackgroundColorDescriptor.m */; };
+		579E330E1F507BF70073C5DC /* OCBarrageWalkBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E33091F507BF70073C5DC /* OCBarrageWalkBannerCell.m */; };
+		579E330F1F507BF70073C5DC /* OCBarrageWalkBannerDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E330B1F507BF70073C5DC /* OCBarrageWalkBannerDescriptor.m */; };
 		57B4CEEF1F4FBC52001BF31F /* OCBarrageTrackInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B4CEEE1F4FBC52001BF31F /* OCBarrageTrackInfo.m */; };
-		57B4CEF21F4FD93E001BF31F /* OCBarrageGradientBackgroundColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B4CEF11F4FD93E001BF31F /* OCBarrageGradientBackgroundColorCell.m */; };
-		57B4CEF51F4FDFD3001BF31F /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B4CEF41F4FDFD3001BF31F /* OCBarrageGradientBackgroundColorDescriptor.m */; };
-		57B4CEF81F501F97001BF31F /* OCBarrageWalkBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B4CEF71F501F97001BF31F /* OCBarrageWalkBannerCell.m */; };
-		57B4CEFB1F50200C001BF31F /* OCBarrageWalkBannerDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B4CEFA1F50200C001BF31F /* OCBarrageWalkBannerDescriptor.m */; };
 		57D513E71F4E964300B2E8A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513E61F4E964300B2E8A7 /* main.m */; };
 		57D513EA1F4E964300B2E8A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513E91F4E964300B2E8A7 /* AppDelegate.m */; };
 		57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513EC1F4E964300B2E8A7 /* ViewController.m */; };
@@ -49,16 +49,16 @@
 /* Begin PBXFileReference section */
 		57969F4E1F4ECC8C0028C955 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		57969F4F1F4ECC8C0028C955 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		579E33041F507BF70073C5DC /* OCBarrageGradientBackgroundColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorCell.h; sourceTree = "<group>"; };
+		579E33051F507BF70073C5DC /* OCBarrageGradientBackgroundColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGradientBackgroundColorCell.m; sourceTree = "<group>"; };
+		579E33061F507BF70073C5DC /* OCBarrageGradientBackgroundColorDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorDescriptor.h; sourceTree = "<group>"; };
+		579E33071F507BF70073C5DC /* OCBarrageGradientBackgroundColorDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGradientBackgroundColorDescriptor.m; sourceTree = "<group>"; };
+		579E33081F507BF70073C5DC /* OCBarrageWalkBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageWalkBannerCell.h; sourceTree = "<group>"; };
+		579E33091F507BF70073C5DC /* OCBarrageWalkBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageWalkBannerCell.m; sourceTree = "<group>"; };
+		579E330A1F507BF70073C5DC /* OCBarrageWalkBannerDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageWalkBannerDescriptor.h; sourceTree = "<group>"; };
+		579E330B1F507BF70073C5DC /* OCBarrageWalkBannerDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageWalkBannerDescriptor.m; sourceTree = "<group>"; };
 		57B4CEED1F4FBC52001BF31F /* OCBarrageTrackInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTrackInfo.h; sourceTree = "<group>"; };
 		57B4CEEE1F4FBC52001BF31F /* OCBarrageTrackInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTrackInfo.m; sourceTree = "<group>"; };
-		57B4CEF01F4FD93E001BF31F /* OCBarrageGradientBackgroundColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorCell.h; sourceTree = "<group>"; };
-		57B4CEF11F4FD93E001BF31F /* OCBarrageGradientBackgroundColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGradientBackgroundColorCell.m; sourceTree = "<group>"; };
-		57B4CEF31F4FDFD3001BF31F /* OCBarrageGradientBackgroundColorDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorDescriptor.h; sourceTree = "<group>"; };
-		57B4CEF41F4FDFD3001BF31F /* OCBarrageGradientBackgroundColorDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGradientBackgroundColorDescriptor.m; sourceTree = "<group>"; };
-		57B4CEF61F501F97001BF31F /* OCBarrageWalkBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageWalkBannerCell.h; sourceTree = "<group>"; };
-		57B4CEF71F501F97001BF31F /* OCBarrageWalkBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageWalkBannerCell.m; sourceTree = "<group>"; };
-		57B4CEF91F50200C001BF31F /* OCBarrageWalkBannerDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageWalkBannerDescriptor.h; sourceTree = "<group>"; };
-		57B4CEFA1F50200C001BF31F /* OCBarrageWalkBannerDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageWalkBannerDescriptor.m; sourceTree = "<group>"; };
 		57D513E21F4E964300B2E8A7 /* OCBarrage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCBarrage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D513E61F4E964300B2E8A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		57D513E81F4E964300B2E8A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -115,6 +115,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		579E33031F507BF70073C5DC /* OtherDescriptorAndCells */ = {
+			isa = PBXGroup;
+			children = (
+				579E33041F507BF70073C5DC /* OCBarrageGradientBackgroundColorCell.h */,
+				579E33051F507BF70073C5DC /* OCBarrageGradientBackgroundColorCell.m */,
+				579E33061F507BF70073C5DC /* OCBarrageGradientBackgroundColorDescriptor.h */,
+				579E33071F507BF70073C5DC /* OCBarrageGradientBackgroundColorDescriptor.m */,
+				579E33081F507BF70073C5DC /* OCBarrageWalkBannerCell.h */,
+				579E33091F507BF70073C5DC /* OCBarrageWalkBannerCell.m */,
+				579E330A1F507BF70073C5DC /* OCBarrageWalkBannerDescriptor.h */,
+				579E330B1F507BF70073C5DC /* OCBarrageWalkBannerDescriptor.m */,
+			);
+			path = OtherDescriptorAndCells;
+			sourceTree = "<group>";
+		};
 		57D513D91F4E964300B2E8A7 = {
 			isa = PBXGroup;
 			children = (
@@ -198,14 +213,7 @@
 				57D514251F4E967700B2E8A7 /* OCBarrageTextDescriptor.m */,
 				57D514221F4E967700B2E8A7 /* OCBarrageTextCell.h */,
 				57D514231F4E967700B2E8A7 /* OCBarrageTextCell.m */,
-				57B4CEF31F4FDFD3001BF31F /* OCBarrageGradientBackgroundColorDescriptor.h */,
-				57B4CEF41F4FDFD3001BF31F /* OCBarrageGradientBackgroundColorDescriptor.m */,
-				57B4CEF01F4FD93E001BF31F /* OCBarrageGradientBackgroundColorCell.h */,
-				57B4CEF11F4FD93E001BF31F /* OCBarrageGradientBackgroundColorCell.m */,
-				57B4CEF91F50200C001BF31F /* OCBarrageWalkBannerDescriptor.h */,
-				57B4CEFA1F50200C001BF31F /* OCBarrageWalkBannerDescriptor.m */,
-				57B4CEF61F501F97001BF31F /* OCBarrageWalkBannerCell.h */,
-				57B4CEF71F501F97001BF31F /* OCBarrageWalkBannerCell.m */,
+				579E33031F507BF70073C5DC /* OtherDescriptorAndCells */,
 			);
 			path = OCBarrage;
 			sourceTree = "<group>";
@@ -345,14 +353,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				57D514281F4E967700B2E8A7 /* OCBarrageManager.m in Sources */,
+				579E330D1F507BF70073C5DC /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */,
 				57D5142A1F4E967700B2E8A7 /* OCBarrageTextCell.m in Sources */,
 				57D514291F4E967700B2E8A7 /* OCBarrageRenderView.m in Sources */,
-				57B4CEF81F501F97001BF31F /* OCBarrageWalkBannerCell.m in Sources */,
-				57B4CEF21F4FD93E001BF31F /* OCBarrageGradientBackgroundColorCell.m in Sources */,
-				57B4CEF51F4FDFD3001BF31F /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */,
+				579E330C1F507BF70073C5DC /* OCBarrageGradientBackgroundColorCell.m in Sources */,
 				57D514261F4E967700B2E8A7 /* OCBarrageCell.m in Sources */,
-				57B4CEFB1F50200C001BF31F /* OCBarrageWalkBannerDescriptor.m in Sources */,
+				579E330E1F507BF70073C5DC /* OCBarrageWalkBannerCell.m in Sources */,
 				57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */,
+				579E330F1F507BF70073C5DC /* OCBarrageWalkBannerDescriptor.m in Sources */,
 				57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */,
 				57D5142B1F4E967700B2E8A7 /* OCBarrageTextDescriptor.m in Sources */,
 				57D514271F4E967700B2E8A7 /* OCBarrageDescriptor.m in Sources */,
