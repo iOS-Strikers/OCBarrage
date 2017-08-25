@@ -94,7 +94,7 @@ Pod::Spec.new do |s|
   s.source_files  = "OCBarrage/OCBarrage/*.{h,m}"
   # s.exclude_files = "Classes/Exclude"
 
-  s.public_header_files = "OCBarrage/OCBarrage/OCBarrage.h"
+  # s.public_header_files = "OCBarrage/OCBarrage/OCBarrage.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
