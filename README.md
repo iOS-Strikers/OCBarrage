@@ -1,6 +1,6 @@
 # OCBarrage
 iOS弹幕库, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, 高度自定义动画, 超高性能, 简单易上手. 
-`OCBarrage`底层使用`Core Animation`驱动, `core graphics`绘图, GPU渲染, 性能极高, 哪怕是同时渲染5000条弹幕也不会感觉到卡顿. 
+`OCBarrage`底层使用`Core Animation`驱动, `Core Graphics`绘图, GPU渲染, 性能极高, 哪怕是同时渲染5000条弹幕也不会感觉到卡顿. 
 
 ## 效果展示
 
