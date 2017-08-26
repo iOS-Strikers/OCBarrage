@@ -69,9 +69,11 @@
     
     if (width == 0 || height == 0) {
         CGImageRef content = (__bridge CGImageRef)self.layer.contents;
-        UIImage *image = [UIImage imageWithCGImage:content];
-        width = image.size.width/[UIScreen mainScreen].scale;
-        height = image.size.height/[UIScreen mainScreen].scale;
+        if (content) {
+            UIImage *image = [UIImage imageWithCGImage:content];
+            width = image.size.width/[UIScreen mainScreen].scale;
+            height = image.size.height/[UIScreen mainScreen].scale;
+        }
     }
     
     self.bounds = CGRectMake(0.0, 0.0, width, height);
