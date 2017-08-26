@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		575D78551F51A66400753F4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575D78541F51A66400753F4C /* Assets.xcassets */; };
 		57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57969F4F1F4ECC8C0028C955 /* RootViewController.m */; };
 		579E331A1F507FF30073C5DC /* OCBarrageGradientBackgroundColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E33131F507FF30073C5DC /* OCBarrageGradientBackgroundColorCell.m */; };
 		579E331B1F507FF30073C5DC /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E33151F507FF30073C5DC /* OCBarrageGradientBackgroundColorDescriptor.m */; };
@@ -17,7 +18,6 @@
 		57D513EA1F4E964300B2E8A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513E91F4E964300B2E8A7 /* AppDelegate.m */; };
 		57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513EC1F4E964300B2E8A7 /* ViewController.m */; };
 		57D513F01F4E964300B2E8A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57D513EE1F4E964300B2E8A7 /* Main.storyboard */; };
-		57D513F21F4E964300B2E8A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57D513F11F4E964300B2E8A7 /* Assets.xcassets */; };
 		57D513F51F4E964300B2E8A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57D513F31F4E964300B2E8A7 /* LaunchScreen.storyboard */; };
 		57D514001F4E964300B2E8A7 /* OCBarrageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513FF1F4E964300B2E8A7 /* OCBarrageTests.m */; };
 		57D5140B1F4E964300B2E8A7 /* OCBarrageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D5140A1F4E964300B2E8A7 /* OCBarrageUITests.m */; };
@@ -47,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		575D78541F51A66400753F4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57969F4E1F4ECC8C0028C955 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		57969F4F1F4ECC8C0028C955 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		579E33101F507EDD0073C5DC /* OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrage.h; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 		57D513EB1F4E964300B2E8A7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		57D513EC1F4E964300B2E8A7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		57D513EF1F4E964300B2E8A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		57D513F11F4E964300B2E8A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57D513F41F4E964300B2E8A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57D513F61F4E964300B2E8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57D513FB1F4E964300B2E8A7 /* OCBarrageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OCBarrageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,7 +163,7 @@
 				57D513EB1F4E964300B2E8A7 /* ViewController.h */,
 				57D513EC1F4E964300B2E8A7 /* ViewController.m */,
 				57D513EE1F4E964300B2E8A7 /* Main.storyboard */,
-				57D513F11F4E964300B2E8A7 /* Assets.xcassets */,
+				575D78541F51A66400753F4C /* Assets.xcassets */,
 				57D513F31F4E964300B2E8A7 /* LaunchScreen.storyboard */,
 				57D513F61F4E964300B2E8A7 /* Info.plist */,
 				57D513E51F4E964300B2E8A7 /* Supporting Files */,
@@ -328,7 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57D513F51F4E964300B2E8A7 /* LaunchScreen.storyboard in Resources */,
-				57D513F21F4E964300B2E8A7 /* Assets.xcassets in Resources */,
+				575D78551F51A66400753F4C /* Assets.xcassets in Resources */,
 				57D513F01F4E964300B2E8A7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
