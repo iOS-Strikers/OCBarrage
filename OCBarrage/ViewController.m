@@ -8,15 +8,14 @@
 
 #import "ViewController.h"
 #import "OCBarrage.h"
-#import "OCBarrageGradientBackgroundColorDescriptor.h"
-#import "OCBarrageGradientBackgroundColorCell.h"
+//#import "OCBarrageGradientBackgroundColorDescriptor.h"
+//#import "OCBarrageGradientBackgroundColorCell.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) CATextLayer *textlayer;
 @property (nonatomic, strong) OCBarrageManager *barrageManager;
 @property (nonatomic, assign) NSInteger count;
-@property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) OCBarrageGradientBackgroundColorDescriptor *textDescriptor;
+//@property (nonatomic, strong) OCBarrageGradientBackgroundColorDescriptor *textDescriptor;
 @property (nonatomic, assign) int times;
 @end
 
@@ -27,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /*
     // Do any additional setup after loading the view, typically from a nib.
     OCBarrageGradientBackgroundColorDescriptor *textDescriptor = [[OCBarrageGradientBackgroundColorDescriptor alloc] init];
     textDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
@@ -35,10 +35,11 @@
     textDescriptor.text = [NSString stringWithFormat:@"~全民直播~"];
     textDescriptor.textColor = [UIColor whiteColor];
     textDescriptor.textFont = [UIFont systemFontOfSize:17.0];
+//    textDescriptor.textShadowOpened = YES;
     textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     textDescriptor.strokeWidth = -1;
     textDescriptor.animationDuration = arc4random()%3 + 12;
-    textDescriptor.barrageIndentifier = @"OCBarrageGradientBackgroundColorDescriptor";//@"OCBarrageGradientBackgroundColorDescriptor";
+    textDescriptor.barrageIndentifier = @"OCBarrageGradientBackgroundColorDescriptor";
     self.textDescriptor = textDescriptor;
     
     self.barrageManager = [[OCBarrageManager alloc] init];
@@ -47,10 +48,9 @@
     [self.view addSubview:self.barrageManager.renderView];
     self.barrageManager.renderView.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
 //    self.barrageManager.renderView.center = self.view.center;
-//    self.barrageManager.renderView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.1];
     self.barrageManager.renderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     CGFloat originY = CGRectGetHeight(self.view.frame) - 50.0;
     
@@ -87,54 +87,57 @@
     [self.view addSubview:button4];
     
     [self.barrageManager start];
+     */
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addBarrage) object:nil];
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addBarrage) object:nil];
 }
 
 - (void)addBarrage {
-    for (int i = 0; i < 1250; i++) {
+    /*
+    for (int i = 0; i < 1; i++) {
         self.textDescriptor.gradientColor = [UIColor colorWithRed:arc4random_uniform(256.0)/255.0 green:arc4random_uniform(256.0)/255.0 blue:arc4random_uniform(256.0)/255.0 alpha:1.0];
         [self.barrageManager renderBarrageDescriptor:self.textDescriptor];
     }
     
     self.times++;
     if (self.times < 4) {
-        [self performSelector:@selector(addBarrage) withObject:nil afterDelay:1.0];
+        
     }
+    
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.1];
+     */
 }
 
 - (void)startBarrage {
-    [self.timer invalidate];
-    self.timer = nil;
+    /*
     [self.barrageManager start];
     [self addBarrage];
-    
-    self.timer = [NSTimer timerWithTimeInterval:0.1 target:self selector:@selector(updateTitle) userInfo:nil repeats:YES];
-    [self.timer fire];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+     */
 }
 
 
 - (void)updateTitle {
+    /*
     NSInteger barrageCount = self.barrageManager.renderView.animatingCells.count;
     self.title = [NSString stringWithFormat:@"现在有 %ld 条弹幕", (unsigned long)barrageCount];
+     */
 }
 
-- (void)pasueBarrage {
-    [self.barrageManager puase];
-}
-
-- (void)resumeBarrage {
-    [self.barrageManager resume];
-}
-
-- (void)stopBarrage {
-    [self.barrageManager stop];
-    _count = 0;
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addBarrage) object:nil];
-}
+//- (void)pasueBarrage {
+//    [self.barrageManager puase];
+//}
+//
+//- (void)resumeBarrage {
+//    [self.barrageManager resume];
+//}
+//
+//- (void)stopBarrage {
+//    [self.barrageManager stop];
+//    _count = 0;
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addBarrage) object:nil];
+//}
 
 @end

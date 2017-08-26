@@ -21,6 +21,8 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self action:@selector(addBarrage) forControlEvents:UIControlEventTouchUpInside];
     button.frame= CGRectMake(0.0, 64.0, 50.0, 50.0);
+    [button setTitle:@"点我" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     button.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
     [self.view addSubview:button];
 }

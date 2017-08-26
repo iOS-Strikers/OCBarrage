@@ -42,13 +42,19 @@
     
     [self.layer setContents:(__bridge id)image.CGImage];
     
-    [self removeAllSublayers];
+    [self removeAllSubViewsAndSublayers];
 }
 
-- (void)removeAllSublayers {
-    NSEnumerator *enumerator = [self.layer.sublayers reverseObjectEnumerator];
+- (void)removeAllSubViewsAndSublayers {
+    NSEnumerator *viewEnumerator = [self.subviews reverseObjectEnumerator];
+    UIView *subView = nil;
+    while (subView = [viewEnumerator nextObject]){
+        [subView removeFromSuperview];
+    }
+    
+    NSEnumerator *layerEnumerator = [self.layer.sublayers reverseObjectEnumerator];
     CALayer *sublayer = nil;
-    while (sublayer = [enumerator nextObject]){
+    while (sublayer = [layerEnumerator nextObject]){
         [sublayer removeFromSuperlayer];
     }
 }
