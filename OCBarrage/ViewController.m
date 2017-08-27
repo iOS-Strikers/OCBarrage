@@ -50,7 +50,7 @@
 //    self.barrageManager.renderView.center = self.view.center;
     self.barrageManager.renderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     
     CGFloat originY = CGRectGetHeight(self.view.frame) - 50.0;
     

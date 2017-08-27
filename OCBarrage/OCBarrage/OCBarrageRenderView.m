@@ -289,7 +289,7 @@
                     } else {
                         if (_trackNextAvailableTime.count < trackCount) {//刚开始不是每一条轨道都跑过弹幕, 还有空轨道
                             NSMutableArray *numberArray = [NSMutableArray array];
-                            for (int index = 0; index < trackIndex; index++) {
+                            for (int index = 0; index < trackCount; index++) {
                                 OCBarrageTrackInfo *emptyTrackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(barrageCell.barrageIndentifier, index)];
                                 if (!emptyTrackInfo) {
                                     [numberArray addObject:[NSNumber numberWithInt:index]];
