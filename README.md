@@ -70,13 +70,21 @@ iOS弹幕库OCBarrage, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, �
 
 ![convertContentToImage.png](http://upload-images.jianshu.io/upload_images/1674413-4e3d9c967a63e610.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+如果不想将子视图的内容转化成图片只需重写`- (void)convertContentToImage`并留空即可:
+
+![convertContentToImage.png](http://upload-images.jianshu.io/upload_images/1674413-4229570c31da70c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 - 第七步:
 
 如果想要进一步优化内存和性能, 可以重写`- (void)removeSubViewsAndSublayers`方法, 删除之前添加的的subView和sublayer, 并将子视图置为`nil`. 
 
 ![removeSubViewsAndSublayers.png](http://upload-images.jianshu.io/upload_images/1674413-c97727b51893f69d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-如果既想提高性能, 又有一些无法图片化的内容(例如:gif)需要展示, 可以不调用`[super removeSubViewsAndSublayers]`方法, 并选择性的删除一些子视图, 保留一些子视图.
+如果既想提高性能, 又有一些无法图片化的内容(例如:gif)需要展示, 可以重写`- (void)removeSubViewsAndSublayers`方法, 但不调用`[super removeSubViewsAndSublayers]`方法, 并选择性的删除一些子视图, 保留一些子视图.
+
+ 如果不想删除子视图, 只需重写`- (void)removeSubViewsAndSublayers`方法并留空即可:
+
+![removeSubViewsAndSublayers.png](http://upload-images.jianshu.io/upload_images/1674413-0b672a860c309083.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 系统要求
 ==============
