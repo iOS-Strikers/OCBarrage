@@ -11,7 +11,7 @@
 @implementation OCBarrageGradientBackgroundColorCell
 
 - (void)updateSubviewsData {
-    [self updateSubviewsData];
+    [super updateSubviewsData];
     
 }
 

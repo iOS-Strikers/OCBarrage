@@ -24,14 +24,16 @@
 }
 
 - (void)updateSubviewsData {
-    [self updateSubviewsData];
+    [super updateSubviewsData];
     
-    [self.leftImageView setImage:[UIImage imageNamed:@""]];
-    [self.middleImageView setBackgroundColor:self.walkBannerDescriptor.bannerMiddleColor];
-    [self.rightImageView setImage:[UIImage imageNamed:@""]];
+    [self.leftImageView setImage:[UIImage imageNamed:@"chaoren_left"]];
+    [self.middleImageView setBackgroundColor:[UIColor colorWithRed:1.00 green:0.83 blue:0.26 alpha:1.00]];
+    [self.rightImageView setImage:[UIImage imageNamed:@"chaoren_right"]];
 }
 
 - (void)layoutContentViews {
+    [super layoutContentViews];
+    
     CGFloat leftImageViewX = 0.0;
     CGFloat leftImageViewY = 0.0;
     CGFloat leftImageViewW = ImageWidth;
