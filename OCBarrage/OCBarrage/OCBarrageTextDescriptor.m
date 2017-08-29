@@ -16,9 +16,6 @@
     self = [super init];
     if (self) {
         _textAttribute = [NSMutableDictionary dictionary];
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setBaseWritingDirection:NSWritingDirectionLeftToRight];
-        [_textAttribute setValue:paragraphStyle forKey:NSParagraphStyleAttributeName];//修复阿拉伯文字显示的bug.
         _shadowColor = [UIColor blackColor];
         _shadowOffset = CGSizeZero;
         _shadowRadius = 2.0;
@@ -103,7 +100,13 @@
         _attributeText = [[NSAttributedString alloc] initWithString:_text attributes:_textAttribute];
     }
     
-    return _attributeText;
+    //修复阿拉伯文字显示的bug.
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setBaseWritingDirection:NSWritingDirectionLeftToRight];
+    NSMutableAttributedString *tempText = [[NSMutableAttributedString alloc] initWithAttributedString:_attributeText];
+    [tempText setAttributes:@{NSParagraphStyleAttributeName:paragraphStyle} range:NSMakeRange(0, tempText.string.length)];
+    
+    return [tempText copy];
 }
 
 @end
