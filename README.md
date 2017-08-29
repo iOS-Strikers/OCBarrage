@@ -38,7 +38,8 @@ iOS弹幕库OCBarrage, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, �
 
 - 第二步:
 
-为新的弹幕类型创建建一个数据展示视图例如:`OCBarrageWalkBannerCell`. 这个新的弹幕类型的展示视图必须继承自`OCBarrageTextCell`类.
+为新的弹幕类型创建建一个数据展示视图例如:`OCBarrageWalkBannerCell`. 这个新的弹幕类型的展示视图必须继承自`OCBarrageTextCell`类. 
+
 ![OCBarrageWalkBannerCell.png](http://upload-images.jianshu.io/upload_images/1674413-1732637b662eab3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 在这个新的展示视图里我们可以添加展示相应数据的子视图,例如:`leftImageView`, `middleImageView`, `rightImageView`.
