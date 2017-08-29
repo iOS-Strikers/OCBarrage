@@ -29,8 +29,8 @@
     [self.renderView start];
 }
 
-- (void)puase {
-    [self.renderView puase];
+- (void)pause {
+    [self.renderView pause];
 }
 
 - (void)resume {

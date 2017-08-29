@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) OCBarrageRenderStatus renderStatus;
 
 - (void)start;
-- (void)puase;
+- (void)pause;
 - (void)resume;
 - (void)stop;
 

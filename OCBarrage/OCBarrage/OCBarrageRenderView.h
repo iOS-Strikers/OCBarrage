@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, OCBarrageRenderStatus) {
 - (void)fireBarrageCell:(OCBarrageCell *)barrageCell;
 
 - (void)start;
-- (void)puase;
+- (void)pause;
 - (void)resume;
 - (void)stop;
 

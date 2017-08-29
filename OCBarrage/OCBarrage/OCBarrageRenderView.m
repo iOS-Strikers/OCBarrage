@@ -84,7 +84,7 @@
     }
 }
 
-- (void)puase {
+- (void)pause {
     switch (self.renderStatus) {
         case OCBarrageRenderStarted: {
             _renderStatus = OCBarrageRenderPaused;
