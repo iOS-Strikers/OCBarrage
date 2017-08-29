@@ -24,8 +24,12 @@
         _idleCellsLock = dispatch_semaphore_create(1);
         _lowPositionView = [[UIView alloc] init];
         [self addSubview:_lowPositionView];
-        _heightPositionView = [[UIView alloc] init];
-        [self addSubview:_heightPositionView];
+        _middlePositionView = [[UIView alloc] init];
+        [self addSubview:_middlePositionView];
+        _highPositionView = [[UIView alloc] init];
+        [self addSubview:_highPositionView];
+        _veryHighPositionView = [[UIView alloc] init];
+        [self addSubview:_veryHighPositionView];
         self.layer.masksToBounds = YES;
         _trackNextAvailableTime = [NSMutableDictionary dictionary];
     }
@@ -226,15 +230,15 @@
 - (void)addBarrageCell:(OCBarrageCell *)barrageCell WithPositionPriority:(OCBarragePositionPriority)positionPriority {
     switch (positionPriority) {
         case OCBarragePositionMiddle: {
-            [self insertSubview:barrageCell aboveSubview:_lowPositionView];
+            [self insertSubview:barrageCell belowSubview:_middlePositionView];
         }
             break;
         case OCBarragePositionHeight: {
-            [self insertSubview:barrageCell belowSubview:_heightPositionView];
+            [self insertSubview:barrageCell belowSubview:_highPositionView];
         }
             break;
         case OCBarragePositionVeryHeight: {
-            [self insertSubview:barrageCell aboveSubview:_heightPositionView];
+            [self insertSubview:barrageCell belowSubview:_veryHighPositionView];
         }
             break;
         default: {

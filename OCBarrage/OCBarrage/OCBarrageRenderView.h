@@ -24,7 +24,9 @@ typedef NS_ENUM(NSInteger, OCBarrageRenderStatus) {
     dispatch_semaphore_t _idleCellsLock;
     OCBarrageCell *_lastestCell;
     UIView *_lowPositionView;
-    UIView *_heightPositionView;
+    UIView *_middlePositionView;
+    UIView *_highPositionView;
+    UIView *_veryHighPositionView;
     BOOL _autoClear;
     OCBarrageRenderStatus _renderStatus;
     NSMutableDictionary *_trackNextAvailableTime;
