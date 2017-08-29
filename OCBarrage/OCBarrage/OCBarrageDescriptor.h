@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat animationDuration;
 
 @property (nonatomic, copy, nullable) OCBarrageTouchAction touchAction;
+@property (nonatomic, strong) UIColor *borderColor; // Default is no border
+@property (nonatomic, assign) CGFloat borderWidth; // Default is 0
+@property (nonatomic, assign) CGFloat cornerRadius; // Default is 8
 
 @property (nonatomic, assign) CGFloat bindingOriginY;//在固定的某个Y坐标上显示
 

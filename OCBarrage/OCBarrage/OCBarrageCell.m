@@ -28,6 +28,20 @@
     _trackIndex = -1;
 }
 
+- (void)setBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor {
+    _barrageDescriptor = barrageDescriptor;
+    
+    if (barrageDescriptor.borderColor) {
+        self.layer.borderColor = barrageDescriptor.borderColor.CGColor;
+    }
+    if (barrageDescriptor.borderWidth > 0) {
+        self.layer.borderWidth = barrageDescriptor.borderWidth;
+    }
+    if (barrageDescriptor.cornerRadius > 0) {
+        self.layer.cornerRadius = barrageDescriptor.cornerRadius;
+    }
+}
+
 - (void)clearContents {
     self.layer.contents = nil;
 }
