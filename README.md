@@ -33,8 +33,10 @@ iOS弹幕库OCBarrage, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, �
 - 第一步: 
 
 为新的弹幕类型新建一个数据模型 例如:`OCBarrageWalkBannerDescriptor`. 这个类必须继承自`OCBarrageDescriptor`类.
+
 ![OCBarrageWalkBannerDescriptor.png](http://upload-images.jianshu.io/upload_images/1674413-0251b7e565efa91d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-这样就创建新的弹幕类型的数据模型类, 我们可以在这个类里面添加新的弹幕属性例如:`bannerLeftImageSrc`, `bannerMiddleColor`, `bannerRightImageSrc`等等.
+
+ 这样就创建新的弹幕类型的数据模型类, 我们可以在这个类里面添加新的弹幕属性例如:`bannerLeftImageSrc`, `bannerMiddleColor`, `bannerRightImageSrc`等等.
 
 - 第二步:
 
