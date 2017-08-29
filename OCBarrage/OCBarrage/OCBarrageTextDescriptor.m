@@ -10,7 +10,7 @@
 
 @implementation OCBarrageTextDescriptor
 
-@synthesize textFont = _textFont, textColor = _textColor, shadowColor = _shadowColor;
+@synthesize textFont = _textFont, textColor = _textColor, shadowColor = _shadowColor, attributedText = _attributedText;
 
 - (instancetype)init {
     self = [super init];
@@ -92,18 +92,18 @@
     return _shadowColor;
 }
 
-- (NSAttributedString *)attributeText {
-    if (!_attributeText) {
+- (NSAttributedString *)attributedText {
+    if (!_attributedText) {
         if (!_text) {
             return nil;
         }
-        _attributeText = [[NSAttributedString alloc] initWithString:_text attributes:_textAttribute];
+        _attributedText = [[NSAttributedString alloc] initWithString:_text attributes:_textAttribute];
     }
     
     //修复阿拉伯文字显示的bug.
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setBaseWritingDirection:NSWritingDirectionLeftToRight];
-    NSMutableAttributedString *tempText = [[NSMutableAttributedString alloc] initWithAttributedString:_attributeText];
+    NSMutableAttributedString *tempText = [[NSMutableAttributedString alloc] initWithAttributedString:_attributedText];
     [tempText setAttributes:@{NSParagraphStyleAttributeName:paragraphStyle} range:NSMakeRange(0, tempText.string.length)];
     
     return [tempText copy];

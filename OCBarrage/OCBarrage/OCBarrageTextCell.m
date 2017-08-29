@@ -35,11 +35,11 @@
         self.textlayer.shadowOpacity = self.textDescriptor.shadowOpacity;
     }
     
-    [self.textlayer setString:self.textDescriptor.attributeText];
+    [self.textlayer setString:self.textDescriptor.attributedText];
 }
 
 - (void)layoutContentViews {
-    self.textlayer.frame = CGRectMake(0.0, 0.0, [self.textDescriptor.attributeText size].width, [self.textDescriptor.attributeText size].height);
+    self.textlayer.frame = CGRectMake(0.0, 0.0, [self.textDescriptor.attributedText size].width, [self.textDescriptor.attributedText size].height);
 }
 
 - (void)convertContentToImage {

@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int strokeWidth;//笔画宽度(粗细)，取值为 NSNumber 对象（整数），负值填充效果，正值中空效果
 
 @property (nonatomic, copy, nullable) NSString *text;
-@property (nonatomic, copy, nullable) NSAttributedString *attributeText;
+@property (nonatomic, copy, nullable) NSAttributedString *attributedText;
 
 @end
 
