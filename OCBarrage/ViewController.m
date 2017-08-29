@@ -80,7 +80,6 @@
 
 - (void)addBarrage {
     int index = self.times%3;
-    NSLog(@"index ----> %d", index);
     switch (index) {
         case 1:{
             OCBarrageGradientBackgroundColorDescriptor *gradientBackgroundDescriptor = [[OCBarrageGradientBackgroundColorDescriptor alloc] init];
@@ -118,7 +117,7 @@
             OCBarrageTextDescriptor *textDescriptor = [[OCBarrageTextDescriptor alloc] init];
             textDescriptor.text = [NSString stringWithFormat:@"~OCBarrage~"];
             textDescriptor.textColor = [UIColor grayColor];
-            textDescriptor.positionPriority = OCBarragePositionMiddle;
+            textDescriptor.positionPriority = OCBarragePositionLow;
             textDescriptor.textFont = [UIFont systemFontOfSize:17.0];
             textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
             textDescriptor.strokeWidth = -1;
