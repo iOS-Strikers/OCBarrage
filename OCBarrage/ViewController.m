@@ -16,8 +16,6 @@
 @interface ViewController ()
 @property (nonatomic, strong) CATextLayer *textlayer;
 @property (nonatomic, strong) OCBarrageManager *barrageManager;
-@property (nonatomic, assign) NSInteger count;
-@property (nonatomic, strong) OCBarrageWalkBannerDescriptor *bannerDescriptor;
 @property (nonatomic, assign) int times;
 @end
 
@@ -30,20 +28,6 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view, typically from a nib.
-    OCBarrageWalkBannerDescriptor *bannerDescriptor = [[OCBarrageWalkBannerDescriptor alloc] init];
-    bannerDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
-        
-    };
-    bannerDescriptor.text = [NSString stringWithFormat:@"~欢迎全民超人大驾光临~"];
-    bannerDescriptor.textColor = [UIColor redColor];
-    bannerDescriptor.textFont = [UIFont systemFontOfSize:17.0];
-//    textDescriptor.textShadowOpened = YES;
-    bannerDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-    bannerDescriptor.strokeWidth = -1;
-    bannerDescriptor.animationDuration = arc4random()%3 + 12;
-    bannerDescriptor.barrageCellClass = [OCBarrageWalkBannerCell class];
-    self.bannerDescriptor = bannerDescriptor;
-    
     self.barrageManager = [[OCBarrageManager alloc] init];
     [self.view addSubview:self.barrageManager.renderView];
     self.barrageManager.renderView.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
@@ -95,27 +79,66 @@
 }
 
 - (void)addBarrage {
-    
-    for (int i = 0; i < 1; i++) {
-//        self.textDescriptor.gradientColor = [UIColor colorWithRed:arc4random_uniform(256.0)/255.0 green:arc4random_uniform(256.0)/255.0 blue:arc4random_uniform(256.0)/255.0 alpha:1.0];
-        [self.barrageManager renderBarrageDescriptor:self.bannerDescriptor];
+    int index = self.times%3;
+    NSLog(@"index ----> %d", index);
+    switch (index) {
+        case 1:{
+            OCBarrageGradientBackgroundColorDescriptor *gradientBackgroundDescriptor = [[OCBarrageGradientBackgroundColorDescriptor alloc] init];
+            gradientBackgroundDescriptor.text = [NSString stringWithFormat:@"~全民直播~"];
+            gradientBackgroundDescriptor.textColor = [UIColor whiteColor];
+            gradientBackgroundDescriptor.positionPriority = OCBarragePositionMiddle;
+            gradientBackgroundDescriptor.textFont = [UIFont systemFontOfSize:17.0];
+            gradientBackgroundDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+            gradientBackgroundDescriptor.strokeWidth = -1;
+            gradientBackgroundDescriptor.animationDuration = arc4random()%5 + 5;
+            gradientBackgroundDescriptor.barrageCellClass = [OCBarrageGradientBackgroundColorCell class];
+            gradientBackgroundDescriptor.gradientColor = [UIColor colorWithRed:arc4random_uniform(256.0)/255.0 green:arc4random_uniform(256.0)/255.0 blue:arc4random_uniform(256.0)/255.0 alpha:1.0];
+            [self.barrageManager renderBarrageDescriptor:gradientBackgroundDescriptor];
+        }
+            break;
+        case 2:{
+            OCBarrageWalkBannerDescriptor *bannerDescriptor = [[OCBarrageWalkBannerDescriptor alloc] init];
+            bannerDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"OCBarrage" message:@"全民超人为您服务" delegate:nil cancelButtonTitle:@"朕知道了" otherButtonTitles:nil];
+                [alertView show];
+            };
+            bannerDescriptor.text = [NSString stringWithFormat:@"~欢迎全民超人大驾光临~"];
+            bannerDescriptor.textColor = [UIColor redColor];
+            bannerDescriptor.textFont = [UIFont systemFontOfSize:17.0];
+            bannerDescriptor.positionPriority = OCBarragePositionHeight;
+            bannerDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+            bannerDescriptor.strokeWidth = -1;
+            bannerDescriptor.animationDuration = arc4random()%5 + 5;
+            bannerDescriptor.barrageCellClass = [OCBarrageWalkBannerCell class];
+            [self.barrageManager renderBarrageDescriptor:bannerDescriptor];
+        }
+            break;
+            
+        default: {
+            OCBarrageTextDescriptor *textDescriptor = [[OCBarrageTextDescriptor alloc] init];
+            textDescriptor.text = [NSString stringWithFormat:@"~OCBarrage~"];
+            textDescriptor.textColor = [UIColor grayColor];
+            textDescriptor.positionPriority = OCBarragePositionMiddle;
+            textDescriptor.textFont = [UIFont systemFontOfSize:17.0];
+            textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+            textDescriptor.strokeWidth = -1;
+            textDescriptor.animationDuration = arc4random()%5 + 5;
+            textDescriptor.barrageCellClass = [OCBarrageTextCell class];
+            [self.barrageManager renderBarrageDescriptor:textDescriptor];
+        }
+            break;
     }
-    
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.25];
     self.times++;
-    if (self.times > 2) {
+    if (self.times == 100) {
         self.times = 0;
-        [self updateTitle];
     }
-    
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:1.0];
-    
 }
 
 - (void)startBarrage {
     [self.barrageManager start];
     [self addBarrage];
 }
-
 
 - (void)updateTitle {
     NSInteger barrageCount = self.barrageManager.renderView.animatingCells.count;
@@ -133,7 +156,6 @@
 
 - (void)stopBarrage {
     [self.barrageManager stop];
-    _count = 0;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addBarrage) object:nil];
 }
 

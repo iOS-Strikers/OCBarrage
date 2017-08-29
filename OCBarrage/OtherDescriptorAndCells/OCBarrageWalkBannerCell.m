@@ -15,12 +15,21 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self addSubview:self.leftImageView];
-        [self addSubview:self.middleImageView];
-        [self addSubview:self.rightImageView];
+        [self addSubviews];
     }
     
     return self;
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    [self addSubviews];
+}
+
+- (void)addSubviews {
+    [self addSubview:self.leftImageView];
+    [self addSubview:self.middleImageView];
+    [self addSubview:self.rightImageView];
 }
 
 - (void)updateSubviewsData {
