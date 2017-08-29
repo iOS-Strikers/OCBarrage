@@ -68,6 +68,14 @@
 }
 
 #pragma mark ----- getter
+- (NSString *)text {
+    if (!_text) {
+        _text = _attributedText.string;
+    }
+    
+    return _text;
+}
+
 - (UIFont *)textFont {
     if (!_textFont) {
         _textFont = [UIFont systemFontOfSize:17.0];
