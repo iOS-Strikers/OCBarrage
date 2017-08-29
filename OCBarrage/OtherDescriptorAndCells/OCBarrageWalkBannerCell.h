@@ -11,7 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OCBarrageWalkBannerCell : OCBarrageTextCell
+@interface OCBarrageWalkBannerCell : OCBarrageTextCell {
+    CGRect _contentRect;
+}
+
+@property (nonatomic, strong) UIImageView *leftImageView;
+@property (nonatomic, strong) UIImageView *middleImageView;
+@property (nonatomic, strong) UIImageView *rightImageView;
+
+@property (nonatomic, strong) OCBarrageWalkBannerDescriptor *walkBannerDescriptor;
 
 @end
 

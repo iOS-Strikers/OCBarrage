@@ -25,16 +25,9 @@
 }
 
 - (void)updateSubviewsData {
-    [self updateTextlayerContentAndBounds];
-    [self convertContentToImageWithSize:_textlayer.frame.size];
-    _textlayer = nil;
-}
-
-- (void)updateTextlayerContentAndBounds; {
     if (!_textlayer) {
         [self.layer addSublayer:self.textlayer];
     }
-    
     if (self.textDescriptor.textShadowOpened) {
         self.textlayer.shadowColor = self.textDescriptor.shadowColor.CGColor;
         self.textlayer.shadowOffset = self.textDescriptor.shadowOffset;
@@ -43,7 +36,21 @@
     }
     
     [self.textlayer setString:self.textDescriptor.attributeText];
+}
+
+- (void)layoutContentViews {
     self.textlayer.frame = CGRectMake(0.0, 0.0, [self.textDescriptor.attributeText size].width, [self.textDescriptor.attributeText size].height);
+}
+
+- (void)convertContentToImage {
+    UIImage *contentImage = [self.layer convertContentToImageWithSize:_textlayer.frame.size];
+    [self.layer setContents:(__bridge id)contentImage.CGImage];
+}
+
+- (void)removeSubViewsAndSublayers {
+    [super removeSubViewsAndSublayers];
+    
+    _textlayer = nil;
 }
 
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate {

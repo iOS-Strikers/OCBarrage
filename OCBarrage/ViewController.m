@@ -122,7 +122,7 @@
 }
 
 - (void)pasueBarrage {
-    [self.barrageManager puase];
+    [self.barrageManager pause];
 }
 
 - (void)resumeBarrage {

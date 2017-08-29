@@ -5,17 +5,100 @@
 //  Created by QMTV on 2017/8/25.
 //  Copyright © 2017年 LFC. All rights reserved.
 //
+#define ImageWidth 89.0
+#define ImageHeight 57.0
 
 #import "OCBarrageWalkBannerCell.h"
 
 @implementation OCBarrageWalkBannerCell
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self addSubview:self.leftImageView];
+        [self addSubview:self.middleImageView];
+        [self addSubview:self.rightImageView];
+    }
+    
+    return self;
 }
-*/
+
+- (void)updateSubviewsData {
+    [self updateSubviewsData];
+    
+    [self.leftImageView setImage:[UIImage imageNamed:@""]];
+    [self.middleImageView setBackgroundColor:self.walkBannerDescriptor.bannerMiddleColor];
+    [self.rightImageView setImage:[UIImage imageNamed:@""]];
+}
+
+- (void)layoutContentViews {
+    CGFloat leftImageViewX = 0.0;
+    CGFloat leftImageViewY = 0.0;
+    CGFloat leftImageViewW = ImageWidth;
+    CGFloat leftImageViewH = ImageHeight;
+    self.leftImageView.frame = CGRectMake(leftImageViewX, leftImageViewY, leftImageViewW, leftImageViewH);
+    
+    CGFloat middleImageViewW = CGRectGetWidth(_textlayer.bounds);
+    CGFloat middleImageViewH = 19;
+    CGFloat middleImageViewX = CGRectGetMaxX(self.leftImageView.bounds) - 1.0;
+    CGFloat middleImageViewY = (leftImageViewH - middleImageViewH)/2;
+    self.middleImageView.frame = CGRectMake(middleImageViewX, middleImageViewY, middleImageViewW, middleImageViewH);
+    _textlayer.frame = self.middleImageView.frame;
+    
+    CGFloat rightImageViewX = CGRectGetMaxX(_textlayer.frame) - 1.0;
+    CGFloat rightImageViewY = leftImageViewY;
+    CGFloat rightImageViewW = CGRectGetWidth(self.rightImageView.frame) > 2?CGRectGetWidth(self.rightImageView.frame):22.0;
+    CGFloat rightImageViewH = ImageHeight;
+    self.rightImageView.frame = CGRectMake(rightImageViewX, rightImageViewY, rightImageViewW, rightImageViewH);
+    
+    CGFloat width = CGRectGetWidth(_textlayer.frame);
+    width = width + ImageWidth + ImageWidth;
+    _contentRect = CGRectMake(0.0, 0.0, width, ImageHeight);
+}
+
+- (void)convertContentToImage {
+    UIImage *contentImage = [self.layer convertContentToImageWithSize:_contentRect.size];
+    [self.layer setContents:(__bridge id)contentImage.CGImage];
+}
+
+- (void)removeSubViewsAndSublayers {
+    [super removeSubViewsAndSublayers];
+    
+    _leftImageView = nil;
+    _middleImageView = nil;
+    _rightImageView = nil;
+}
+
+#pragma mark ---- setter
+- (void)setBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor {
+    [super setBarrageDescriptor:barrageDescriptor];
+    self.walkBannerDescriptor = (OCBarrageWalkBannerDescriptor *)barrageDescriptor;
+}
+
+#pragma mark ---- getter
+- (UIImageView *)leftImageView {
+    if (!_leftImageView) {
+        _leftImageView = [[UIImageView alloc] init];
+        _leftImageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    return _leftImageView;
+}
+
+- (UIImageView *)middleImageView {
+    if (!_middleImageView) {
+        _middleImageView = [[UIImageView alloc] init];
+        _middleImageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    return _middleImageView;
+}
+
+- (UIImageView *)rightImageView {
+    if (!_rightImageView) {
+        _rightImageView = [[UIImageView alloc] init];
+        _rightImageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
+    return _rightImageView;
+}
 
 @end

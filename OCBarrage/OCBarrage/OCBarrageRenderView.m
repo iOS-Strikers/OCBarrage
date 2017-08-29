@@ -203,7 +203,10 @@
     }
     [barrageCell clearContents];
     [barrageCell updateSubviewsData];
+    [barrageCell layoutContentViews];
+    [barrageCell convertContentToImage];
     [barrageCell sizeToFit];
+    [barrageCell removeSubViewsAndSublayers];
     
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     _lastestCell = [self.animatingCells lastObject];

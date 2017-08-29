@@ -11,8 +11,25 @@
 @implementation OCBarrageGradientBackgroundColorCell
 
 - (void)updateSubviewsData {
-    [self updateTextlayerContentAndBounds];
+    [self updateSubviewsData];
+    
+}
+
+- (void)layoutContentViews {
+    [super layoutContentViews];
     [self addGradientLayer];
+}
+
+- (void)convertContentToImage {
+    UIImage *contentImage = [self.layer convertContentToImageWithSize:_gradientLayer.frame.size];
+    [self.layer setContents:(__bridge id)contentImage.CGImage];
+}
+
+- (void)removeSubViewsAndSublayers {
+    [super removeSubViewsAndSublayers];
+    
+    _gradientLayer = nil;
+    _textlayer = nil;
 }
 
 - (void)layoutSubviews {
@@ -40,10 +57,6 @@
     gradientLayer.mask = maskLayer;
     _gradientLayer = gradientLayer;
     [self.layer insertSublayer:gradientLayer atIndex:0];
-    
-    [self convertContentToImageWithSize:gradientLayer.frame.size];
-    _gradientLayer = nil;
-    _textlayer = nil;
 }
 
 

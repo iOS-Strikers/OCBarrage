@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CALayer+OCBarrage.h"
 #import "OCBarrageDescriptor.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,11 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int trackIndex;
 
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate;
-- (void)updateSubviewsData;
-- (void)clearContents;
-- (void)sizeToFit;//设置好数据之后调用一下自动计算bounds
-- (void)convertContentToImageWithSize:(CGSize)contentSize;
 - (void)prepareForReuse;
+- (void)clearContents;
+
+- (void)updateSubviewsData;
+- (void)layoutContentViews;
+- (void)convertContentToImage;
+- (void)sizeToFit;//设置好数据之后调用一下自动计算bounds
+- (void)removeSubViewsAndSublayers;//默认删除所有的subview和sublayer; 如果需要选择性的删除可以重写这个方法.
 
 @end
 

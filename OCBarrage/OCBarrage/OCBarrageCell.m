@@ -46,19 +46,11 @@
     self.layer.contents = nil;
 }
 
-- (void)convertContentToImageWithSize:(CGSize)contentSize {
-    UIGraphicsBeginImageContextWithOptions(contentSize, 0.0, [UIScreen mainScreen].scale);
-    //self为需要截屏的UI控件 即通过改变此参数可以截取特定的UI控件
-    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image= UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+- (void)convertContentToImage {
     
-    [self.layer setContents:(__bridge id)image.CGImage];
-    
-    [self removeAllSubViewsAndSublayers];
 }
 
-- (void)removeAllSubViewsAndSublayers {
+- (void)removeSubViewsAndSublayers {
     NSEnumerator *viewEnumerator = [self.subviews reverseObjectEnumerator];
     UIView *subView = nil;
     while (subView = [viewEnumerator nextObject]){
@@ -104,6 +96,10 @@
 
 - (void)updateSubviewsData {
    
+}
+
+- (void)layoutContentViews {
+
 }
 
 - (CAAnimation *)barrageAnimation {
