@@ -18,8 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) OCBarrageRenderView *renderView;
 @property (nonatomic, assign, readonly) OCBarrageRenderStatus renderStatus;
 
-- (void)resgisterBarrageCellClass:(Class)barrageCellClass withBarrageIndentifier:(NSString *)barrageIndentifier;
-
 - (void)start;
 - (void)puase;
 - (void)resume;

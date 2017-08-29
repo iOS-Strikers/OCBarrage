@@ -20,7 +20,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _barrageCellStyleClass = [NSMutableDictionary dictionary];
         _animatingCellsLock = dispatch_semaphore_create(1);
         _idleCellsLock = dispatch_semaphore_create(1);
         _lowPositionView = [[UIView alloc] init];
@@ -34,16 +33,12 @@
     return self;
 }
 
-- (void)resgisterBarrageCellClass:(Class)barrageCellClass withBarrageIndentifier:(NSString *)barrageIndentifier {
-    [_barrageCellStyleClass setValue:barrageCellClass forKey:barrageIndentifier];
-}
-
-- (nullable OCBarrageCell *)cellWithBarrageIndentifier:(NSString *)barrageIndentifier {
+- (nullable OCBarrageCell *)dequeueReusableCellWithClass:(Class)barrageCellClass {
     OCBarrageCell *barrageCell = nil;
     
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
     for (OCBarrageCell *cell in self.idleCells) {
-        if (cell.barrageIndentifier == barrageIndentifier) {
+        if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass(barrageCellClass)]) {
             barrageCell = cell;
             break;
         }
@@ -52,7 +47,7 @@
         [self.idleCells removeObject:barrageCell];
         barrageCell.idleTime = 0.0;
     } else {
-        barrageCell = [self newCellWithBarrageIndentifier:barrageIndentifier];
+        barrageCell = [self newCellWithClass:barrageCellClass];
     }
     dispatch_semaphore_signal(_idleCellsLock);
     if (![barrageCell isKindOfClass:[OCBarrageCell class]]) {
@@ -62,12 +57,11 @@
     return barrageCell;
 }
 
-- (OCBarrageCell *)newCellWithBarrageIndentifier:(NSString *)barrageIndentifier {
-    Class barrageCellClass = [_barrageCellStyleClass valueForKey:barrageIndentifier];
-    if (barrageCellClass == nil) {
+- (OCBarrageCell *)newCellWithClass:(Class)barrageCellClass {
+    OCBarrageCell *barrageCell = [[barrageCellClass alloc] init];
+    if (![barrageCell isKindOfClass:[OCBarrageCell class]]) {
         return nil;
     }
-    OCBarrageCell *barrageCell = [(OCBarrageCell *)[barrageCellClass alloc] initWithBarrageIndentifier:barrageIndentifier];
     
     return barrageCell;
 }
@@ -275,7 +269,7 @@
                 int trackCount = floorf(renderViewHeight/cellHeight);
                 int trackIndex = arc4random_uniform(trackCount);
                 
-                OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(barrageCell.barrageIndentifier, trackIndex)];
+                OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), trackIndex)];
                 if (trackInfo && trackInfo.nextAvailableTime > CACurrentMediaTime()) {//当前行暂不可用
                     NSMutableArray *availableTrackInfos = [NSMutableArray array];
                     for (OCBarrageTrackInfo *info in _trackNextAvailableTime.allValues) {
@@ -290,7 +284,7 @@
                         if (_trackNextAvailableTime.count < trackCount) {//刚开始不是每一条轨道都跑过弹幕, 还有空轨道
                             NSMutableArray *numberArray = [NSMutableArray array];
                             for (int index = 0; index < trackCount; index++) {
-                                OCBarrageTrackInfo *emptyTrackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(barrageCell.barrageIndentifier, index)];
+                                OCBarrageTrackInfo *emptyTrackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), index)];
                                 if (!emptyTrackInfo) {
                                     [numberArray addObject:[NSNumber numberWithInt:index]];
                                 }
@@ -339,7 +333,7 @@
 }
 
 - (void)recordTrackInfoWithBarrageCell:(OCBarrageCell *)barrageCell {
-    NSString *nextAvalibleTimeKey = kNextAvailableTimeKey(barrageCell.barrageIndentifier, barrageCell.trackIndex);
+    NSString *nextAvalibleTimeKey = kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), barrageCell.trackIndex);
     CFTimeInterval duration = barrageCell.barrageAnimation.duration;
     NSValue *fromValue = nil;
     NSValue *toValue = nil;
@@ -431,7 +425,7 @@
         return;
     }
     
-    OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(animationedCell.barrageIndentifier, animationedCell.trackIndex)];
+    OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([animationedCell class]), animationedCell.trackIndex)];
     if (trackInfo) {
         trackInfo.barrageCount--;
     }

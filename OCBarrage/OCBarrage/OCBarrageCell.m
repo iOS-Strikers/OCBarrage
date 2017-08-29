@@ -10,10 +10,9 @@
 
 @implementation OCBarrageCell
 
-- (instancetype)initWithBarrageIndentifier:(NSString *)barrageIndentifier {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        _barrageIndentifier = barrageIndentifier;
         _trackIndex = -1;
     }
     
@@ -95,10 +94,6 @@
 
 - (CAAnimation *)barrageAnimation {
     return [self.layer animationForKey:kBarrageAnimation];
-}
-
-- (NSString *)barrageIndentifier {
-    return _barrageIndentifier;
 }
 
 

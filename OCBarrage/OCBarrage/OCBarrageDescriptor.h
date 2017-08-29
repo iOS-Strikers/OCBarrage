@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OCBarrageDescriptor : NSObject
 
-@property (nonatomic, copy, nullable) NSString *barrageIndentifier;
+@property (nonatomic, assign) Class barrageCellClass;
 @property (nonatomic, assign) OCBarragePositionPriority positionPriority;//显示位置normal型的渲染在low型的上面, height型的渲染在normal上面
 @property (nonatomic, assign) CGFloat animationDuration;
 

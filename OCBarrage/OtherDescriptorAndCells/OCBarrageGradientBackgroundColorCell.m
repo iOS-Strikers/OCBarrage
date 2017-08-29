@@ -10,15 +10,6 @@
 
 @implementation OCBarrageGradientBackgroundColorCell
 
-- (instancetype)initWithBarrageIndentifier:(NSString *)barrageIndentifier {
-    self = [super initWithBarrageIndentifier:barrageIndentifier];
-    if (self) {
-        
-    }
-    
-    return self;
-}
-
 - (void)updateSubviewsData {
     [self updateTextlayerContentAndBounds];
     [self addGradientLayer];

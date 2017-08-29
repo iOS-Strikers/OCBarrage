@@ -25,10 +25,6 @@
     return self;
 }
 
-- (void)resgisterBarrageCellClass:(Class)barrageCellClass withBarrageIndentifier:(NSString *)barrageIndentifier {
-    [self.renderView resgisterBarrageCellClass:barrageCellClass withBarrageIndentifier:barrageIndentifier];
-}
-
 - (void)start {
     [self.renderView start];
 }
@@ -53,7 +49,7 @@
         return;
     }
     
-    OCBarrageCell *barrageCell = [self.renderView cellWithBarrageIndentifier:barrageDescriptor.barrageIndentifier];
+    OCBarrageCell *barrageCell = [self.renderView dequeueReusableCellWithClass:barrageDescriptor.barrageCellClass];
     if (!barrageCell) {
         return;
     }

@@ -13,18 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol OCBarrageCellDelegate;
 
-@interface OCBarrageCell : UIView {
-    NSString *_barrageIndentifier;
-}
-
+@interface OCBarrageCell : UIView
 @property (nonatomic, assign, getter=isIdle) BOOL idle;//是否是空闲状态
 @property (nonatomic, assign) NSTimeInterval idleTime;//开始闲置的时间, 闲置超过5秒的, 自动回收内存
-@property (nonatomic, copy, readonly) NSString *barrageIndentifier;
 @property (nonatomic, strong, nullable) OCBarrageDescriptor *barrageDescriptor;
 @property (nonatomic, strong, readonly) CAAnimation *barrageAnimation;
 @property (nonatomic, assign) int trackIndex;
 
-- (instancetype)initWithBarrageIndentifier:(NSString *)barrageIndentifier;
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate;
 - (void)updateSubviewsData;
 - (void)clearContents;

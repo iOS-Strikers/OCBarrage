@@ -39,12 +39,10 @@
     textDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     textDescriptor.strokeWidth = -1;
     textDescriptor.animationDuration = arc4random()%3 + 12;
-    textDescriptor.barrageIndentifier = @"OCBarrageGradientBackgroundColorDescriptor";
+    textDescriptor.barrageCellClass = [OCBarrageGradientBackgroundColorCell class];
     self.textDescriptor = textDescriptor;
     
     self.barrageManager = [[OCBarrageManager alloc] init];
-//    [self.barrageManager resgisterBarrageCellClass:[OCBarrageTextCell class] withBarrageIndentifier:@"OCBarrageStyleText"];
-    [self.barrageManager resgisterBarrageCellClass:[OCBarrageGradientBackgroundColorCell class] withBarrageIndentifier:@"OCBarrageGradientBackgroundColorDescriptor"];
     [self.view addSubview:self.barrageManager.renderView];
     self.barrageManager.renderView.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
 //    self.barrageManager.renderView.center = self.view.center;
