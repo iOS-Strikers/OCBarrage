@@ -102,11 +102,12 @@
     }
     
     self.times++;
-    if (self.times < 4) {
-        
+    if (self.times > 2) {
+        self.times = 0;
+        [self updateTitle];
     }
     
-    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.1];
+    [self performSelector:@selector(addBarrage) withObject:nil afterDelay:0.3];
     
 }
 
