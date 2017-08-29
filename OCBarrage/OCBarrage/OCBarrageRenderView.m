@@ -267,7 +267,7 @@
                 CGFloat renderViewHeight = CGRectGetHeight(self.bounds);
                 CGFloat cellHeight = CGRectGetHeight(barrageCell.bounds);
                 int trackCount = floorf(renderViewHeight/cellHeight);
-                int trackIndex = arc4random_uniform(trackCount);
+                int trackIndex = arc4random_uniform(trackCount);//用户改变行高(比如弹幕文字大小不会引起显示bug, 因为虽然是同一个类, 但是trackCount变小了, 所以不会出现trackIndex*cellHeight超出屏幕边界的情况)
                 
                 OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), trackIndex)];
                 if (trackInfo && trackInfo.nextAvailableTime > CACurrentMediaTime()) {//当前行暂不可用
