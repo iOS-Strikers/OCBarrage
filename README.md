@@ -1,6 +1,7 @@
 # OCBarrage
-iOS弹幕库OCBarrage, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, 高度自定义动画, 超高性能, 简单易上手. 
-`OCBarrage`底层使用`Core Animation`驱动, `Core Graphics`绘图, GPU渲染, 性能极高, 哪怕是同时渲染5000条弹幕也不会感觉到卡顿. 可以自定义各种属性动画及路径动画, 满足您对动画的多样化需求.
+
+A high performance barrage engine for iOS. At the same time, rendering 5000 barrages is also very smooth, lightweight, scalable, you can add animation whatever you want!, ultra high performance, simple and easy to use!
+Underlying `OCBarrage` used `Core Animation` framework to drive, use `Core Graphics` to draw, GPU to render, ultra high performance, meet your diverse needs for animation!
 
 ## 效果展示 (Demonstration)
 
@@ -39,6 +40,9 @@ OCBarrage is provided under the MIT license. See LICENSE file for details.
 ---
 中文介绍
 ==============
+iOS弹幕库OCBarrage, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, 高度自定义动画, 超高性能, 简单易上手. 
+`OCBarrage`底层使用`Core Animation`驱动, `Core Graphics`绘图, GPU渲染, 性能极高, 哪怕是同时渲染5000条弹幕也不会感觉到卡顿. 可以自定义各种属性动画及路径动画, 满足您对动画的多样化需求.
+
 安装
 ==============
 
