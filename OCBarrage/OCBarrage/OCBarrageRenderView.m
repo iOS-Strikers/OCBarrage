@@ -25,8 +25,8 @@
         _trackInfoLock = dispatch_semaphore_create(1);
         _lowPositionView = [[UIView alloc] init];
         [self addSubview:_lowPositionView];
-        _heightPositionView = [[UIView alloc] init];
-        [self addSubview:_heightPositionView];
+        _highPositionView = [[UIView alloc] init];
+        [self addSubview:_highPositionView];
         self.layer.masksToBounds = YES;
         _trackNextAvailableTime = [NSMutableDictionary dictionary];
     }
@@ -235,11 +235,11 @@
         }
             break;
         case OCBarragePositionHeight: {
-            [self insertSubview:barrageCell belowSubview:_heightPositionView];
+            [self insertSubview:barrageCell belowSubview:_highPositionView];
         }
             break;
         case OCBarragePositionVeryHeight: {
-            [self insertSubview:barrageCell aboveSubview:_heightPositionView];
+            [self insertSubview:barrageCell belowSubview:_veryHighPositionView];
         }
             break;
         default: {
