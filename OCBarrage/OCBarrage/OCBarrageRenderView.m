@@ -280,7 +280,6 @@
                 dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
                 OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), trackIndex)];
                 if (trackInfo && trackInfo.nextAvailableTime > CACurrentMediaTime()) {//当前行暂不可用
-                    NSLog(@"----> 换轨道了, 换之前 %d", trackIndex);
                     NSMutableArray *availableTrackInfos = [NSMutableArray array];
                     for (OCBarrageTrackInfo *info in _trackNextAvailableTime.allValues) {
                         if (CACurrentMediaTime() > info.nextAvailableTime) {
@@ -305,7 +304,6 @@
                         }
                         //真的是没有可用的轨道了
                     }
-                    NSLog(@"----> 换轨道了, 换之后 %d", trackIndex);
                 }
                 dispatch_semaphore_signal(_trackInfoLock);
                 
