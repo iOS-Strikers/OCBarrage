@@ -39,7 +39,8 @@
 }
 
 - (void)layoutContentViews {
-    self.textlayer.frame = CGRectMake(0.0, 0.0, [self.textDescriptor.attributedText size].width, [self.textDescriptor.attributedText size].height);
+    CGRect textFrame = [self.textDescriptor.attributedText.string boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[self.textDescriptor.attributedText attributesAtIndex:0 effectiveRange:NULL] context:nil];
+    self.textlayer.frame = textFrame;
 }
 
 - (void)convertContentToImage {
@@ -77,7 +78,7 @@
     if (!_textlayer) {
         _textlayer = [[CATextLayer alloc] init];
         _textlayer.contentsScale = [UIScreen mainScreen].scale;
-        _textlayer.alignmentMode = @"center";
+        _textlayer.alignmentMode = kCAAlignmentCenter;
     }
     
     return _textlayer;

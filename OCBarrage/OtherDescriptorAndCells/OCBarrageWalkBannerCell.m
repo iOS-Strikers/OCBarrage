@@ -54,7 +54,7 @@
     CGFloat middleImageViewX = CGRectGetMaxX(self.leftImageView.bounds) - 1.0;
     CGFloat middleImageViewY = (leftImageViewH - middleImageViewH)/2;
     self.middleImageView.frame = CGRectMake(middleImageViewX, middleImageViewY, middleImageViewW, middleImageViewH);
-    _textlayer.frame = self.middleImageView.frame;
+    _textlayer.position = self.middleImageView.center;
     
     CGFloat rightImageViewX = CGRectGetMaxX(_textlayer.frame) - 1.0;
     CGFloat rightImageViewY = leftImageViewY;
