@@ -104,7 +104,7 @@
             bannerDescriptor.text = [NSString stringWithFormat:@"~欢迎全民超人大驾光临~"];
             bannerDescriptor.textColor = [UIColor redColor];
             bannerDescriptor.textFont = [UIFont systemFontOfSize:17.0];
-            bannerDescriptor.positionPriority = OCBarragePositionHeight;
+            bannerDescriptor.positionPriority = OCBarragePositionHigh;
             bannerDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
             bannerDescriptor.strokeWidth = -1;
             bannerDescriptor.animationDuration = arc4random()%5 + 5;

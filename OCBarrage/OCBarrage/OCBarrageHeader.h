@@ -18,8 +18,8 @@ typedef void(^OCBarrageTouchAction)(__weak OCBarrageDescriptor *descriptor);
 typedef NS_ENUM(NSInteger, OCBarragePositionPriority) {
     OCBarragePositionLow = 0,
     OCBarragePositionMiddle,
-    OCBarragePositionHeight,
-    OCBarragePositionVeryHeight
+    OCBarragePositionHigh,
+    OCBarragePositionVeryHigh
 };
 
 typedef NS_ENUM(NSInteger, OCBarrageRenderPositionStyle) {//新加的cell的y坐标的类型
