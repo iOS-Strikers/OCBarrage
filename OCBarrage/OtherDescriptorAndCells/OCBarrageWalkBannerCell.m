@@ -61,14 +61,10 @@
     CGFloat rightImageViewW = CGRectGetWidth(self.rightImageView.frame) > 2?CGRectGetWidth(self.rightImageView.frame):22.0;
     CGFloat rightImageViewH = ImageHeight;
     self.rightImageView.frame = CGRectMake(rightImageViewX, rightImageViewY, rightImageViewW, rightImageViewH);
-    
-    CGFloat width = CGRectGetWidth(_textlayer.frame);
-    width = width + ImageWidth + ImageWidth;
-    _contentRect = CGRectMake(0.0, 0.0, width, ImageHeight);
 }
 
 - (void)convertContentToImage {
-    UIImage *contentImage = [self.layer convertContentToImageWithSize:_contentRect.size];
+    UIImage *contentImage = [self.layer convertContentToImageWithSize:CGSizeMake(CGRectGetMaxX(self.rightImageView.frame), CGRectGetMaxY(self.rightImageView.frame))];
     [self.layer setContents:(__bridge id)contentImage.CGImage];
 }
 
