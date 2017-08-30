@@ -22,14 +22,11 @@
     if (self) {
         _animatingCellsLock = dispatch_semaphore_create(1);
         _idleCellsLock = dispatch_semaphore_create(1);
+        _trackInfoLock = dispatch_semaphore_create(1);
         _lowPositionView = [[UIView alloc] init];
         [self addSubview:_lowPositionView];
-        _middlePositionView = [[UIView alloc] init];
-        [self addSubview:_middlePositionView];
-        _highPositionView = [[UIView alloc] init];
-        [self addSubview:_highPositionView];
-        _veryHighPositionView = [[UIView alloc] init];
-        [self addSubview:_veryHighPositionView];
+        _heightPositionView = [[UIView alloc] init];
+        [self addSubview:_heightPositionView];
         self.layer.masksToBounds = YES;
         _trackNextAvailableTime = [NSMutableDictionary dictionary];
     }
@@ -181,7 +178,10 @@
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
     [self.idleCells removeAllObjects];
     dispatch_semaphore_signal(_idleCellsLock);
+    
+    dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
     [_trackNextAvailableTime removeAllObjects];
+    dispatch_semaphore_signal(_trackInfoLock);
 }
 
 - (void)fireBarrageCell:(OCBarrageCell *)barrageCell {
@@ -231,15 +231,15 @@
 - (void)addBarrageCell:(OCBarrageCell *)barrageCell WithPositionPriority:(OCBarragePositionPriority)positionPriority {
     switch (positionPriority) {
         case OCBarragePositionMiddle: {
-            [self insertSubview:barrageCell belowSubview:_middlePositionView];
+            [self insertSubview:barrageCell aboveSubview:_lowPositionView];
         }
             break;
         case OCBarragePositionHeight: {
-            [self insertSubview:barrageCell belowSubview:_highPositionView];
+            [self insertSubview:barrageCell belowSubview:_heightPositionView];
         }
             break;
         case OCBarragePositionVeryHeight: {
-            [self insertSubview:barrageCell belowSubview:_veryHighPositionView];
+            [self insertSubview:barrageCell aboveSubview:_heightPositionView];
         }
             break;
         default: {
@@ -277,11 +277,13 @@
                 int trackCount = floorf(renderViewHeight/cellHeight);
                 int trackIndex = arc4random_uniform(trackCount);//用户改变行高(比如弹幕文字大小不会引起显示bug, 因为虽然是同一个类, 但是trackCount变小了, 所以不会出现trackIndex*cellHeight超出屏幕边界的情况)
                 
+                dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
                 OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), trackIndex)];
                 if (trackInfo && trackInfo.nextAvailableTime > CACurrentMediaTime()) {//当前行暂不可用
+                    NSLog(@"----> 换轨道了, 换之前 %d", trackIndex);
                     NSMutableArray *availableTrackInfos = [NSMutableArray array];
                     for (OCBarrageTrackInfo *info in _trackNextAvailableTime.allValues) {
-                        if (info.nextAvailableTime < CACurrentMediaTime()) {
+                        if (CACurrentMediaTime() > info.nextAvailableTime) {
                             [availableTrackInfos addObject:info];
                         }
                     }
@@ -303,7 +305,10 @@
                         }
                         //真的是没有可用的轨道了
                     }
+                    NSLog(@"----> 换轨道了, 换之后 %d", trackIndex);
                 }
+                dispatch_semaphore_signal(_trackInfoLock);
+                
                 barrageCell.trackIndex = trackIndex;
                 cellFrame.origin.y = trackIndex*cellHeight;
             }
@@ -364,6 +369,8 @@
     if ([fromeValueTypeString containsString:@"CGPoint"]) {
         CGPoint fromPoint = [fromValue CGPointValue];
         CGPoint toPoint = [toValue CGPointValue];
+        
+        dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
         OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:nextAvalibleTimeKey];
         if (!trackInfo) {
             trackInfo = [[OCBarrageTrackInfo alloc] init];
@@ -371,7 +378,7 @@
             trackInfo.trackIndex = barrageCell.trackIndex;
         }
         trackInfo.barrageCount++;
-
+        
         trackInfo.nextAvailableTime = CGRectGetWidth(barrageCell.bounds);
         CGFloat distanceX = fabs(toPoint.x - fromPoint.x);
         CGFloat distanceY = fabs(toPoint.y - fromPoint.y);
@@ -379,16 +386,16 @@
         CGFloat speed = distance/duration;
         if (distanceX == distance) {
             CFTimeInterval time = CGRectGetWidth(barrageCell.bounds)/speed;
-            trackInfo.nextAvailableTime = CACurrentMediaTime() + time + 1.0;//多加一秒
+            trackInfo.nextAvailableTime = CACurrentMediaTime() + time + 0.2;//多加一秒
             [_trackNextAvailableTime setValue:trackInfo forKey:nextAvalibleTimeKey];
-            return;
         } else if (distanceY == distance) {
-//            CFTimeInterval time = CGRectGetHeight(barrageCell.bounds)/speed;
-            return;
+            //            CFTimeInterval time = CGRectGetHeight(barrageCell.bounds)/speed;
+            
         } else {
-            return;
+            
         }
-        
+        dispatch_semaphore_signal(_trackInfoLock);
+        return;
     } else if ([fromeValueTypeString containsString:@"CGVector"]) {
         
         return;
@@ -396,10 +403,10 @@
         
         return;
     } else if ([fromeValueTypeString containsString:@"CGRect"]) {
-    
+        
         return;
     } else if ([fromeValueTypeString containsString:@"CGAffineTransform"]) {
-    
+        
         return;
     } else if ([fromeValueTypeString containsString:@"UIEdgeInsets"]) {
         
@@ -433,13 +440,16 @@
         return;
     }
     
+    dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
     OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([animationedCell class]), animationedCell.trackIndex)];
     if (trackInfo) {
         trackInfo.barrageCount--;
     }
+    dispatch_semaphore_signal(_trackInfoLock);
+    
     [animationedCell removeFromSuperview];
     [animationedCell prepareForReuse];
-
+    
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
     animationedCell.idleTime = [[NSDate date] timeIntervalSince1970];
     [self.idleCells addObject:animationedCell];
@@ -455,7 +465,7 @@
     if (event.type == UIEventTypeTouches) {
         UITouch *touch = [touches.allObjects firstObject];
         CGPoint touchPoint = [touch locationInView:self];
-
+        
         dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
         NSInteger count = self.animatingCells.count;
         for (int i = 0; i < count; i++) {

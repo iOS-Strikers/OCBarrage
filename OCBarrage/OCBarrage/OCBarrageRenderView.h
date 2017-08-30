@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, OCBarrageRenderStatus) {
     NSMutableArray<OCBarrageCell *> *_idleCells;
     dispatch_semaphore_t _animatingCellsLock;
     dispatch_semaphore_t _idleCellsLock;
+    dispatch_semaphore_t _trackInfoLock;
     OCBarrageCell *_lastestCell;
     UIView *_lowPositionView;
     UIView *_middlePositionView;
