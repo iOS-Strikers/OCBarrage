@@ -2,12 +2,43 @@
 iOS弹幕库OCBarrage, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, 高度自定义动画, 超高性能, 简单易上手. 
 `OCBarrage`底层使用`Core Animation`驱动, `Core Graphics`绘图, GPU渲染, 性能极高, 哪怕是同时渲染5000条弹幕也不会感觉到卡顿. 可以自定义各种属性动画及路径动画, 满足您对动画的多样化需求.
 
-## 效果展示
+## 效果展示 (Demonstration)
 
  ![同时渲染200条弹幕.gif](http://upload-images.jianshu.io/upload_images/1674413-3adb102451678194.gif?imageMogr2/auto-orient/strip)  
 
  ![同时渲染3000条弹幕.gif](http://upload-images.jianshu.io/upload_images/1674413-c61f09719def8ccb.gif?imageMogr2/auto-orient/strip)
 
+Installation
+==============
+
+### CocoaPods
+
+1. Add `pod 'OCBarrage'` to your Podfile.
+2. Run `pod install` or `pod update`.
+3. Import `OCBarrage.h`.
+
+### Manually
+
+1. Download all the files in the `OCBarrage` subdirectory.
+2. Add the source files to your Xcode project.
+3. Import `OCBarrage.h`.
+
+Documentation
+==============
+[iOS弹幕库OCBarrage-如何hold住每秒5000条巨量弹幕](http://www.jianshu.com/p/6593778a85e4)
+
+Requirements
+==============
+This library requires `iOS 8.0+` and `Xcode 8.0+`.
+
+License
+==============
+OCBarrage is provided under the MIT license. See LICENSE file for details.
+
+<br/><br/>
+---
+中文介绍
+==============
 安装
 ==============
 
