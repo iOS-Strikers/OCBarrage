@@ -3,7 +3,7 @@
 A high performance barrage engine for iOS. At the same time, rendering 5000 barrages is also very smooth, lightweight, scalable, you can add animation whatever you want!, ultra high performance, simple and easy to use!
 Underlying `OCBarrage` used `Core Animation` framework to drive, use `Core Graphics` to draw, GPU to render, ultra high performance, meet your diverse needs for animation!
 
-## 效果展示 (Demonstration)
+## Demonstration
 
  ![同时渲染200条弹幕.gif](http://upload-images.jianshu.io/upload_images/1674413-3adb102451678194.gif?imageMogr2/auto-orient/strip)  
 
