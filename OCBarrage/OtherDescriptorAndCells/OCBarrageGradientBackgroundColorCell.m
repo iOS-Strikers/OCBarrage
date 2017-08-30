@@ -15,6 +15,13 @@
     
 }
 
+-(void)prepareForReuse {
+    [super prepareForReuse];
+    
+    [self.textLabel setAttributedText:nil];
+    [self addSubview:self.textLabel];
+}
+
 - (void)layoutContentViews {
     [super layoutContentViews];
     [self addGradientLayer];
@@ -29,13 +36,12 @@
     [super removeSubViewsAndSublayers];
     
     _gradientLayer = nil;
-    _textlayer = nil;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    _textlayer.frame = _gradientLayer.frame;
+    self.textLabel.center = _gradientLayer.position;
 }
 
 - (void)addGradientLayer {
@@ -48,7 +54,7 @@
     gradientLayer.locations = @[@0.2, @1.0];
     gradientLayer.startPoint = CGPointMake(0, 0);
     gradientLayer.endPoint = CGPointMake(1.0, 0);
-    gradientLayer.frame = CGRectMake(0.0, 0.0, _textlayer.frame.size.width + 20.0, _textlayer.frame.size.height);
+    gradientLayer.frame = CGRectMake(0.0, 0.0, self.textLabel.frame.size.width + 20.0, self.textLabel.frame.size.height);
     
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:gradientLayer.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerTopLeft cornerRadii:gradientLayer.bounds.size];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
@@ -58,8 +64,6 @@
     _gradientLayer = gradientLayer;
     [self.layer insertSublayer:gradientLayer atIndex:0];
 }
-
-
 
 - (void)setBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor {
     [super setBarrageDescriptor:barrageDescriptor];

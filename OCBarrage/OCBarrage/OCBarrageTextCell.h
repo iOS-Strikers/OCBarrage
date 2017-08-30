@@ -11,11 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OCBarrageTextCell : OCBarrageCell {
-    CATextLayer *_textlayer;
-}
+@interface OCBarrageTextCell : OCBarrageCell
 
-@property (nonatomic, strong) OCBarrageTextDescriptor *textDescriptor;
+@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong, nullable) OCBarrageTextDescriptor *textDescriptor;
 
 @end
 

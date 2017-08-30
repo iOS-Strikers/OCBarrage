@@ -49,14 +49,14 @@
     CGFloat leftImageViewH = ImageHeight;
     self.leftImageView.frame = CGRectMake(leftImageViewX, leftImageViewY, leftImageViewW, leftImageViewH);
     
-    CGFloat middleImageViewW = CGRectGetWidth(_textlayer.bounds);
+    CGFloat middleImageViewW = CGRectGetWidth(self.textLabel.bounds);
     CGFloat middleImageViewH = 19;
     CGFloat middleImageViewX = CGRectGetMaxX(self.leftImageView.bounds) - 1.0;
     CGFloat middleImageViewY = (leftImageViewH - middleImageViewH)/2;
     self.middleImageView.frame = CGRectMake(middleImageViewX, middleImageViewY, middleImageViewW, middleImageViewH);
-    _textlayer.position = self.middleImageView.center;
+    self.textLabel.center = self.middleImageView.center;
     
-    CGFloat rightImageViewX = CGRectGetMaxX(_textlayer.frame) - 1.0;
+    CGFloat rightImageViewX = CGRectGetMaxX(self.textLabel.frame) - 1.0;
     CGFloat rightImageViewY = leftImageViewY;
     CGFloat rightImageViewW = CGRectGetWidth(self.rightImageView.frame) > 2?CGRectGetWidth(self.rightImageView.frame):22.0;
     CGFloat rightImageViewH = ImageHeight;

@@ -25,33 +25,33 @@
 }
 
 - (void)updateSubviewsData {
-    if (!_textlayer) {
-        [self.layer addSublayer:self.textlayer];
+    if (!_textLabel) {
+        [self addSubview:self.textLabel];
     }
     if (self.textDescriptor.textShadowOpened) {
-        self.textlayer.shadowColor = self.textDescriptor.shadowColor.CGColor;
-        self.textlayer.shadowOffset = self.textDescriptor.shadowOffset;
-        self.textlayer.shadowRadius = self.textDescriptor.shadowRadius;
-        self.textlayer.shadowOpacity = self.textDescriptor.shadowOpacity;
+        self.textLabel.layer.shadowColor = self.textDescriptor.shadowColor.CGColor;
+        self.textLabel.layer.shadowOffset = self.textDescriptor.shadowOffset;
+        self.textLabel.layer.shadowRadius = self.textDescriptor.shadowRadius;
+        self.textLabel.layer.shadowOpacity = self.textDescriptor.shadowOpacity;
     }
     
-    [self.textlayer setString:self.textDescriptor.attributedText];
+    [self.textLabel setAttributedText:self.textDescriptor.attributedText];
 }
 
 - (void)layoutContentViews {
     CGRect textFrame = [self.textDescriptor.attributedText.string boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[self.textDescriptor.attributedText attributesAtIndex:0 effectiveRange:NULL] context:nil];
-    self.textlayer.frame = textFrame;
+    self.textLabel.frame = textFrame;
 }
 
 - (void)convertContentToImage {
-    UIImage *contentImage = [self.layer convertContentToImageWithSize:_textlayer.frame.size];
+    UIImage *contentImage = [self.layer convertContentToImageWithSize:_textLabel.frame.size];
     [self.layer setContents:(__bridge id)contentImage.CGImage];
 }
 
 - (void)removeSubViewsAndSublayers {
     [super removeSubViewsAndSublayers];
     
-    _textlayer = nil;
+    _textLabel = nil;
 }
 
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate {
@@ -74,14 +74,13 @@
     [self.layer addAnimation:walkAnimation forKey:kBarrageAnimation];
 }
 
-- (CATextLayer *)textlayer {
-    if (!_textlayer) {
-        _textlayer = [[CATextLayer alloc] init];
-        _textlayer.contentsScale = [UIScreen mainScreen].scale;
-        _textlayer.alignmentMode = kCAAlignmentCenter;
+- (UILabel *)textLabel {
+    if (!_textLabel) {
+        _textLabel = [[UILabel alloc] init];
+        _textLabel.textAlignment = NSTextAlignmentCenter;
     }
     
-    return _textlayer;
+    return _textLabel;
 }
 
 - (void)setBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor {
