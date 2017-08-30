@@ -386,7 +386,7 @@
         CGFloat speed = distance/duration;
         if (distanceX == distance) {
             CFTimeInterval time = CGRectGetWidth(barrageCell.bounds)/speed;
-            trackInfo.nextAvailableTime = CACurrentMediaTime() + time + 0.2;//多加一秒
+            trackInfo.nextAvailableTime = CACurrentMediaTime() + time + 0.1;//多加一点时间
             [_trackNextAvailableTime setValue:trackInfo forKey:nextAvalibleTimeKey];
         } else if (distanceY == distance) {
             //            CFTimeInterval time = CGRectGetHeight(barrageCell.bounds)/speed;
