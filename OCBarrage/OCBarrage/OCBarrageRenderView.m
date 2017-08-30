@@ -234,11 +234,11 @@
             [self insertSubview:barrageCell aboveSubview:_lowPositionView];
         }
             break;
-        case OCBarragePositionHeight: {
+        case OCBarragePositionHigh: {
             [self insertSubview:barrageCell belowSubview:_highPositionView];
         }
             break;
-        case OCBarragePositionVeryHeight: {
+        case OCBarragePositionVeryHigh: {
             [self insertSubview:barrageCell belowSubview:_veryHighPositionView];
         }
             break;
