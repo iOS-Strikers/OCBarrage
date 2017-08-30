@@ -211,6 +211,7 @@
     [barrageCell convertContentToImage];
     [barrageCell sizeToFit];
     [barrageCell removeSubViewsAndSublayers];
+    [barrageCell addBorderAttributes];
     
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     _lastestCell = [self.animatingCells lastObject];

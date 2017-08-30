@@ -31,15 +31,6 @@
 - (void)setBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor {
     _barrageDescriptor = barrageDescriptor;
     
-    if (barrageDescriptor.borderColor) {
-        self.layer.borderColor = barrageDescriptor.borderColor.CGColor;
-    }
-    if (barrageDescriptor.borderWidth > 0) {
-        self.layer.borderWidth = barrageDescriptor.borderWidth;
-    }
-    if (barrageDescriptor.cornerRadius > 0) {
-        self.layer.cornerRadius = barrageDescriptor.cornerRadius;
-    }
 }
 
 - (void)clearContents {
@@ -48,20 +39,6 @@
 
 - (void)convertContentToImage {
     
-}
-
-- (void)removeSubViewsAndSublayers {
-    NSEnumerator *viewEnumerator = [self.subviews reverseObjectEnumerator];
-    UIView *subView = nil;
-    while (subView = [viewEnumerator nextObject]){
-        [subView removeFromSuperview];
-    }
-    
-    NSEnumerator *layerEnumerator = [self.layer.sublayers reverseObjectEnumerator];
-    CALayer *sublayer = nil;
-    while (sublayer = [layerEnumerator nextObject]){
-        [sublayer removeFromSuperlayer];
-    }
 }
 
 - (void)sizeToFit {
@@ -88,6 +65,33 @@
     }
     
     self.bounds = CGRectMake(0.0, 0.0, width, height);
+}
+
+
+- (void)removeSubViewsAndSublayers {
+    NSEnumerator *viewEnumerator = [self.subviews reverseObjectEnumerator];
+    UIView *subView = nil;
+    while (subView = [viewEnumerator nextObject]){
+        [subView removeFromSuperview];
+    }
+    
+    NSEnumerator *layerEnumerator = [self.layer.sublayers reverseObjectEnumerator];
+    CALayer *sublayer = nil;
+    while (sublayer = [layerEnumerator nextObject]){
+        [sublayer removeFromSuperlayer];
+    }
+}
+
+- (void)addBorderAttributes {
+    if (self.barrageDescriptor.borderColor) {
+        self.layer.borderColor = self.barrageDescriptor.borderColor.CGColor;
+    }
+    if (self.barrageDescriptor.borderWidth > 0) {
+        self.layer.borderWidth = self.barrageDescriptor.borderWidth;
+    }
+    if (self.barrageDescriptor.cornerRadius > 0) {
+        self.layer.cornerRadius = self.barrageDescriptor.cornerRadius;
+    }
 }
 
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate {
