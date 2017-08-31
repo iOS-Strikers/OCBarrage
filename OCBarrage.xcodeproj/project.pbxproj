@@ -10,6 +10,7 @@
 		5767BA4D1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA4A1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m */; };
 		5767BA4E1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */; };
 		5767BA501F5804B800EBA7C1 /* noble_background_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5767BA4F1F5804B800EBA7C1 /* noble_background_image@2x.png */; };
+		5767BA531F580F4F00EBA7C1 /* stopover.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BA521F580F4F00EBA7C1 /* stopover.gif */; };
 		577F95E81F55625600B989FA /* CALayer+OCBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95E71F55625600B989FA /* CALayer+OCBarrage.m */; };
 		577F95F81F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F11F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m */; };
 		577F95F91F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F31F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m */; };
@@ -57,6 +58,7 @@
 		5767BA4B1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageBecomeNobleDescriptor.h; sourceTree = "<group>"; };
 		5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageBecomeNobleDescriptor.m; sourceTree = "<group>"; };
 		5767BA4F1F5804B800EBA7C1 /* noble_background_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noble_background_image@2x.png"; sourceTree = "<group>"; };
+		5767BA521F580F4F00EBA7C1 /* stopover.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = stopover.gif; sourceTree = "<group>"; };
 		577F95E61F55625600B989FA /* CALayer+OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+OCBarrage.h"; sourceTree = "<group>"; };
 		577F95E71F55625600B989FA /* CALayer+OCBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+OCBarrage.m"; sourceTree = "<group>"; };
 		577F95F01F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorCell.h; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		5767BA511F580E8000EBA7C1 /* Demonstration */ = {
 			isa = PBXGroup;
 			children = (
+				5767BA521F580F4F00EBA7C1 /* stopover.gif */,
 			);
 			path = Demonstration;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5767BA531F580F4F00EBA7C1 /* stopover.gif in Resources */,
 				57D513F51F4E964300B2E8A7 /* LaunchScreen.storyboard in Resources */,
 				577F96041F5587B400B989FA /* chaoren_right@2x.png in Resources */,
 				5767BA501F5804B800EBA7C1 /* noble_background_image@2x.png in Resources */,
