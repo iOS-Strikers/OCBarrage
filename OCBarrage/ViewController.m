@@ -12,6 +12,8 @@
 #import "OCBarrageGradientBackgroundColorCell.h"
 #import "OCBarrageWalkBannerCell.h"
 #import "OCBarrageWalkBannerDescriptor.h"
+#import "OCBarrageBecomeNobleDescriptor.h"
+#import "OCBarrageBecomeNobleCell.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) CATextLayer *textlayer;
@@ -79,7 +81,7 @@
 }
 
 - (void)addBarrage {
-    int index = self.times%3;
+    int index = self.times%4;
     switch (index) {
         case 1:{
             OCBarrageGradientBackgroundColorDescriptor *gradientBackgroundDescriptor = [[OCBarrageGradientBackgroundColorDescriptor alloc] init];
@@ -110,6 +112,22 @@
             bannerDescriptor.animationDuration = arc4random()%5 + 5;
             bannerDescriptor.barrageCellClass = [OCBarrageWalkBannerCell class];
             [self.barrageManager renderBarrageDescriptor:bannerDescriptor];
+        }
+            break;
+        case 3:{
+            OCBarrageBecomeNobleDescriptor *becomeNobleDescriptor = [[OCBarrageBecomeNobleDescriptor alloc] init];
+            NSMutableAttributedString *mAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"~OCBarrage~全民直播~荣誉出品~"]];
+            [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, mAttributedString.length)];
+            [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(1, 9)];
+            [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(11, 4)];
+            [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor yellowColor] range:NSMakeRange(16, 4)];
+            [mAttributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17.0] range:NSMakeRange(0, mAttributedString.length)];
+            becomeNobleDescriptor.attributedText = mAttributedString;
+            becomeNobleDescriptor.positionPriority = OCBarragePositionVeryHigh;
+            becomeNobleDescriptor.animationDuration = 8.0;
+            becomeNobleDescriptor.barrageCellClass = [OCBarrageBecomeNobleCell class];
+            becomeNobleDescriptor.backgroundImage = [UIImage imageNamed:@"chaoren_left"];
+            [self.barrageManager renderBarrageDescriptor:becomeNobleDescriptor];
         }
             break;
             

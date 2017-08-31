@@ -25,8 +25,12 @@
         _trackInfoLock = dispatch_semaphore_create(1);
         _lowPositionView = [[UIView alloc] init];
         [self addSubview:_lowPositionView];
+        _middlePositionView = [[UIView alloc] init];
+        [self addSubview:_middlePositionView];
         _highPositionView = [[UIView alloc] init];
         [self addSubview:_highPositionView];
+        _veryHighPositionView = [[UIView alloc] init];
+        [self addSubview:_veryHighPositionView];
         self.layer.masksToBounds = YES;
         _trackNextAvailableTime = [NSMutableDictionary dictionary];
     }
@@ -231,7 +235,7 @@
 - (void)addBarrageCell:(OCBarrageCell *)barrageCell WithPositionPriority:(OCBarragePositionPriority)positionPriority {
     switch (positionPriority) {
         case OCBarragePositionMiddle: {
-            [self insertSubview:barrageCell aboveSubview:_lowPositionView];
+            [self insertSubview:barrageCell aboveSubview:_middlePositionView];
         }
             break;
         case OCBarragePositionHigh: {
@@ -359,6 +363,9 @@
     }
     const char *fromeValueType = [fromValue objCType];
     const char *toValueType = [toValue objCType];
+    if (!fromeValueType || !toValueType) {
+        return;
+    }
     NSString *fromeValueTypeString = [NSString stringWithCString:fromeValueType encoding:NSUTF8StringEncoding];
     NSString *toValueTypeString = [NSString stringWithCString:toValueType encoding:NSUTF8StringEncoding];
     if (![fromeValueTypeString isEqualToString:toValueTypeString]) {

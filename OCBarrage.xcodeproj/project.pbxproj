@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5767BA4D1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA4A1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m */; };
+		5767BA4E1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */; };
 		577F95E81F55625600B989FA /* CALayer+OCBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95E71F55625600B989FA /* CALayer+OCBarrage.m */; };
 		577F95F81F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F11F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m */; };
 		577F95F91F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F31F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m */; };
@@ -49,6 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5767BA491F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageBecomeNobleCell.h; sourceTree = "<group>"; };
+		5767BA4A1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageBecomeNobleCell.m; sourceTree = "<group>"; };
+		5767BA4B1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageBecomeNobleDescriptor.h; sourceTree = "<group>"; };
+		5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageBecomeNobleDescriptor.m; sourceTree = "<group>"; };
 		577F95E61F55625600B989FA /* CALayer+OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+OCBarrage.h"; sourceTree = "<group>"; };
 		577F95E71F55625600B989FA /* CALayer+OCBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+OCBarrage.m"; sourceTree = "<group>"; };
 		577F95F01F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorCell.h; sourceTree = "<group>"; };
@@ -141,6 +147,10 @@
 				577F95F51F5572B700B989FA /* OCBarrageWalkBannerCell.m */,
 				577F95F61F5572B700B989FA /* OCBarrageWalkBannerDescriptor.h */,
 				577F95F71F5572B700B989FA /* OCBarrageWalkBannerDescriptor.m */,
+				5767BA491F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.h */,
+				5767BA4A1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m */,
+				5767BA4B1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.h */,
+				5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */,
 			);
 			path = OtherDescriptorAndCells;
 			sourceTree = "<group>";
@@ -379,6 +389,7 @@
 				57D5142A1F4E967700B2E8A7 /* OCBarrageTextCell.m in Sources */,
 				57D514291F4E967700B2E8A7 /* OCBarrageRenderView.m in Sources */,
 				57D514261F4E967700B2E8A7 /* OCBarrageCell.m in Sources */,
+				5767BA4D1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m in Sources */,
 				57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */,
 				57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */,
 				577F95FA1F5572B700B989FA /* OCBarrageWalkBannerCell.m in Sources */,
@@ -386,6 +397,7 @@
 				57D514271F4E967700B2E8A7 /* OCBarrageDescriptor.m in Sources */,
 				57D513EA1F4E964300B2E8A7 /* AppDelegate.m in Sources */,
 				57B4CEEF1F4FBC52001BF31F /* OCBarrageTrackInfo.m in Sources */,
+				5767BA4E1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m in Sources */,
 				57D513E71F4E964300B2E8A7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
