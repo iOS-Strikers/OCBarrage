@@ -87,9 +87,9 @@
 }
 
 - (void)addBarrage {
-    [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.5];
-    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:1.0];
-    [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:2.0];
+//    [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.5];
+//    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:1.0];
+//    [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:2.0];
     [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:4.0];
 }
 
@@ -155,7 +155,7 @@
     CGFloat bannerHeight = 185.0/2.0;
     becomeNobleDescriptor.bindingOriginY = self.view.center.y - bannerHeight + self.stopY;
     becomeNobleDescriptor.positionPriority = OCBarragePositionVeryHigh;
-    becomeNobleDescriptor.animationDuration = 8.0;
+    becomeNobleDescriptor.animationDuration = 4.0;
     becomeNobleDescriptor.barrageCellClass = [OCBarrageBecomeNobleCell class];
     becomeNobleDescriptor.backgroundImage = [UIImage imageNamed:@"noble_background_image@2x"];
     [self.barrageManager renderBarrageDescriptor:becomeNobleDescriptor];

@@ -5,9 +5,10 @@ Underlying `OCBarrage` used `Core Animation` framework to drive, use `Core Graph
 
 ## Demonstration
 
- ![同时渲染200条弹幕.gif](http://upload-images.jianshu.io/upload_images/1674413-3adb102451678194.gif?imageMogr2/auto-orient/strip)  
+ ![同时渲染5000条弹幕.gif](http://upload-images.jianshu.io/upload_images/1674413-46935364f778e159.gif?imageMogr2/auto-orient/strip)
+ 
+ ![stopover.gif](http://upload-images.jianshu.io/upload_images/1674413-1bdfd811755b9f9e.gif?imageMogr2/auto-orient/strip)
 
- ![同时渲染3000条弹幕.gif](http://upload-images.jianshu.io/upload_images/1674413-c61f09719def8ccb.gif?imageMogr2/auto-orient/strip)
 
 Installation
 ==============
