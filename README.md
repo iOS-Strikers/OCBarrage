@@ -7,7 +7,7 @@ Underlying `OCBarrage` used `Core Animation` framework to drive, use `Core Graph
 
  ![同时渲染5000条弹幕.gif](http://upload-images.jianshu.io/upload_images/1674413-46935364f778e159.gif?imageMogr2/auto-orient/strip)
  
- ![normalDemo.gif](https://github.com/w1531724247/OCBarrage/blob/master/OCBarrage/Demonstration/OCBarrageDemo.gif?raw=true)
+ ![normalDemo.gif](https://raw.githubusercontent.com/w1531724247/OCBarrage/master/OCBarrage/Demonstration/normalDemo.gif)
  
  ![stopover.gif](http://upload-images.jianshu.io/upload_images/1674413-1bdfd811755b9f9e.gif?imageMogr2/auto-orient/strip)
 
