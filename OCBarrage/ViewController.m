@@ -92,10 +92,10 @@
 }
 
 - (void)addBarrage {
-//    [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.5];
-//    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:0.5];
-//    [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:0.5];
-//    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(addMixedImageAndTextBarrage) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(addGifBarrage) withObject:nil afterDelay:0.5];
 }
@@ -217,7 +217,7 @@
     imageAndTextDescriptor.barrageCellClass = [OCBarrageMixedImageAndTextCell class];
     [self.barrageManager renderBarrageDescriptor:imageAndTextDescriptor];
     
-    [self performSelector:@selector(addMixedImageAndTextBarrage) withObject:nil afterDelay:1.0];
+    [self performSelector:@selector(addMixedImageAndTextBarrage) withObject:nil afterDelay:2.0];
 }
 
 - (void)addGifBarrage {
@@ -227,7 +227,7 @@
     NSData *data = [NSData dataWithContentsOfFile:path];
     YYImage *image = [YYImage imageWithData:data scale:4];
     gifDescriptor.image = image;
-    gifDescriptor.positionPriority = OCBarragePositionVeryHigh;
+    gifDescriptor.positionPriority = OCBarragePositionHigh;
     gifDescriptor.animationDuration = arc4random()%5 + 5;
     gifDescriptor.barrageCellClass = [OCBarrageGifCell class];
     [self.barrageManager renderBarrageDescriptor:gifDescriptor];
