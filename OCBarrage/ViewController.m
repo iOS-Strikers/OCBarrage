@@ -8,13 +8,13 @@
 
 #import "ViewController.h"
 #import "OCBarrage.h"
-#import "OCBarrageGradientBackgroundColorDescriptor.h"
+
+#import "YYKit.h"
 #import "OCBarrageGradientBackgroundColorCell.h"
 #import "OCBarrageWalkBannerCell.h"
-#import "OCBarrageWalkBannerDescriptor.h"
-#import "OCBarrageBecomeNobleDescriptor.h"
 #import "OCBarrageBecomeNobleCell.h"
 #import "OCBarrageMixedImageAndTextCell.h"
+#import "OCBarrageGifCell.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) CATextLayer *textlayer;
@@ -84,14 +84,18 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addNormalBarrage) object:nil];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addGradientBackgroundColorBarrage) object:nil];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addWalkBannerBarrage) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addMixedImageAndTextBarrage) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addGifBarrage) object:nil];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addStopoverBarrage) object:nil];
 }
 
 - (void)addBarrage {
     [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.5];
-    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:1.0];
-    [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:2.0];
-    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:4.0];
+    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addMixedImageAndTextBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addGifBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:0.5];
 }
 
 - (void)addNormalBarrage {
@@ -115,7 +119,7 @@
     OCBarrageGradientBackgroundColorDescriptor *gradientBackgroundDescriptor = [[OCBarrageGradientBackgroundColorDescriptor alloc] init];
     gradientBackgroundDescriptor.text = [NSString stringWithFormat:@"~全民直播~"];
     gradientBackgroundDescriptor.textColor = [UIColor whiteColor];
-    gradientBackgroundDescriptor.positionPriority = OCBarragePositionMiddle;
+    gradientBackgroundDescriptor.positionPriority = OCBarragePositionLow;
     gradientBackgroundDescriptor.textFont = [UIFont systemFontOfSize:17.0];
     gradientBackgroundDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     gradientBackgroundDescriptor.strokeWidth = -1;
@@ -136,7 +140,7 @@
     bannerDescriptor.text = [NSString stringWithFormat:@"~欢迎全民超人大驾光临~"];
     bannerDescriptor.textColor = [UIColor redColor];
     bannerDescriptor.textFont = [UIFont systemFontOfSize:17.0];
-    bannerDescriptor.positionPriority = OCBarragePositionHigh;
+    bannerDescriptor.positionPriority = OCBarragePositionMiddle;
     bannerDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     bannerDescriptor.strokeWidth = -1;
     bannerDescriptor.animationDuration = arc4random()%5 + 5;
@@ -174,27 +178,58 @@
 
 - (void)addMixedImageAndTextBarrage {
     OCBarrageTextDescriptor *imageAndTextDescriptor = [[OCBarrageTextDescriptor alloc] init];
-    NSMutableAttributedString *mAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"~OCBarrage~全民直播~荣誉出品~"]];
-    [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, mAttributedString.length)];
-    [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(1, 9)];
-    [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor cyanColor] range:NSMakeRange(11, 4)];
-    [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(16, 4)];
-    [mAttributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17.0] range:NSMakeRange(0, mAttributedString.length)];
+    
+    NSString *path = [[NSBundle mainBundle] pathForScaledResource:@"longmao" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    YYImage *image = [YYImage imageWithData:data scale:15];
+    image.preloadAllAnimatedImageFrames = YES;
+    YYAnimatedImageView *imageView = [[YYAnimatedImageView alloc] initWithImage:image];
+    
+    NSMutableAttributedString *mAttributedString = [NSMutableAttributedString attachmentStringWithContent:imageView contentMode:UIViewContentModeCenter attachmentSize:imageView.size alignToFont:[UIFont boldSystemFontOfSize:25.0] alignment:YYTextVerticalAlignmentCenter];
+    
+    [mAttributedString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"~OCBarrage~"] attributes:@{NSForegroundColorAttributeName:[UIColor greenColor]}]];
+    
+    YYImage *image2 = [YYImage imageWithData:data scale:15];
+    image2.preloadAllAnimatedImageFrames = YES;
+    YYAnimatedImageView *imageView2 = [[YYAnimatedImageView alloc] initWithImage:image2];
+    
+    NSMutableAttributedString *attachText2 = [NSMutableAttributedString attachmentStringWithContent:imageView2 contentMode:UIViewContentModeCenter attachmentSize:imageView2.size alignToFont:[UIFont boldSystemFontOfSize:25.0] alignment:YYTextVerticalAlignmentCenter];
+    [mAttributedString appendAttributedString:attachText2];
+    
+    [mAttributedString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"~OCBarrage~"] attributes:@{NSForegroundColorAttributeName:[UIColor cyanColor]}]];
+    
+    YYImage *image3 = [YYImage imageWithData:data scale:15];
+    image3.preloadAllAnimatedImageFrames = YES;
+    YYAnimatedImageView *imageView3 = [[YYAnimatedImageView alloc] initWithImage:image2];
+    
+    NSMutableAttributedString *attachText3 = [NSMutableAttributedString attachmentStringWithContent:imageView3 contentMode:UIViewContentModeCenter attachmentSize:imageView3.size alignToFont:[UIFont boldSystemFontOfSize:25.0] alignment:YYTextVerticalAlignmentCenter];
+    [mAttributedString appendAttributedString:attachText3];
+    
+    [mAttributedString addAttribute:NSStrokeWidthAttributeName value:[NSNumber numberWithInteger:-1] range:NSMakeRange(0, mAttributedString.length)];
+    [mAttributedString addAttribute:NSStrokeColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, mAttributedString.length)];
+    [mAttributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:25.0] range:NSMakeRange(0, mAttributedString.length)];
     imageAndTextDescriptor.attributedText = mAttributedString;
-    CGFloat bannerHeight = 185.0/2.0;
-    imageAndTextDescriptor.bindingOriginY = self.view.center.y - bannerHeight + self.stopY;
-    imageAndTextDescriptor.positionPriority = OCBarragePositionVeryHigh;
+    imageAndTextDescriptor.positionPriority = OCBarragePositionHigh;
     imageAndTextDescriptor.animationDuration = 4.0;
     imageAndTextDescriptor.barrageCellClass = [OCBarrageMixedImageAndTextCell class];
     [self.barrageManager renderBarrageDescriptor:imageAndTextDescriptor];
     
-    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:4.0];
+    [self performSelector:@selector(addMixedImageAndTextBarrage) withObject:nil afterDelay:3.0];
+}
+
+- (void)addGifBarrage {
+    OCBarrageGifDescriptor *gifDescriptor = [[OCBarrageGifDescriptor alloc] init];
     
-    if (self.stopY == 0) {
-        self.stopY = bannerHeight;
-    } else {
-        self.stopY = 0;
-    }
+    NSString *path = [[NSBundle mainBundle] pathForScaledResource:@"xuanzhuan" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    YYImage *image = [YYImage imageWithData:data scale:4];
+    gifDescriptor.image = image;
+    gifDescriptor.positionPriority = OCBarragePositionHigh;
+    gifDescriptor.animationDuration = arc4random()%5 + 5;
+    gifDescriptor.barrageCellClass = [OCBarrageGifCell class];
+    [self.barrageManager renderBarrageDescriptor:gifDescriptor];
+    
+    [self performSelector:@selector(addGifBarrage) withObject:nil afterDelay:3.0];
 }
 
 - (void)startBarrage {

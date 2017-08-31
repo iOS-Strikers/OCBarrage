@@ -7,7 +7,10 @@
 //
 
 #import "OCBarrageTextCell.h"
+#import "YYLabel.h"
 
 @interface OCBarrageMixedImageAndTextCell : OCBarrageTextCell
+
+@property (nonatomic, strong) YYLabel *miaxedImageAndTextLabel;
 
 @end

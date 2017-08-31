@@ -111,6 +111,8 @@
 		5767BB7B1F5816F900EBA7C1 /* xuanzhuan.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB7A1F5816F900EBA7C1 /* xuanzhuan.gif */; };
 		5767BB7D1F58172B00EBA7C1 /* longmao.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB7C1F58172B00EBA7C1 /* longmao.gif */; };
 		5767BB801F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BB7F1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m */; };
+		5767BB831F58317000EBA7C1 /* OCBarrageGifCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BB821F58316F00EBA7C1 /* OCBarrageGifCell.m */; };
+		5767BB861F58320900EBA7C1 /* OCBarrageGifDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BB851F58320900EBA7C1 /* OCBarrageGifDescriptor.m */; };
 		577F95E81F55625600B989FA /* CALayer+OCBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95E71F55625600B989FA /* CALayer+OCBarrage.m */; };
 		577F95F81F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F11F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m */; };
 		577F95F91F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F31F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m */; };
@@ -343,6 +345,10 @@
 		5767BB7C1F58172B00EBA7C1 /* longmao.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = longmao.gif; sourceTree = "<group>"; };
 		5767BB7E1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageMixedImageAndTextCell.h; sourceTree = "<group>"; };
 		5767BB7F1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageMixedImageAndTextCell.m; sourceTree = "<group>"; };
+		5767BB811F58316F00EBA7C1 /* OCBarrageGifCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGifCell.h; sourceTree = "<group>"; };
+		5767BB821F58316F00EBA7C1 /* OCBarrageGifCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGifCell.m; sourceTree = "<group>"; };
+		5767BB841F58320900EBA7C1 /* OCBarrageGifDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGifDescriptor.h; sourceTree = "<group>"; };
+		5767BB851F58320900EBA7C1 /* OCBarrageGifDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGifDescriptor.m; sourceTree = "<group>"; };
 		577F95E61F55625600B989FA /* CALayer+OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+OCBarrage.h"; sourceTree = "<group>"; };
 		577F95E71F55625600B989FA /* CALayer+OCBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+OCBarrage.m"; sourceTree = "<group>"; };
 		577F95F01F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorCell.h; sourceTree = "<group>"; };
@@ -765,6 +771,10 @@
 				5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */,
 				5767BB7E1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.h */,
 				5767BB7F1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m */,
+				5767BB811F58316F00EBA7C1 /* OCBarrageGifCell.h */,
+				5767BB821F58316F00EBA7C1 /* OCBarrageGifCell.m */,
+				5767BB841F58320900EBA7C1 /* OCBarrageGifDescriptor.h */,
+				5767BB851F58320900EBA7C1 /* OCBarrageGifDescriptor.m */,
 			);
 			path = OtherDescriptorAndCells;
 			sourceTree = "<group>";
@@ -1010,6 +1020,7 @@
 				577F95E81F55625600B989FA /* CALayer+OCBarrage.m in Sources */,
 				577F95F91F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */,
 				5767BB411F5811D300EBA7C1 /* YYTextSelectionView.m in Sources */,
+				5767BB831F58317000EBA7C1 /* OCBarrageGifCell.m in Sources */,
 				57D514281F4E967700B2E8A7 /* OCBarrageManager.m in Sources */,
 				5767BB161F5811D300EBA7C1 /* CALayer+YYAdd.m in Sources */,
 				5767BB261F5811D300EBA7C1 /* YYCache.m in Sources */,
@@ -1048,6 +1059,7 @@
 				57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */,
 				5767BB311F5811D300EBA7C1 /* YYImage.m in Sources */,
 				5767BB4C1F5811D300EBA7C1 /* YYTextView.m in Sources */,
+				5767BB861F58320900EBA7C1 /* OCBarrageGifDescriptor.m in Sources */,
 				5767BB2C1F5811D300EBA7C1 /* MKAnnotationView+YYWebImage.m in Sources */,
 				5767BB191F5811D300EBA7C1 /* UIBarButtonItem+YYAdd.m in Sources */,
 				5767BB401F5811D300EBA7C1 /* YYTextMagnifier.m in Sources */,
