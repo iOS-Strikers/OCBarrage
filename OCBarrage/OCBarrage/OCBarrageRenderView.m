@@ -282,7 +282,7 @@
                 if (trackInfo && trackInfo.nextAvailableTime > CACurrentMediaTime()) {//当前行暂不可用
                     NSMutableArray *availableTrackInfos = [NSMutableArray array];
                     for (OCBarrageTrackInfo *info in _trackNextAvailableTime.allValues) {
-                        if (CACurrentMediaTime() > info.nextAvailableTime) {
+                        if (CACurrentMediaTime() > info.nextAvailableTime && [info.trackIdentifier containsString:NSStringFromClass([barrageCell class])]) {//只在同类弹幕中判断是否有可用的轨道
                             [availableTrackInfos addObject:info];
                         }
                     }
