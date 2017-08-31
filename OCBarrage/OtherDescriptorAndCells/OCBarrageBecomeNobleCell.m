@@ -38,11 +38,14 @@
 - (void)layoutContentSubviews {
     [super layoutContentSubviews];
  
-    self.backgroundImageLayer.frame = CGRectMake(0.0, 0.0, 100.0, 30.0);
+    self.backgroundImageLayer.frame = CGRectMake(0.0, 0.0, self.nobleDescriptor.backgroundImage.size.width, self.nobleDescriptor.backgroundImage.size.height);
+    CGPoint center = self.backgroundImageLayer.position;
+    center.y += 17.0;
+    self.textLabel.center = center;
 }
 
 - (void)convertContentToImage {
-    UIImage *image = [self.layer convertContentToImageWithSize:CGSizeMake(CGRectGetWidth(self.textLabel.bounds), 30.0)];
+    UIImage *image = [self.layer convertContentToImageWithSize:CGSizeMake(self.nobleDescriptor.backgroundImage.size.width, self.nobleDescriptor.backgroundImage.size.height)];
     [self.layer setContents:(__bridge id)image.CGImage];
 }
 
