@@ -11,7 +11,6 @@
 		5767BA4E1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */; };
 		5767BA501F5804B800EBA7C1 /* noble_background_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5767BA4F1F5804B800EBA7C1 /* noble_background_image@2x.png */; };
 		5767BA531F580F4F00EBA7C1 /* stopover.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BA521F580F4F00EBA7C1 /* stopover.gif */; };
-		5767BA551F580FA700EBA7C1 /* OCBarrageDemo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BA541F580FA700EBA7C1 /* OCBarrageDemo.gif */; };
 		5767BB081F5811D300EBA7C1 /* NSArray+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA5B1F5811D300EBA7C1 /* NSArray+YYAdd.m */; };
 		5767BB091F5811D300EBA7C1 /* NSBundle+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA5D1F5811D300EBA7C1 /* NSBundle+YYAdd.m */; };
 		5767BB0A1F5811D300EBA7C1 /* NSData+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA5F1F5811D300EBA7C1 /* NSData+YYAdd.m */; };
@@ -108,6 +107,7 @@
 		5767BB731F5812C700EBA7C1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5767BB721F5812C700EBA7C1 /* MobileCoreServices.framework */; };
 		5767BB751F5812CD00EBA7C1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5767BB741F5812CD00EBA7C1 /* libz.tbd */; };
 		5767BB771F5812D300EBA7C1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5767BB761F5812D300EBA7C1 /* libsqlite3.tbd */; };
+		5767BB791F58152800EBA7C1 /* normalDemo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB781F58152800EBA7C1 /* normalDemo.gif */; };
 		577F95E81F55625600B989FA /* CALayer+OCBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95E71F55625600B989FA /* CALayer+OCBarrage.m */; };
 		577F95F81F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F11F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m */; };
 		577F95F91F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F31F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m */; };
@@ -156,7 +156,6 @@
 		5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageBecomeNobleDescriptor.m; sourceTree = "<group>"; };
 		5767BA4F1F5804B800EBA7C1 /* noble_background_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noble_background_image@2x.png"; sourceTree = "<group>"; };
 		5767BA521F580F4F00EBA7C1 /* stopover.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = stopover.gif; sourceTree = "<group>"; };
-		5767BA541F580FA700EBA7C1 /* OCBarrageDemo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = OCBarrageDemo.gif; sourceTree = "<group>"; };
 		5767BA5A1F5811D300EBA7C1 /* NSArray+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+YYAdd.h"; sourceTree = "<group>"; };
 		5767BA5B1F5811D300EBA7C1 /* NSArray+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+YYAdd.m"; sourceTree = "<group>"; };
 		5767BA5C1F5811D300EBA7C1 /* NSBundle+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+YYAdd.h"; sourceTree = "<group>"; };
@@ -336,6 +335,7 @@
 		5767BB721F5812C700EBA7C1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		5767BB741F5812CD00EBA7C1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5767BB761F5812D300EBA7C1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		5767BB781F58152800EBA7C1 /* normalDemo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = normalDemo.gif; sourceTree = "<group>"; };
 		577F95E61F55625600B989FA /* CALayer+OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+OCBarrage.h"; sourceTree = "<group>"; };
 		577F95E71F55625600B989FA /* CALayer+OCBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+OCBarrage.m"; sourceTree = "<group>"; };
 		577F95F01F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorCell.h; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 		5767BA511F580E8000EBA7C1 /* Demonstration */ = {
 			isa = PBXGroup;
 			children = (
-				5767BA541F580FA700EBA7C1 /* OCBarrageDemo.gif */,
+				5767BB781F58152800EBA7C1 /* normalDemo.gif */,
 				5767BA521F580F4F00EBA7C1 /* stopover.gif */,
 			);
 			path = Demonstration;
@@ -959,13 +959,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5767BB791F58152800EBA7C1 /* normalDemo.gif in Resources */,
 				5767BA531F580F4F00EBA7C1 /* stopover.gif in Resources */,
 				57D513F51F4E964300B2E8A7 /* LaunchScreen.storyboard in Resources */,
 				577F96041F5587B400B989FA /* chaoren_right@2x.png in Resources */,
 				5767BA501F5804B800EBA7C1 /* noble_background_image@2x.png in Resources */,
 				577F96031F5587B400B989FA /* chaoren_left@2x.png in Resources */,
 				57D513F01F4E964300B2E8A7 /* Main.storyboard in Resources */,
-				5767BA551F580FA700EBA7C1 /* OCBarrageDemo.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

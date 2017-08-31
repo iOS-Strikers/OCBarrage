@@ -87,13 +87,15 @@
 }
 
 - (void)addBarrage {
-//    [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.5];
-//    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:1.0];
-//    [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:2.0];
-    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:4.0];
+    [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:1.0];
+    [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:2.0];
+//    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:4.0];
 }
 
 - (void)addNormalBarrage {
+    [self updateTitle];
+    
     OCBarrageTextDescriptor *textDescriptor = [[OCBarrageTextDescriptor alloc] init];
     textDescriptor.text = [NSString stringWithFormat:@"~OCBarrage~"];
     textDescriptor.textColor = [UIColor grayColor];
