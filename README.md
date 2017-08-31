@@ -98,9 +98,9 @@ iOS弹幕库OCBarrage, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, �
 
 - 第五步:
 
-在第四步设置好子视图的数据之后就可以计算并设置子视图的大小和位置.重写`- (void)layoutContentViews`方法, 并在这个方法里布局子视图的位置.渲染引擎会在调用`- (void)updateSubviewsData`方法之后自动调用`- (void)layoutContentViews`方法, 这个方法必须在主线程执行.
+在第四步设置好子视图的数据之后就可以计算并设置子视图的大小和位置.重写`- (void)layoutContentSubviews`方法, 并在这个方法里布局子视图的位置.渲染引擎会在调用`- (void)updateSubviewsData`方法之后自动调用`- (void)layoutContentSubviews`方法, 这个方法必须在主线程执行.
 
-![layoutContentViews.png](http://upload-images.jianshu.io/upload_images/1674413-7374f9fdc3038c1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![layoutContentSubviews.png](http://upload-images.jianshu.io/upload_images/1674413-8a1e07313efaa516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 - 第六步:
 
