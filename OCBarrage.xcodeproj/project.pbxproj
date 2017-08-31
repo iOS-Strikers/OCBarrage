@@ -129,6 +129,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5767BA511F580E8000EBA7C1 /* Demonstration */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Demonstration;
+			sourceTree = "<group>";
+		};
 		577F96001F5587B400B989FA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +188,7 @@
 		57D513E41F4E964300B2E8A7 /* OCBarrage */ = {
 			isa = PBXGroup;
 			children = (
+				5767BA511F580E8000EBA7C1 /* Demonstration */,
 				577F96001F5587B400B989FA /* Sources */,
 				579E33111F507FF30073C5DC /* OtherDescriptorAndCells */,
 				57D514181F4E967700B2E8A7 /* OCBarrage */,
