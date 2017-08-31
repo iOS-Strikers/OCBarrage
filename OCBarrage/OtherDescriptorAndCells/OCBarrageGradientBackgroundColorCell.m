@@ -22,8 +22,8 @@
     [self addSubview:self.textLabel];
 }
 
-- (void)layoutContentViews {
-    [super layoutContentViews];
+- (void)layoutContentSubviews {
+    [super layoutContentSubviews];
     [self addGradientLayer];
 }
 

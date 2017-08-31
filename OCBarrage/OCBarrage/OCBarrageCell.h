@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)clearContents;
 
 - (void)updateSubviewsData;
-- (void)layoutContentViews;
+- (void)layoutContentSubviews;
 - (void)convertContentToImage;
 - (void)sizeToFit;//设置好数据之后调用一下自动计算bounds
 - (void)removeSubViewsAndSublayers;//默认删除所有的subview和sublayer; 如果需要选择性的删除可以重写这个方法.

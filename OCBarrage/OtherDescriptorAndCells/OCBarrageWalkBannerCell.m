@@ -40,8 +40,8 @@
     [self.rightImageView setImage:[UIImage imageNamed:@"chaoren_right"]];
 }
 
-- (void)layoutContentViews {
-    [super layoutContentViews];
+- (void)layoutContentSubviews {
+    [super layoutContentSubviews];
     
     CGFloat leftImageViewX = 0.0;
     CGFloat leftImageViewY = 0.0;

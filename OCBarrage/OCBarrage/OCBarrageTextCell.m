@@ -38,7 +38,7 @@
     [self.textLabel setAttributedText:self.textDescriptor.attributedText];
 }
 
-- (void)layoutContentViews {
+- (void)layoutContentSubviews {
     CGRect textFrame = [self.textDescriptor.attributedText.string boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[self.textDescriptor.attributedText attributesAtIndex:0 effectiveRange:NULL] context:nil];
     self.textLabel.frame = textFrame;
 }

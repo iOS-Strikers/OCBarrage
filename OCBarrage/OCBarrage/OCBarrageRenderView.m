@@ -207,7 +207,7 @@
     }
     [barrageCell clearContents];
     [barrageCell updateSubviewsData];
-    [barrageCell layoutContentViews];
+    [barrageCell layoutContentSubviews];
     [barrageCell convertContentToImage];
     [barrageCell sizeToFit];
     [barrageCell removeSubViewsAndSublayers];
