@@ -14,6 +14,7 @@
 #import "OCBarrageWalkBannerDescriptor.h"
 #import "OCBarrageBecomeNobleDescriptor.h"
 #import "OCBarrageBecomeNobleCell.h"
+#import "OCBarrageMixedImageAndTextCell.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) CATextLayer *textlayer;
@@ -90,7 +91,7 @@
     [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:1.0];
     [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:2.0];
-//    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:4.0];
+    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:4.0];
 }
 
 - (void)addNormalBarrage {
@@ -161,6 +162,31 @@
     becomeNobleDescriptor.barrageCellClass = [OCBarrageBecomeNobleCell class];
     becomeNobleDescriptor.backgroundImage = [UIImage imageNamed:@"noble_background_image@2x"];
     [self.barrageManager renderBarrageDescriptor:becomeNobleDescriptor];
+    
+    [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:4.0];
+    
+    if (self.stopY == 0) {
+        self.stopY = bannerHeight;
+    } else {
+        self.stopY = 0;
+    }
+}
+
+- (void)addMixedImageAndTextBarrage {
+    OCBarrageTextDescriptor *imageAndTextDescriptor = [[OCBarrageTextDescriptor alloc] init];
+    NSMutableAttributedString *mAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"~OCBarrage~全民直播~荣誉出品~"]];
+    [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, mAttributedString.length)];
+    [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(1, 9)];
+    [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor cyanColor] range:NSMakeRange(11, 4)];
+    [mAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(16, 4)];
+    [mAttributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17.0] range:NSMakeRange(0, mAttributedString.length)];
+    imageAndTextDescriptor.attributedText = mAttributedString;
+    CGFloat bannerHeight = 185.0/2.0;
+    imageAndTextDescriptor.bindingOriginY = self.view.center.y - bannerHeight + self.stopY;
+    imageAndTextDescriptor.positionPriority = OCBarragePositionVeryHigh;
+    imageAndTextDescriptor.animationDuration = 4.0;
+    imageAndTextDescriptor.barrageCellClass = [OCBarrageMixedImageAndTextCell class];
+    [self.barrageManager renderBarrageDescriptor:imageAndTextDescriptor];
     
     [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:4.0];
     

@@ -108,6 +108,9 @@
 		5767BB751F5812CD00EBA7C1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5767BB741F5812CD00EBA7C1 /* libz.tbd */; };
 		5767BB771F5812D300EBA7C1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5767BB761F5812D300EBA7C1 /* libsqlite3.tbd */; };
 		5767BB791F58152800EBA7C1 /* normalDemo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB781F58152800EBA7C1 /* normalDemo.gif */; };
+		5767BB7B1F5816F900EBA7C1 /* xuanzhuan.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB7A1F5816F900EBA7C1 /* xuanzhuan.gif */; };
+		5767BB7D1F58172B00EBA7C1 /* longmao.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB7C1F58172B00EBA7C1 /* longmao.gif */; };
+		5767BB801F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BB7F1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m */; };
 		577F95E81F55625600B989FA /* CALayer+OCBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95E71F55625600B989FA /* CALayer+OCBarrage.m */; };
 		577F95F81F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F11F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m */; };
 		577F95F91F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F31F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m */; };
@@ -336,6 +339,10 @@
 		5767BB741F5812CD00EBA7C1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5767BB761F5812D300EBA7C1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		5767BB781F58152800EBA7C1 /* normalDemo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = normalDemo.gif; sourceTree = "<group>"; };
+		5767BB7A1F5816F900EBA7C1 /* xuanzhuan.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xuanzhuan.gif; sourceTree = "<group>"; };
+		5767BB7C1F58172B00EBA7C1 /* longmao.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = longmao.gif; sourceTree = "<group>"; };
+		5767BB7E1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageMixedImageAndTextCell.h; sourceTree = "<group>"; };
+		5767BB7F1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageMixedImageAndTextCell.m; sourceTree = "<group>"; };
 		577F95E61F55625600B989FA /* CALayer+OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+OCBarrage.h"; sourceTree = "<group>"; };
 		577F95E71F55625600B989FA /* CALayer+OCBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+OCBarrage.m"; sourceTree = "<group>"; };
 		577F95F01F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorCell.h; sourceTree = "<group>"; };
@@ -732,6 +739,8 @@
 		577F96001F5587B400B989FA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				5767BB7C1F58172B00EBA7C1 /* longmao.gif */,
+				5767BB7A1F5816F900EBA7C1 /* xuanzhuan.gif */,
 				577F96011F5587B400B989FA /* chaoren_left@2x.png */,
 				577F96021F5587B400B989FA /* chaoren_right@2x.png */,
 				5767BA4F1F5804B800EBA7C1 /* noble_background_image@2x.png */,
@@ -754,6 +763,8 @@
 				5767BA4A1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m */,
 				5767BA4B1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.h */,
 				5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */,
+				5767BB7E1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.h */,
+				5767BB7F1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m */,
 			);
 			path = OtherDescriptorAndCells;
 			sourceTree = "<group>";
@@ -959,9 +970,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5767BB7D1F58172B00EBA7C1 /* longmao.gif in Resources */,
 				5767BB791F58152800EBA7C1 /* normalDemo.gif in Resources */,
 				5767BA531F580F4F00EBA7C1 /* stopover.gif in Resources */,
 				57D513F51F4E964300B2E8A7 /* LaunchScreen.storyboard in Resources */,
+				5767BB7B1F5816F900EBA7C1 /* xuanzhuan.gif in Resources */,
 				577F96041F5587B400B989FA /* chaoren_right@2x.png in Resources */,
 				5767BA501F5804B800EBA7C1 /* noble_background_image@2x.png in Resources */,
 				577F96031F5587B400B989FA /* chaoren_left@2x.png in Resources */,
@@ -1024,6 +1037,7 @@
 				5767BB241F5811D300EBA7C1 /* UITextField+YYAdd.m in Sources */,
 				5767BB081F5811D300EBA7C1 /* NSArray+YYAdd.m in Sources */,
 				5767BB0C1F5811D300EBA7C1 /* NSDictionary+YYAdd.m in Sources */,
+				5767BB801F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m in Sources */,
 				5767BB111F5811D300EBA7C1 /* NSObject+YYAddForARC.m in Sources */,
 				5767BB141F5811D300EBA7C1 /* NSThread+YYAdd.m in Sources */,
 				5767BB321F5811D300EBA7C1 /* YYImageCache.m in Sources */,
