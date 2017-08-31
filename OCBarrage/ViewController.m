@@ -227,7 +227,7 @@
     NSData *data = [NSData dataWithContentsOfFile:path];
     YYImage *image = [YYImage imageWithData:data scale:4];
     gifDescriptor.image = image;
-    gifDescriptor.positionPriority = OCBarragePositionHigh;
+    gifDescriptor.positionPriority = OCBarragePositionVeryHigh;
     gifDescriptor.animationDuration = arc4random()%5 + 5;
     gifDescriptor.barrageCellClass = [OCBarrageGifCell class];
     [self.barrageManager renderBarrageDescriptor:gifDescriptor];
