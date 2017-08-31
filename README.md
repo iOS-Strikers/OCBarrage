@@ -36,6 +36,9 @@ License
 ==============
 OCBarrage is provided under the MIT license. See LICENSE file for details.
 
+## Communities
+QQ group：263384911 
+
 <br/><br/>
 ---
 中文介绍
@@ -133,3 +136,7 @@ iOS弹幕库OCBarrage, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, �
 许可证
 ==============
 OCBarrage 使用 MIT 许可证，详情见 LICENSE 文件。
+
+## 社区
+欢迎加群讨论
+QQ群：263384911
