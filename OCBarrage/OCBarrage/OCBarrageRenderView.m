@@ -256,8 +256,48 @@
 - (CGRect)calculationBarrageCellFrame:(OCBarrageCell *)barrageCell {
     CGRect cellFrame = barrageCell.bounds;
     cellFrame.origin.x = CGRectGetMaxX(self.frame);
-    if (barrageCell.barrageDescriptor.bindingOriginY >= 0.0) {
-        cellFrame.origin.y = barrageCell.barrageDescriptor.bindingOriginY;
+    
+    if (![[NSValue valueWithRange:barrageCell.barrageDescriptor.renderRange] isEqualToValue:[NSValue valueWithRange:NSMakeRange(0, 0)]]) {
+        CGFloat minOriginY = barrageCell.barrageDescriptor.renderRange.location;
+        CGFloat maxOriginY = barrageCell.barrageDescriptor.renderRange.length;
+        CGFloat renderHeight = maxOriginY - minOriginY;
+        CGFloat cellHeight = CGRectGetHeight(barrageCell.bounds);
+        int trackCount = floorf(renderHeight/cellHeight);
+        int trackIndex = arc4random_uniform(trackCount);//用户改变行高(比如弹幕文字大小不会引起显示bug, 因为虽然是同一个类, 但是trackCount变小了, 所以不会出现trackIndex*cellHeight超出屏幕边界的情况)
+        
+        dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
+        OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), trackIndex)];
+        if (trackInfo && trackInfo.nextAvailableTime > CACurrentMediaTime()) {//当前行暂不可用
+            
+            NSMutableArray *availableTrackInfos = [NSMutableArray array];
+            for (OCBarrageTrackInfo *info in _trackNextAvailableTime.allValues) {
+                if (CACurrentMediaTime() > info.nextAvailableTime && [info.trackIdentifier containsString:NSStringFromClass([barrageCell class])]) {//只在同类弹幕中判断是否有可用的轨道
+                    [availableTrackInfos addObject:info];
+                }
+            }
+            if (availableTrackInfos.count > 0) {
+                OCBarrageTrackInfo *randomInfo = [availableTrackInfos objectAtIndex:arc4random_uniform((int)availableTrackInfos.count)];
+                trackIndex = randomInfo.trackIndex;
+            } else {
+                if (_trackNextAvailableTime.count < trackCount) {//刚开始不是每一条轨道都跑过弹幕, 还有空轨道
+                    NSMutableArray *numberArray = [NSMutableArray array];
+                    for (int index = 0; index < trackCount; index++) {
+                        OCBarrageTrackInfo *emptyTrackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), index)];
+                        if (!emptyTrackInfo) {
+                            [numberArray addObject:[NSNumber numberWithInt:index]];
+                        }
+                    }
+                    if (numberArray.count > 0) {
+                        trackIndex = [[numberArray objectAtIndex:arc4random_uniform((int)numberArray.count)] intValue];
+                    }
+                }
+                //真的是没有可用的轨道了
+            }
+        }
+        dispatch_semaphore_signal(_trackInfoLock);
+        
+        barrageCell.trackIndex = trackIndex;
+        cellFrame.origin.y = trackIndex*cellHeight+minOriginY;
     } else {
         switch (self.renderPositionStyle) {
             case OCBarrageRenderPositionRandom: {

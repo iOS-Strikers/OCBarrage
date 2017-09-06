@@ -112,6 +112,7 @@
     textDescriptor.strokeWidth = -1;
     textDescriptor.animationDuration = arc4random()%5 + 5;
     textDescriptor.barrageCellClass = [OCBarrageTextCell class];
+    
     [self.barrageManager renderBarrageDescriptor:textDescriptor];
     
     [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.25];
@@ -128,6 +129,7 @@
     gradientBackgroundDescriptor.animationDuration = arc4random()%5 + 5;
     gradientBackgroundDescriptor.barrageCellClass = [OCBarrageGradientBackgroundColorCell class];
     gradientBackgroundDescriptor.gradientColor = kRandomColor;
+    
     [self.barrageManager renderBarrageDescriptor:gradientBackgroundDescriptor];
     
     [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:0.5];
@@ -162,7 +164,9 @@
     [mAttributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17.0] range:NSMakeRange(0, mAttributedString.length)];
     becomeNobleDescriptor.attributedText = mAttributedString;
     CGFloat bannerHeight = 185.0/2.0;
-    becomeNobleDescriptor.bindingOriginY = self.view.center.y - bannerHeight + self.stopY;
+    CGFloat minOriginY = CGRectGetMidY(self.view.frame) - bannerHeight;
+    CGFloat maxOriginY = CGRectGetMidY(self.view.frame) + bannerHeight;
+    becomeNobleDescriptor.renderRange = NSMakeRange(minOriginY, maxOriginY);
     becomeNobleDescriptor.positionPriority = OCBarragePositionVeryHigh;
     becomeNobleDescriptor.animationDuration = 4.0;
     becomeNobleDescriptor.barrageCellClass = [OCBarrageBecomeNobleCell class];

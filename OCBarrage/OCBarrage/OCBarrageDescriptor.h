@@ -23,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat borderWidth; // Default is 0
 @property (nonatomic, assign) CGFloat cornerRadius; // Default is 8
 
-@property (nonatomic, assign) CGFloat bindingOriginY;//在固定的某个Y坐标上显示
+@property (nonatomic, assign) NSRange renderRange;//渲染范围, 最终渲染出来的弹幕的Y坐标最小不小于renderRange.location, 最大不超过renderRange.length-barrageCell.height
+
 
 @end
 

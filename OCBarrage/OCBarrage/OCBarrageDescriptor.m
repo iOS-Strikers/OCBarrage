@@ -14,7 +14,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _bindingOriginY = -1.0;
+        
     }
     
     return self;
