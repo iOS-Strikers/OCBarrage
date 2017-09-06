@@ -258,10 +258,20 @@
     cellFrame.origin.x = CGRectGetMaxX(self.frame);
     
     if (![[NSValue valueWithRange:barrageCell.barrageDescriptor.renderRange] isEqualToValue:[NSValue valueWithRange:NSMakeRange(0, 0)]]) {
+        CGFloat cellHeight = CGRectGetHeight(barrageCell.bounds);
         CGFloat minOriginY = barrageCell.barrageDescriptor.renderRange.location;
         CGFloat maxOriginY = barrageCell.barrageDescriptor.renderRange.length;
+        if (maxOriginY > CGRectGetHeight(self.bounds)) {
+            maxOriginY = CGRectGetHeight(self.bounds);
+        }
+        if (minOriginY < 0) {
+            minOriginY = 0;
+        }
         CGFloat renderHeight = maxOriginY - minOriginY;
-        CGFloat cellHeight = CGRectGetHeight(barrageCell.bounds);
+        if (renderHeight < 0) {
+            renderHeight = cellHeight;
+        }
+
         int trackCount = floorf(renderHeight/cellHeight);
         int trackIndex = arc4random_uniform(trackCount);//用户改变行高(比如弹幕文字大小不会引起显示bug, 因为虽然是同一个类, 但是trackCount变小了, 所以不会出现trackIndex*cellHeight超出屏幕边界的情况)
         
