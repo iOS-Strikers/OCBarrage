@@ -426,6 +426,10 @@
 #pragma mark ----- CAAnimationDelegate
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    if (!flag) {
+        return;
+    }
+    
     if (self.renderStatus == OCBarrageRenderStoped) {
         return;
     }
