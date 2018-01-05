@@ -137,6 +137,8 @@
 		57D514291F4E967700B2E8A7 /* OCBarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D514211F4E967700B2E8A7 /* OCBarrageRenderView.m */; };
 		57D5142A1F4E967700B2E8A7 /* OCBarrageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D514231F4E967700B2E8A7 /* OCBarrageTextCell.m */; };
 		57D5142B1F4E967700B2E8A7 /* OCBarrageTextDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D514251F4E967700B2E8A7 /* OCBarrageTextDescriptor.m */; };
+		57F8BCB91FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F8BCB81FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m */; };
+		57F8BCBC1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F8BCBB1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -398,6 +400,10 @@
 		57D514231F4E967700B2E8A7 /* OCBarrageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTextCell.m; sourceTree = "<group>"; };
 		57D514241F4E967700B2E8A7 /* OCBarrageTextDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTextDescriptor.h; sourceTree = "<group>"; };
 		57D514251F4E967700B2E8A7 /* OCBarrageTextDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTextDescriptor.m; sourceTree = "<group>"; };
+		57F8BCB71FFF707F00D3897B /* OCBarrageVerticalAnimationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCBarrageVerticalAnimationCell.h; sourceTree = "<group>"; };
+		57F8BCB81FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBarrageVerticalAnimationCell.m; sourceTree = "<group>"; };
+		57F8BCBA1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCBarrageVerticalTextDescriptor.h; sourceTree = "<group>"; };
+		57F8BCBB1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBarrageVerticalTextDescriptor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -781,6 +787,10 @@
 				5767BB821F58316F00EBA7C1 /* OCBarrageGifCell.m */,
 				5767BB841F58320900EBA7C1 /* OCBarrageGifDescriptor.h */,
 				5767BB851F58320900EBA7C1 /* OCBarrageGifDescriptor.m */,
+				57F8BCB71FFF707F00D3897B /* OCBarrageVerticalAnimationCell.h */,
+				57F8BCB81FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m */,
+				57F8BCBA1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.h */,
+				57F8BCBB1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m */,
 			);
 			path = OtherDescriptorAndCells;
 			sourceTree = "<group>";
@@ -1022,6 +1032,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5767BB091F5811D300EBA7C1 /* NSBundle+YYAdd.m in Sources */,
+				57F8BCB91FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m in Sources */,
 				5767BB531F5811D300EBA7C1 /* YYSentinel.m in Sources */,
 				5767BB121F5811D300EBA7C1 /* NSObject+YYAddForKVO.m in Sources */,
 				5767BB421F5811D300EBA7C1 /* NSAttributedString+YYText.m in Sources */,
@@ -1084,6 +1095,7 @@
 				5767BB491F5811D300EBA7C1 /* YYTextRunDelegate.m in Sources */,
 				57D5142B1F4E967700B2E8A7 /* OCBarrageTextDescriptor.m in Sources */,
 				5767BB221F5811D300EBA7C1 /* UIScrollView+YYAdd.m in Sources */,
+				57F8BCBC1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m in Sources */,
 				5767BB4B1F5811D300EBA7C1 /* YYLabel.m in Sources */,
 				5767BB3A1F5811D300EBA7C1 /* YYTextDebugOption.m in Sources */,
 				5767BB361F5811D300EBA7C1 /* YYWebImageOperation.m in Sources */,

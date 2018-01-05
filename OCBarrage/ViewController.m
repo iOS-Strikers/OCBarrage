@@ -17,6 +17,7 @@
 #import "OCBarrageBecomeNobleCell.h"
 #import "OCBarrageMixedImageAndTextCell.h"
 #import "OCBarrageGifCell.h"
+#import "OCBarrageVerticalAnimationCell.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) CATextLayer *textlayer;
@@ -98,6 +99,7 @@
     [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(addMixedImageAndTextBarrage) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(addGifBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addVerticalAnimationCell) withObject:nil afterDelay:0.5];
 }
 
 - (void)addNormalBarrage {
@@ -224,6 +226,22 @@
     [self performSelector:@selector(addMixedImageAndTextBarrage) withObject:nil afterDelay:2.0];
 }
 
+- (void)addVerticalAnimationCell {
+    OCBarrageVerticalTextDescriptor *verticalTextDescriptor = [[OCBarrageVerticalTextDescriptor alloc] init];
+    verticalTextDescriptor.text = [NSString stringWithFormat:@"~从上往下的动画~"];
+    verticalTextDescriptor.textColor = [UIColor grayColor];
+    verticalTextDescriptor.positionPriority = OCBarragePositionLow;
+    verticalTextDescriptor.textFont = [UIFont systemFontOfSize:17.0];
+    verticalTextDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    verticalTextDescriptor.strokeWidth = -1;
+    verticalTextDescriptor.animationDuration = 5;
+    verticalTextDescriptor.barrageCellClass = [OCBarrageVerticalAnimationCell class];
+    
+    [self.barrageManager renderBarrageDescriptor:verticalTextDescriptor];
+    
+    [self performSelector:@selector(addVerticalAnimationCell) withObject:nil afterDelay:0.5];
+}
+
 - (void)addGifBarrage {
     OCBarrageGifDescriptor *gifDescriptor = [[OCBarrageGifDescriptor alloc] init];
     
@@ -247,7 +265,6 @@
 - (void)updateTitle {
     NSInteger barrageCount = self.barrageManager.renderView.animatingCells.count;
     self.title = [NSString stringWithFormat:@"现在有 %ld 条弹幕", (unsigned long)barrageCount];
-    
 }
 
 - (void)pasueBarrage {
