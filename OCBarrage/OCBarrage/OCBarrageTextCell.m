@@ -62,10 +62,18 @@
     CGPoint startCenter = CGPointMake(CGRectGetMaxX(self.superview.bounds) + CGRectGetWidth(self.bounds)/2, self.center.y);
     CGPoint endCenter = CGPointMake(-(CGRectGetWidth(self.bounds)/2), self.center.y);
     
+    CGFloat animationDuration = self.barrageDescriptor.animationDuration;
+    if (self.barrageDescriptor.fixedSpeed > 0.0) {//如果是固定速度那就用固定速度
+        if (self.barrageDescriptor.fixedSpeed > 100.0) {
+            self.barrageDescriptor.fixedSpeed = 100.0;
+        }
+        animationDuration = (startCenter.x - endCenter.x)/([UIScreen mainScreen].scale*2)/self.barrageDescriptor.fixedSpeed;
+    }
+    
     CAKeyframeAnimation *walkAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     walkAnimation.values = @[[NSValue valueWithCGPoint:startCenter], [NSValue valueWithCGPoint:endCenter]];
     walkAnimation.keyTimes = @[@(0.0), @(1.0)];
-    walkAnimation.duration = self.barrageDescriptor.animationDuration;
+    walkAnimation.duration = animationDuration;
     walkAnimation.repeatCount = 1;
     walkAnimation.delegate =  animationDelegate;
     walkAnimation.removedOnCompletion = NO;

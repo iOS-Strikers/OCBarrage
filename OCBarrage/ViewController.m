@@ -94,7 +94,7 @@
 
 - (void)addBarrage {
     [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.5];
-    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addFixedSpeedAnimationCell) withObject:nil afterDelay:0.5];//添加等速的弹幕, 等速弹幕速度相同不会重叠
     [self performSelector:@selector(addWalkBannerBarrage) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(addStopoverBarrage) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(addMixedImageAndTextBarrage) withObject:nil afterDelay:0.5];
@@ -120,21 +120,21 @@
     [self performSelector:@selector(addNormalBarrage) withObject:nil afterDelay:0.25];
 }
 
-- (void)addGradientBackgroundColorBarrage {
+- (void)addFixedSpeedAnimationCell {
     OCBarrageGradientBackgroundColorDescriptor *gradientBackgroundDescriptor = [[OCBarrageGradientBackgroundColorDescriptor alloc] init];
-    gradientBackgroundDescriptor.text = [NSString stringWithFormat:@"~全民直播~"];
+    gradientBackgroundDescriptor.text = [NSString stringWithFormat:@"~等速弹幕~"];
     gradientBackgroundDescriptor.textColor = [UIColor whiteColor];
     gradientBackgroundDescriptor.positionPriority = OCBarragePositionLow;
     gradientBackgroundDescriptor.textFont = [UIFont systemFontOfSize:17.0];
     gradientBackgroundDescriptor.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     gradientBackgroundDescriptor.strokeWidth = -1;
-    gradientBackgroundDescriptor.animationDuration = arc4random()%5 + 5;
+    gradientBackgroundDescriptor.fixedSpeed = 50.0;//用fixedSpeed属性设定速度
     gradientBackgroundDescriptor.barrageCellClass = [OCBarrageGradientBackgroundColorCell class];
     gradientBackgroundDescriptor.gradientColor = kRandomColor;
     
     [self.barrageManager renderBarrageDescriptor:gradientBackgroundDescriptor];
     
-    [self performSelector:@selector(addGradientBackgroundColorBarrage) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(addFixedSpeedAnimationCell) withObject:nil afterDelay:0.5];
 }
 
 - (void)addWalkBannerBarrage {
