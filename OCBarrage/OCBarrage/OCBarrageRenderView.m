@@ -533,6 +533,9 @@
                 if (barrageCell.barrageDescriptor.touchAction) {
                     barrageCell.barrageDescriptor.touchAction(barrageCell.barrageDescriptor);
                 }
+                if (barrageCell.barrageDescriptor.cellTouchedAction) {
+                    barrageCell.barrageDescriptor.cellTouchedAction(barrageCell.barrageDescriptor, barrageCell);
+                }
                 break;
             }
         }

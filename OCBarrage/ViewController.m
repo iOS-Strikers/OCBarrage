@@ -139,10 +139,14 @@
 
 - (void)addWalkBannerBarrage {
     OCBarrageWalkBannerDescriptor *bannerDescriptor = [[OCBarrageWalkBannerDescriptor alloc] init];
-    bannerDescriptor.touchAction = ^(OCBarrageDescriptor *descriptor){
+    bannerDescriptor.cellTouchedAction = ^(OCBarrageDescriptor *__weak descriptor, OCBarrageCell *__weak cell) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"OCBarrage" message:@"全民超人为您服务" delegate:nil cancelButtonTitle:@"朕知道了" otherButtonTitles:nil];
         [alertView show];
+        
+        OCBarrageWalkBannerCell *walkBannerCell = (OCBarrageWalkBannerCell *)cell;
+        walkBannerCell.textLabel.backgroundColor = [UIColor redColor];
     };
+    
     bannerDescriptor.text = [NSString stringWithFormat:@"~欢迎全民超人大驾光临~"];
     bannerDescriptor.textColor = kRandomColor;
     bannerDescriptor.textFont = [UIFont systemFontOfSize:17.0];

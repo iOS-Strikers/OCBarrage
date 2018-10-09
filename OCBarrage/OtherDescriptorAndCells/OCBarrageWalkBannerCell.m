@@ -23,7 +23,9 @@
 
 - (void)prepareForReuse {
     [super prepareForReuse];
-    [self addSubviews];
+    
+    //因为在点击的时候被改为了红色, 所以在重用的时候, 要重置一下颜色
+    self.textLabel.backgroundColor = [UIColor clearColor];
 }
 
 - (void)addSubviews {
@@ -69,11 +71,8 @@
 }
 
 - (void)removeSubViewsAndSublayers {
-    [super removeSubViewsAndSublayers];
-    
-    _leftImageView = nil;
-    _middleImageView = nil;
-    _rightImageView = nil;
+    //如果不要删除leftImageView, middleImageView, rightImageView, textLabel, 只需重写这个方法并留空就可以了.
+    //比如: 你想在这个cell被点击的时候, 修改文本颜色
 }
 
 #pragma mark ---- setter

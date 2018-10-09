@@ -30,7 +30,6 @@
 
 - (void)setBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor {
     _barrageDescriptor = barrageDescriptor;
-    
 }
 
 - (void)clearContents {

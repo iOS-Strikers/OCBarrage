@@ -11,9 +11,10 @@
 
 #define kBarrageAnimation @"kBarrageAnimation"
 @class OCBarrageDescriptor;
-
+@class OCBarrageCell;
 
 typedef void(^OCBarrageTouchAction)(__weak OCBarrageDescriptor *descriptor);
+typedef void(^OCBarrageCellTouchedAction)(__weak OCBarrageDescriptor *descriptor, __weak OCBarrageCell *cell);
 
 typedef NS_ENUM(NSInteger, OCBarragePositionPriority) {
     OCBarragePositionLow = 0,
