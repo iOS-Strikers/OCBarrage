@@ -4,6 +4,14 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "../OCBarrage/ViewController.h"
+#import "../OCBarrage/OCBarrage/OCBarrageManager.h"
+
+@interface ViewController (DemoRegression)
+- (void)startBarrage;
+- (void)pasueBarrage;
+- (void)stopBarrage;
+@end
 #import "../OCBarrage/OCBarrage/OCBarrageRenderView.h"
 #import "../OCBarrage/OCBarrage/OCBarrageTextCell.h"
 #import "../OCBarrage/OCBarrage/OCBarrageTrackInfo.h"
@@ -641,6 +649,120 @@
     [view stop];
     window.hidden = YES;
     [previousWindow makeKeyAndVisible];
+}
+
+- (void)testDemoStartPauseRestartAndStopAreConsistent {
+    ViewController *controller = [[ViewController alloc] init];
+    UIWindow *previous = UIApplication.sharedApplication.keyWindow;
+    UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    window.rootViewController = controller;
+    [window makeKeyAndVisible];
+    [controller.view layoutIfNeeded];
+    OCBarrageManager *manager = [controller valueForKey:@"barrageManager"];
+    [controller startBarrage];
+    NSUInteger initial = manager.renderView.animatingCells.count;
+    XCTAssertGreaterThan(initial, (NSUInteger)0, @"开始应立即发送首批弹幕");
+    [controller startBarrage];
+    XCTAssertEqual(manager.renderView.animatingCells.count, initial);
+    [controller pasueBarrage];
+    XCTAssertEqual(manager.renderView.renderStatus, OCBarrageRenderPaused);
+    [self waitForAnimationTime:0.8];
+    XCTAssertEqual(manager.renderView.animatingCells.count, initial);
+    [controller startBarrage];
+    XCTAssertEqual(manager.renderView.renderStatus, OCBarrageRenderStarted);
+    XCTAssertEqual(manager.renderView.animatingCells.count, initial, @"暂停后开始应恢复，不能另发一批");
+    [controller stopBarrage];
+    [self waitForAnimationTime:1.0];
+    XCTAssertEqual(manager.renderView.animatingCells.count, (NSUInteger)0);
+    XCTAssertEqual(manager.renderView.renderStatus, OCBarrageRenderStoped);
+    [controller startBarrage];
+    XCTAssertGreaterThan(manager.renderView.animatingCells.count, (NSUInteger)0);
+    [controller stopBarrage];
+    window.hidden = YES;
+    [previous makeKeyAndVisible];
+}
+
+- (void)testDemoButtonsStayInsideSafeAreaAndModesCancelPlayback {
+    UIWindow *previous = UIApplication.sharedApplication.keyWindow;
+    UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    ViewController *controller = [[ViewController alloc] init];
+    window.rootViewController = controller;
+    [window makeKeyAndVisible];
+    [controller.view layoutIfNeeded];
+    UIButton *start = [controller valueForKey:@"startButton"];
+    UIButton *pause = [controller valueForKey:@"pauseButton"];
+    UIButton *stop = [controller valueForKey:@"stopButton"];
+    for (UIButton *button in @[start, pause, stop]) {
+        XCTAssertGreaterThanOrEqual(button.bounds.size.height, 44);
+        XCTAssertLessThanOrEqual(CGRectGetMaxY(button.frame), CGRectGetHeight(controller.view.bounds) - controller.view.safeAreaInsets.bottom);
+    }
+    CGPoint startCenter = start.center;
+    XCTAssertEqual([controller.view hitTest:startCenter withEvent:nil], start);
+    [start sendActionsForControlEvents:UIControlEventTouchUpInside];
+    XCTAssertFalse(start.enabled);
+    XCTAssertTrue(pause.enabled);
+    OCBarrageManager *manager = [controller valueForKey:@"barrageManager"];
+    [self waitForAnimationTime:0.8];
+    [pause sendActionsForControlEvents:UIControlEventTouchUpInside];
+    XCTAssertTrue(start.enabled);
+    XCTAssertEqual(manager.renderView.renderStatus, OCBarrageRenderPaused);
+    [self attachWindow:window name:@"demo-paused"];
+    [start sendActionsForControlEvents:UIControlEventTouchUpInside];
+    XCTAssertEqual(manager.renderView.renderStatus, OCBarrageRenderStarted);
+    UISegmentedControl *mode = [controller valueForKey:@"modeControl"];
+    mode.selectedSegmentIndex = 1;
+    [mode sendActionsForControlEvents:UIControlEventValueChanged];
+    XCTAssertFalse(start.enabled);
+    XCTAssertFalse(pause.enabled);
+    XCTAssertFalse(stop.enabled);
+    [self waitForAnimationTime:1.2];
+    XCTAssertEqual(manager.renderView.animatingCells.count, (NSUInteger)0);
+    XCTAssertEqual(manager.renderView.renderStatus, OCBarrageRenderStoped);
+    [self attachWindow:window name:@"demo-vertical"];
+    mode.selectedSegmentIndex = 2;
+    [mode sendActionsForControlEvents:UIControlEventValueChanged];
+    [start sendActionsForControlEvents:UIControlEventTouchUpInside];
+    XCTAssertGreaterThan(manager.renderView.animatingCells.count, (NSUInteger)0);
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationWillResignActiveNotification object:nil];
+    XCTAssertEqual(manager.renderView.renderStatus, OCBarrageRenderPaused);
+    [controller viewDidDisappear:NO];
+    [self waitForAnimationTime:1.2];
+    XCTAssertEqual(manager.renderView.animatingCells.count, (NSUInteger)0);
+    XCTAssertEqual(manager.renderView.renderStatus, OCBarrageRenderStoped);
+    window.hidden = YES;
+    [previous makeKeyAndVisible];
+}
+
+- (void)testDemoFeedsOneLaneAtATimeWithAlternatingSpeeds {
+    UIWindow *previous = UIApplication.sharedApplication.keyWindow;
+    UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    ViewController *controller = [[ViewController alloc] init];
+    window.rootViewController = controller;
+    [window makeKeyAndVisible];
+    [controller.view layoutIfNeeded];
+    OCBarrageManager *manager = [controller valueForKey:@"barrageManager"];
+    [controller startBarrage];
+    XCTAssertEqual(manager.renderView.animatingCells.count, (NSUInteger)1, @"开始只能发送一条，不能整批齐发");
+    [self waitForAnimationTime:0.8];
+    [controller pasueBarrage];
+    NSArray<OCBarrageCell *> *cells = [manager.renderView.animatingCells copy];
+    XCTAssertEqual(cells.count, (NSUInteger)2);
+    if (cells.count == 2) {
+        XCTAssertEqualWithAccuracy(CGRectGetMinY(cells[0].frame), 0, 0.01);
+        XCTAssertEqualWithAccuracy(CGRectGetMinY(cells[1].frame), 40, 0.01);
+        CGFloat speeds[2];
+        for (NSUInteger i = 0; i < 2; i++) {
+            CAKeyframeAnimation *animation = (CAKeyframeAnimation *)cells[i].barrageAnimation;
+            CGFloat distance = [animation.values.firstObject CGPointValue].x - [animation.values.lastObject CGPointValue].x;
+            speeds[i] = distance / animation.duration;
+        }
+        XCTAssertEqualWithAccuracy(speeds[0], 60, 0.01);
+        XCTAssertEqualWithAccuracy(speeds[1], 110, 0.01);
+    }
+    [self attachWindow:window name:@"demo-alternating-lanes"];
+    [controller stopBarrage];
+    window.hidden = YES;
+    [previous makeKeyAndVisible];
 }
 
 @end

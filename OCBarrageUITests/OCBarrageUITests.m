@@ -1,40 +1,42 @@
-//
-//  OCBarrageUITests.m
-//  OCBarrageUITests
-//
-//  Created by QMTV on 2017/8/24.
-//  Copyright © 2017年 LFC. All rights reserved.
-//
-
 #import <XCTest/XCTest.h>
 
 @interface OCBarrageUITests : XCTestCase
-
 @end
 
 @implementation OCBarrageUITests
-
-- (void)setUp {
-    [super setUp];
-    
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    
-    // In UI tests it is usually best to stop immediately when a failure occurs.
+- (void)testDemoPlaybackControlsAndModeSwitching {
     self.continueAfterFailure = NO;
-    // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-    [[[XCUIApplication alloc] init] launch];
-    
-    // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+    XCUIApplication *app = [[XCUIApplication alloc] init];
+    [app launch];
+    XCUIElement *start = app.buttons[@"demo.start"];
+    XCUIElement *pause = app.buttons[@"demo.pause"];
+    XCUIElement *stop = app.buttons[@"demo.stop"];
+    XCTAssertTrue([start waitForExistenceWithTimeout:5]);
+    [start tap];
+    XCTAssertTrue(pause.enabled);
+    XCTAssertFalse(start.enabled);
+    [pause tap];
+    XCTAssertEqualObjects(start.label, @"继续播放");
+    XCTAssertEqualObjects(app.staticTexts[@"demo.status"].label, @"已暂停 · 点击继续播放");
+    [start tap];
+    XCTAssertTrue(pause.enabled);
+    [stop tap];
+    XCTAssertEqualObjects(start.label, @"开始播放");
+    XCTAssertFalse(stop.enabled);
+    [app.segmentedControls[@"demo.mode"].buttons[@"竖排文字"] tap];
+    XCTAssertEqualObjects(app.staticTexts[@"demo.status"].label, @"静态预览 · 无需播放");
+    XCTAssertFalse(start.enabled);
+    [app.segmentedControls[@"demo.mode"].buttons[@"综合演示"] tap];
+    [start tap];
+    XCTAssertTrue(pause.enabled);
+    [app.segmentedControls[@"demo.mode"].buttons[@"轨道错峰"] tap];
+    XCTAssertTrue(start.enabled);
+    XCTAssertFalse(stop.enabled);
+    [start tap];
+    [pause tap];
+    XCTAttachment *image = [XCTAttachment attachmentWithScreenshot:app.screenshot];
+    image.name = @"demo-controls-ui-tested";
+    image.lifetime = XCTAttachmentLifetimeKeepAlways;
+    [self addAttachment:image];
 }
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testExample {
-    // Use recording to get started writing UI tests.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
 @end
