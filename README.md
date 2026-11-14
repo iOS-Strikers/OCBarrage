@@ -19,7 +19,7 @@ An extensible iOS barrage renderer with reusable cells and custom Core Animation
   </tr>
 </table>
 
-动态预览来自 iPhone 17 Pro / iOS 26.5 模拟器真实录屏，按原速截取 8 秒，压缩为 12 fps GIF；竖排预览来自 UI 验证截图。GIF 用于展示行为，不能代表 App 的实际帧率。轨道动图展示持续播放阶段，点击开始时仍只发送第一条。
+动态预览来自 iPhone 17 Pro / iOS 26.5 模拟器真实录屏，按原速截取 8 秒，压缩为 12 fps GIF；竖排预览来自同一模拟器的完整屏幕截图。三张预览统一保留顶部状态栏（09:41、满格 Wi-Fi、满电），标题、画布与底部按钮位置一致。GIF 用于展示行为，不能代表 App 的实际帧率。轨道动图展示持续播放阶段，点击开始时仍只发送第一条。
 
 ## 功能一览
 
