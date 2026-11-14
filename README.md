@@ -13,9 +13,9 @@ An extensible iOS barrage renderer with reusable cells and custom Core Animation
     <th>竖排文字 · 静态预览</th>
   </tr>
   <tr>
-    <td><img src="OCBarrage/Demonstration/demo-lanes.gif" width="260" alt="奇数轨道慢、偶数轨道快，弹幕逐条进入"></td>
-    <td><img src="OCBarrage/Demonstration/demo-mixed.gif" width="260" alt="优化后的文字、图文、GIF 与礼物综合演示"></td>
-    <td><img src="OCBarrage/Demonstration/demo-vertical.png" width="260" alt="从右向左排列的竖排文字与组合字符"></td>
+    <td><img src="OCBarrage/Demonstration/demo-lanes-statusbar.gif" width="260" alt="奇数轨道慢、偶数轨道快，弹幕逐条进入"></td>
+    <td><img src="OCBarrage/Demonstration/demo-mixed-statusbar.gif" width="260" alt="优化后的文字、图文、GIF 与礼物综合演示"></td>
+    <td><img src="OCBarrage/Demonstration/demo-vertical-statusbar.png" width="260" alt="从右向左排列的竖排文字与组合字符"></td>
   </tr>
 </table>
 
