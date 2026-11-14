@@ -1,6 +1,6 @@
 # OCBarrage
 
-基于 Objective-C、Core Animation 和 Core Graphics 的 iOS 弹幕渲染库，支持文字、图文、GIF 和自定义路径动画。通过描述符配置内容，由渲染器负责布局、动画和 cell 复用。
+基于 Swift 6、Core Animation 和 Core Graphics 的 iOS 弹幕渲染库，支持文字、图文、GIF 和自定义路径动画。通过描述符配置内容，由渲染器负责布局、动画和 cell 复用。
 
 An extensible iOS barrage renderer with reusable cells and custom Core Animation effects. The demo includes staggered lane playback, vertical text layout, and mixed effects.
 
@@ -19,7 +19,7 @@ An extensible iOS barrage renderer with reusable cells and custom Core Animation
   </tr>
 </table>
 
-动态预览来自 iPhone 17 Pro / iOS 26.5 模拟器真实录屏，按原速截取 8 秒，压缩为 12 fps GIF；竖排预览取自同一模拟器录屏的静态帧。三张预览统一保留顶部状态栏（09:41、满格 Wi-Fi、满电），标题、画布与底部按钮位置一致。GIF 用于展示行为，不能代表 App 的实际帧率。轨道动图展示持续播放阶段，点击开始时仍只发送第一条。
+上方预览保留迁移前的同版界面记录；Swift 迁移已另行完成模拟器交互和录屏验收。动态预览来自 iPhone 17 Pro / iOS 26.5 模拟器真实录屏，按原速截取 8 秒，压缩为 12 fps GIF；竖排预览取自同一模拟器录屏的静态帧。三张预览统一保留顶部状态栏（09:41、满格 Wi-Fi、满电），标题、画布与底部按钮位置一致。GIF 用于展示行为，不能代表 App 的实际帧率。轨道动图展示持续播放阶段，点击开始时仍只发送第一条。
 
 ## 功能一览
 
@@ -56,7 +56,7 @@ An extensible iOS barrage renderer with reusable cells and custom Core Animation
 - 使用固定移动速度，文字长短只影响完整通过画布所需的时间，不改变 pt/s。
 - 0.65 秒是 Demo 的**发送间隔**。渲染器仍会加入短暂入场延迟，并在同类相交轨道繁忙时排队，因此不是保证每条都在该时刻进入可见区域。
 
-以上是 [Demo 的配置](OCBarrage/ViewController.m)，不是库对所有调用方强制采用的策略。
+以上是 [Demo 的配置](OCBarrage/ViewController.swift)，不是库对所有调用方强制采用的策略。
 
 ### 综合模式与 GIF
 
@@ -77,142 +77,107 @@ An extensible iOS barrage renderer with reusable cells and custom Core Animation
 
 播放按钮固定在底部安全区域，内容区支持滚动。竖排模式展示的是**文字排版方向**，与综合模式中“从上往下移动”的动画是两种不同效果。
 
-### 新版 Xcode 运行与测试
+### 构建要求与测试
 
-项目及 podspec 保留 `iOS 8.0` 部署声明，但本次验证使用 **Xcode 27.2、iPhone 17 Pro / iOS 26.5**。该工具链不支持原 iOS 8 部署目标，需要在本次模拟器构建时覆盖最低版本；这不代表已验证旧系统兼容性。
-
-在仓库根目录执行以下命令，替换为本机可用模拟器的 UDID：
+核心包、Demo 和测试均为 Swift，最低 iOS 15；使用 Swift 6 语言模式和 Swift 6.2+ 工具链（隔离析构需要该编译器版本）。本次验证环境为 Xcode 27.2、Swift 6.4.2、iPhone 17 Pro / iOS 26.5 模拟器。工程内已配置部署版本，无需命令行覆盖。
 
 ```sh
-# 若 Xcode 不在此路径，请调整；仅影响当前终端会话。
 export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 xcrun simctl list devices available
-
+xcodebuild -project OCBarrage.xcodeproj -scheme OCBarrage \
+  -destination 'platform=iOS Simulator,id=YOUR_SIMULATOR_UDID' build
 xcodebuild -project OCBarrage.xcodeproj -scheme OCBarrage \
   -destination 'platform=iOS Simulator,id=YOUR_SIMULATOR_UDID' \
-  IPHONEOS_DEPLOYMENT_TARGET=15.0 CODE_SIGNING_ALLOWED=NO build
-
-xcodebuild -project OCBarrage.xcodeproj -scheme OCBarrage \
-  -destination 'platform=iOS Simulator,id=YOUR_SIMULATOR_UDID' \
-  -only-testing:OCBarrageTests -only-testing:OCBarrageUITests \
-  IPHONEOS_DEPLOYMENT_TARGET=15.0 CODE_SIGNING_ALLOWED=NO test
+  -only-testing:OCBarrageTests -only-testing:OCBarrageUITests test
 ```
 
-在 Xcode 界面中运行时，也需为相应构建配置设置当前工具链支持的 Deployment Target。签名关闭参数仅用于这里的模拟器验证，不适用于真机发布。
+模拟器无需签名；真机运行需配置自己的开发团队和签名。
 
 ## 安装到自己的项目
 
-### 使用当前仓库源码
+### Swift Package Manager
 
-将 [`OCBarrage/OCBarrage`](OCBarrage/OCBarrage) 中的 `.h`、`.m` 文件加入项目，启用 ARC，并导入：
+在 Xcode 中添加本地克隆目录作为 Local Package，并选择 **OCBarrage** library。`Package.swift` 只包含 `OCBarrage/OCBarrage/*.swift` 核心实现，依赖 UIKit，不含 Demo、YYKit 或图片资源。当前 Swift 迁移版本尚未发布 tag，不能按已发布的 2.0.0 版本解析依赖。
 
-```objc
-#import "OCBarrage.h"
+```swift
+import OCBarrage
 ```
 
-核心库与 Demo 分离：`OtherDescriptorAndCells` 中的扩展示例、图片资源以及内置 YYKit 不属于核心库。使用图文、GIF、竖排示例时，需要一并集成相应实现及依赖。
+也可以将核心目录的 Swift 文件直接加入 iOS target；直接添加文件时不需要 `import OCBarrage`。图文、GIF、竖排示例在 `OtherDescriptorAndCells/DemoCells.swift`，使用它们时还需要 YYKit、桥接头和对应资源。
 
 ### CocoaPods
 
-```ruby
-pod 'OCBarrage'
-```
-
-执行 `pod install` 后导入 `OCBarrage.h`。**发布版本与当前仓库修改需区分**：仓库 podspec 仍为 `1.0.5`，本轮修改未发布新的 Pod 版本；普通安装不能据此认为已经包含本轮修复。需要当前代码时可先将仓库克隆到本地，再使用路径依赖：
+仓库 podspec 的 `2.0.0` 是**待发布定义**，尚未创建 tag、发布 Pod 或执行远程 Pod 安装验收。需要当前本地代码可使用：
 
 ```ruby
 pod 'OCBarrage', :path => '../OCBarrage'
 ```
 
+已有公开版本仍是 Objective-C API，普通 `pod 'OCBarrage'` 不代表获得本次 Swift 迁移内容。
+
 ## 快速接入
 
-在主线程创建并持有 manager，先给渲染视图设置有效大小，再发送弹幕：
+UI API 由 `@MainActor` 隔离。控制器持有 manager，设置有效容器大小后启动和发送：
 
-```objc
-// 控制器属性，保持 manager 的生命周期。
-@property (nonatomic, strong) OCBarrageManager *barrageManager;
+```swift
+import UIKit
+import OCBarrage
 
-// 视图初始化时：
-self.barrageManager = [[OCBarrageManager alloc] init];
-self.barrageManager.renderView.frame = CGRectMake(0, 100, 320, 240);
-[self.view addSubview:self.barrageManager.renderView];
-[self.barrageManager start];
+final class PlayerViewController: UIViewController {
+    private let barrageManager = OCBarrageManager()
 
-OCBarrageTextDescriptor *text = [[OCBarrageTextDescriptor alloc] init];
-text.text = @"你好，OCBarrage";
-text.textFont = [UIFont systemFontOfSize:20];
-text.textColor = [UIColor whiteColor];
-text.animationDuration = 6;
-text.barrageCellClass = [OCBarrageTextCell class];
-[self.barrageManager renderBarrageDescriptor:text];
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        barrageManager.renderView.frame = CGRect(x: 0, y: 100, width: 320, height: 240)
+        view.addSubview(barrageManager.renderView)
+        barrageManager.start()
+
+        let text = OCBarrageTextDescriptor()
+        text.text = "你好，OCBarrage"
+        text.textFont = .systemFont(ofSize: 20)
+        text.textColor = .white
+        text.animationDuration = 6
+        text.barrageCellClass = OCBarrageTextCell.self
+        barrageManager.renderBarrageDescriptor(text)
+    }
+}
 ```
 
-尺寸变化时更新 `renderView.frame`。暂停、继续、停止分别调用 manager 的 `pause`、`resume`、`stop`。如果业务侧有定时发送器，也必须同步暂停或取消：**库管理动画，不会替调用方取消自己的计时任务**。
+尺寸变化时更新 `renderView.frame`。暂停、继续、停止分别调用 `pause()`、`resume()`、`stop()`。库管理弹幕动画，业务定时发送任务仍由调用方取消；manager 释放时会停止并清空渲染器。
 
 ### 配置速度与固定轨道
 
-对于标准 `OCBarrageTextCell`：`animationDuration` 控制完整动画时长；`fixedSpeed > 0` 时优先使用固定速度，且最大值会被限制为 100。现有实现的换算为：
+标准 `OCBarrageTextCell` 的 `animationDuration` 控制完整动画时长；`fixedSpeed > 0` 时优先使用固定速度，且最大值被限制为 100。实际速度（pt/s）= `UIScreen.main.scale × 2 × fixedSpeed`。例如固定第 2 条 40 pt 高的行带，速度为 110 pt/s：
 
-```text
-实际移动速度（pt/s）= UIScreen.mainScreen.scale × 2 × fixedSpeed
+```swift
+text.renderRange = NSRange(location: 40, length: 80)
+text.fixedSpeed = 110 / (UIScreen.main.scale * 2)
 ```
 
-例如将弹幕固定到第 2 条 40pt 高的行带，并设置 110 pt/s：
-
-```objc
-text.renderRange = NSMakeRange(40, 80);
-text.fixedSpeed = 110.0 / (UIScreen.mainScreen.scale * 2.0);
-```
-
-**`renderRange` 是历史 API 的特殊约定：`location` 表示 Y 下界，`length` 表示 Y 上界，不是通常 NSRange 的区间长度。** 因此上例表示 `[40, 80]`，不是 `[40, 120]`。`NSMakeRange(0, 0)` 表示使用默认范围；行带必须能容纳整个 cell 的高度。
+**历史 `renderRange` 语义保留：location 是 Y 下界，length 是 Y 上界。** 上例表示 `[40, 80]`，不是 `[40, 120]`；`NSRange(location: 0, length: 0)` 表示默认范围。行带必须容纳整个 cell。
 
 ### 点击回调
 
-```objc
-text.cellTouchedAction = ^(OCBarrageDescriptor *descriptor, OCBarrageCell *cell) {
-    NSLog(@"点击了弹幕：%@", cell);
-};
-```
-
-使用 `cellTouchedAction`，旧 `touchAction` 已标记为弃用。回调在释放活动列表锁后同步执行，可以重入暂停或停止；业务回调仍应避免耗时操作。
-
-### 接入 GIF 弹幕
-
-GIF 是 Demo 的扩展示例，不包含在核心 Pod 的源码目录中。先加入 [`OCBarrageGifCell`](OCBarrage/OtherDescriptorAndCells/OCBarrageGifCell.m)、[`OCBarrageGifDescriptor`](OCBarrage/OtherDescriptorAndCells/OCBarrageGifDescriptor.h) 及 YYKit 依赖，并将 GIF 文件添加到应用资源中。
-
-```objc
-#import "OCBarrageGifCell.h"
-
-// 控制器属性，避免每次发送都重新读取文件和初始化解码器。
-@property (nonatomic, strong) YYImage *barrageGIF;
-
-// manager 已启动、renderView 已设置有效尺寸，在主线程发送：
-if (!self.barrageGIF) {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"xuanzhuan" ofType:@"gif"];
-    NSData *data = path ? [NSData dataWithContentsOfFile:path] : nil;
-    if (data) self.barrageGIF = [YYImage imageWithData:data scale:4];
-}
-if (self.barrageGIF) {
-    OCBarrageGifDescriptor *gif = [[OCBarrageGifDescriptor alloc] init];
-    gif.image = self.barrageGIF;
-    gif.animationDuration = 6;
-    gif.barrageCellClass = [OCBarrageGifCell class];
-    [self.barrageManager renderBarrageDescriptor:gif];
+```swift
+text.cellTouchedAction = { [weak barrageManager] descriptor, cell in
+    cell.alpha = 0.8
+    barrageManager?.pause()
 }
 ```
 
-示例中的 `scale:4` 控制图片的显示尺寸，不控制播放速度。图片资源可以共享，`YYAnimatedImageView` 应由各 cell 独立持有。manager 的暂停只冻结弹幕位移；若还需要冻结 GIF 换帧，需在自定义 cell 中同步管理内部动画。
+回调在主 actor 上同步执行，支持暂停、停止、发送重入。优先使用带 cell 的 `cellTouchedAction`；兼容保留 `touchAction`。回调会被描述符持有，捕获 manager 或控制器时使用弱引用，避免业务闭包形成引用环。
 
-## 自定义弹幕
+### GIF 和自定义弹幕
 
-1. 继承 `OCBarrageDescriptor` 添加数据；文字类可继承 `OCBarrageTextDescriptor`。
-2. 继承 `OCBarrageCell` 创建视图；需要复用文字能力时继承 `OCBarrageTextCell`。
-3. 在 `setBarrageDescriptor:` 中调用 `super`，再保存自定义描述符。
-4. 用 `updateSubviewsData` 更新内容，`layoutContentSubviews` 计算布局。
-5. `convertContentToImage` 可将静态内容合成为图片；GIF 等动态内容可保留自己的子视图，并相应重写 `removeSubViewsAndSublayers`。
-6. 需要自定义运动时重写 `addBarrageAnimationWithDelegate:`，正确设置动画代理和动画引用；在 `prepareForReuse` 中调用 `super` 并清理自定义状态。
+GIF 是 Demo 扩展，不属于核心库。加入 `DemoCells.swift`、YYKit 与资源后，用 `OCBarrageGifDescriptor.image` 传入缓存的 `YYImage`，设置 `barrageCellClass = OCBarrageGifCell.self` 后发送。每条弹幕使用独立 `YYAnimatedImageView`；图片资源可以共享。manager 暂停只冻结位移，GIF 内部换帧由自定义 cell 管理。
 
-示例见 [`OtherDescriptorAndCells`](OCBarrage/OtherDescriptorAndCells)。
+1. 继承 `OCBarrageDescriptor` 或 `OCBarrageTextDescriptor` 增加数据，必要时实现 `public required init()`。
+2. 继承 `OCBarrageCell` 或 `OCBarrageTextCell`，以 `barrageDescriptor as? CustomDescriptor` 读取数据。
+3. 重写 `updateSubviewsData()`、`layoutContentSubviews()`、`convertContentToImage()`；动态视图可跳过栅格化并保留子视图。
+4. 重写 `addBarrageAnimation(delegate:)` 实现自定义运动，设置动画代理并以 `kBarrageAnimation` 为 key 添加动画。
+5. 重写 `prepareForReuse()` 时调用 `super`，释放自定义内容与回调。
+
+核心可扩展类和生命周期方法为 `open`，动态 cell 构造使用 `OCBarrageCell.Type` 和 `required init()`；不能传入任意类。详见 [Swift 迁移说明](docs/Swift迁移.md)。
 
 <details>
 <summary>历史效果图：横幅、图文与礼物</summary>
@@ -233,13 +198,13 @@ if (self.barrageGIF) {
 - **标签复用**：文字 cell 保留离屏 UILabel，复用时重挂并重置阴影；布局使用已经设置的富文本，减少重复创建和复制。
 - **错峰准备**：综合模式每次最多准备一种效果，将原先同一回调内的集中工作分散执行。
 
-在同一模拟器、Debug 配置下，固定执行 30 轮“GIF＋图文准备”，每轮停止再开始，包含首次资源加载：
+迁移前 Objective-C 基线在同一模拟器、Debug 配置下，固定执行 30 轮“GIF＋图文准备”，每轮停止再开始，包含首次资源加载：
 
 | 指标 | 优化前 | 优化后 |
 | --- | ---: | ---: |
 | 30 轮准备总耗时 | 234.723 ms | 21.094 ms |
 
-以上是本次测试记录的准备代码墙钟耗时，不是平均帧率或掉帧率；随机颜色、系统负载和调度均会影响结果。首次加载仍是同步执行，GIF 后续帧仍按需解码，不能据此宣称所有场景无卡顿。
+以上是迁移前测试记录的准备代码墙钟耗时，不是平均帧率或掉帧率；随机颜色、系统负载和调度均会影响结果。首次加载仍是同步执行，GIF 后续帧仍按需解码，不能据此宣称所有场景无卡顿。
 
 ## 修复与验证范围
 
@@ -250,7 +215,7 @@ if (self.barrageGIF) {
 - 标准水平线性动画支持错峰和同类相交轨道的速度约束；暂停／继续同步调度时间，复用重置图层时钟。
 - 修复 Demo 内置 YYKit 的比较表达式和默认竖排容器布局，安全处理空文本及无效栅格化尺寸。
 
-2026-11-14 在上述环境中执行 **25 项单元测试和 1 项 UI 测试，全部通过**。覆盖轨道位置与快慢速度、逐条发送、生命周期、复用、点击重入、默认竖排，Demo 的真实触控操作与模式切换、标签及 GIF 资源复用、综合模式单次发送数量；另包含固定负载耗时记录。
+迁移前基线已通过 25 项单元测试和 1 项 UI 测试；Swift 迁移已通过 **27 项单元测试和 1 项 UI 测试**，逐项保留原用例，并补充释放与自然动画完成测试；独立 SPM 调用方构建也已通过。迁移验证结果见 [Swift 迁移说明](docs/Swift迁移.md)。覆盖轨道位置与快慢速度、逐条发送、生命周期、复用、点击重入、默认竖排，Demo 的真实触控操作与模式切换、标签及 GIF 资源复用、综合模式单次发送数量；另包含固定负载耗时记录。
 
 边界：
 

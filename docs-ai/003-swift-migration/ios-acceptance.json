@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "AC3-original-tests",
+      "required": true,
+      "tests": [
+        "OCBarrageTests/testCleanupIsScheduledAgainAfterStopAndRestart()",
+        "OCBarrageTests/testReusedCellAppliesZeroAndNilBorderAttributes()",
+        "OCBarrageTests/testReuseMatchesExactClassAndRemovesOnlySelectedCell()",
+        "OCBarrageTests/testTouchCallbacksCanPauseAndStopSynchronously()",
+        "OCBarrageTests/testTouchMissAndFirstHitPreserveDispatchBehavior()",
+        "OCBarrageTests/testTextHitTestingKeepsComposedCharacterBoundaries()",
+        "OCBarrageTests/testTrackFramesUseBoundsAndRejectUnusableGeometry()",
+        "OCBarrageTests/testTracksIgnoreStaleIndicesAfterResize()",
+        "OCBarrageTests/testTracksUseFreeRowsDespiteOtherClassRecords()",
+        "OCBarrageTests/testBurstIsStaggeredAndFastFollowingCellDoesNotCatchSlowCell()",
+        "OCBarrageTests/testRangeAndHeightChangesKeepOverlappingTrackOccupancy()",
+        "OCBarrageTests/testPauseMovesTrackDeadlinesAndReuseResetsLayerClock()",
+        "OCBarrageTests/testCustomAnimationTimingRemainsUntouched()",
+        "OCBarrageTests/testDefaultVerticalLayoutMatchesExplicitInsetPath()",
+        "OCBarrageTests/testTooNarrowVerticalContainerHasNoVisibleText()",
+        "OCBarrageTests/testNonUnitAncestorClockDoesNotEnterTrackScheduler()",
+        "OCBarrageTests/testRealEmptyTextAndInvalidRasterSizesAreRejected()",
+        "OCBarrageTests/testVisibleTracksStayStaggeredAcrossPauseAndResume()",
+        "OCBarrageTests/testDemoStartPauseRestartAndStopAreConsistent()",
+        "OCBarrageTests/testDemoButtonsStayInsideSafeAreaAndModesCancelPlayback()",
+        "OCBarrageTests/testDemoFeedsOneLaneAtATimeWithAlternatingSpeeds()",
+        "OCBarrageTests/testTextCellReusesLabelAndResetsShadow()",
+        "OCBarrageTests/testDemoReusesDecodedGif()",
+        "OCBarrageTests/testPerformanceRepeatedDemoPreparation()",
+        "OCBarrageTests/testMixedDemoPreparesAtMostOneCellPerTick()"
+      ]
+    },
+    {
+      "id": "AC4-lifetime",
+      "required": true,
+      "tests": [
+        "OCBarrageTests/testManagerReleaseStopsExternallyRetainedRenderer()",
+        "OCBarrageTests/testAnimationCompletionRecyclesAndRendererCanDeallocate()"
+      ]
+    },
+    {
+      "id": "AC5-ui-controls",
+      "required": true,
+      "tests": [
+        "OCBarrageUITests/testDemoPlaybackControlsAndModeSwitching()"
+      ]
+    }
+  ]
+}
