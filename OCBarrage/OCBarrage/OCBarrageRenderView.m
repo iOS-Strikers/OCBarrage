@@ -6,10 +6,39 @@
 //  Copyright © 2017年 LFC. All rights reserved.
 //
 
-#define kNextAvailableTimeKey(identifier, index) [NSString stringWithFormat:@"%@_%d", identifier, index]
-
 #import "OCBarrageRenderView.h"
 #import "OCBarrageTrackInfo.h"
+
+// 同一垂直带与入口／出口几何只保留最后一条预约；不同几何的活动记录并存。
+@interface OCBarrageScheduledTrackInfo : OCBarrageTrackInfo
+@property (nonatomic, assign) Class cellClass;
+@property (nonatomic, assign) CGFloat originY;
+@property (nonatomic, assign) CGFloat tailStartX;
+@property (nonatomic, assign) CGFloat tailEndX;
+@property (nonatomic, assign) CGFloat speed;
+@property (nonatomic, assign) CFTimeInterval startTime;
+@property (nonatomic, assign) CFTimeInterval endTime;
+@end
+@implementation OCBarrageScheduledTrackInfo
+@end
+
+@interface OCBarrageRenderView ()
+@property (nonatomic, assign) CFTimeInterval trackPauseTime;
+@end
+
+static BOOL OCBarrageTimingIsLinear(CAMediaTimingFunction *timing) {
+    if (!timing) return YES;
+    float first[2], second[2];
+    [timing getControlPointAtIndex:1 values:first];
+    [timing getControlPointAtIndex:2 values:second];
+    return first[0] == first[1] && second[0] == second[1];
+}
+
+static BOOL OCBarrageTracksOverlap(OCBarrageScheduledTrackInfo *info, OCBarrageCell *cell, CGFloat originY) {
+    return info.cellClass == [cell class] &&
+        info.originY < originY + CGRectGetHeight(cell.bounds) &&
+        originY < info.originY + info.trackHeight;
+}
 
 @implementation OCBarrageRenderView
 
@@ -43,7 +72,7 @@
     
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
     for (OCBarrageCell *cell in self.idleCells) {
-        if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass(barrageCellClass)]) {
+        if ([cell class] == barrageCellClass) {
             barrageCell = cell;
             break;
         }
@@ -105,11 +134,12 @@
             break;
     }
     
+    self.trackPauseTime = CACurrentMediaTime();
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     NSEnumerator *enumerator = [self.animatingCells reverseObjectEnumerator];
     OCBarrageCell *cell = nil;
     while (cell = [enumerator nextObject]){
-        CFTimeInterval pausedTime = [cell.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+        CFTimeInterval pausedTime = [cell.layer convertTime:self.trackPauseTime fromLayer:nil];
         cell.layer.speed = 0.0;
         cell.layer.timeOffset = pausedTime;
     }
@@ -132,6 +162,8 @@
             break;
     }
     
+    CFTimeInterval now = CACurrentMediaTime();
+    CFTimeInterval pauseDuration = MAX(0.0, now - self.trackPauseTime);
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     NSEnumerator *enumerator = [self.animatingCells reverseObjectEnumerator];
     OCBarrageCell *cell = nil;
@@ -140,10 +172,20 @@
         cell.layer.speed = 1.0;
         cell.layer.timeOffset = 0.0;
         cell.layer.beginTime = 0.0;
-        CFTimeInterval timeSincePause = [cell.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        CFTimeInterval timeSincePause = [cell.layer convertTime:now fromLayer:nil] - pausedTime;
         cell.layer.beginTime = timeSincePause;
     }
     dispatch_semaphore_signal(_animatingCellsLock);
+    dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
+    for (OCBarrageScheduledTrackInfo *info in _trackNextAvailableTime.allValues) {
+        if (info.endTime > self.trackPauseTime) {
+            info.startTime += pauseDuration;
+            info.endTime += pauseDuration;
+            info.nextAvailableTime += pauseDuration;
+        }
+    }
+    dispatch_semaphore_signal(_trackInfoLock);
+    self.trackPauseTime = 0;
 }
 
 - (void)stop {
@@ -164,19 +206,22 @@
     
     if (_autoClear) {
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearIdleCells) object:nil];
+        _autoClear = NO;
     }
     
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     NSEnumerator *animatingEnumerator = [self.animatingCells reverseObjectEnumerator];
     OCBarrageCell *animatingCell = nil;
     while (animatingCell = [animatingEnumerator nextObject]){
-        CFTimeInterval pausedTime = [animatingCell.layer convertTime:CACurrentMediaTime() fromLayer:nil];
-        animatingCell.layer.speed = 0.0;
-        animatingCell.layer.timeOffset = pausedTime;
         [animatingCell.layer removeAllAnimations];
+        animatingCell.layer.speed = 1.0;
+        animatingCell.layer.timeOffset = 0.0;
+        animatingCell.layer.beginTime = 0.0;
         [animatingCell removeFromSuperview];
     }
     [self.animatingCells removeAllObjects];
+    _lastestCell = nil;
+    self.trackPauseTime = 0;
     dispatch_semaphore_signal(_animatingCellsLock);
     
     dispatch_semaphore_wait(_idleCellsLock, DISPATCH_TIME_FOREVER);
@@ -219,12 +264,17 @@
     
     dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     _lastestCell = [self.animatingCells lastObject];
+    dispatch_semaphore_signal(_animatingCellsLock);
+    CGRect cellFrame = [self calculationBarrageCellFrame:barrageCell];
+    if (CGRectIsNull(cellFrame)) {
+        return;
+    }
+    dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
     [self.animatingCells addObject:barrageCell];
     barrageCell.idle = NO;
     dispatch_semaphore_signal(_animatingCellsLock);
     
     [self addBarrageCell:barrageCell WithPositionPriority:barrageCell.barrageDescriptor.positionPriority];
-    CGRect cellFrame = [self calculationBarrageCellFrame:barrageCell];
     barrageCell.frame = cellFrame;
     [barrageCell addBarrageAnimationWithDelegate:self];
     [self recordTrackInfoWithBarrageCell:barrageCell];
@@ -254,127 +304,65 @@
 }
 
 - (CGRect)calculationBarrageCellFrame:(OCBarrageCell *)barrageCell {
-    CGRect cellFrame = barrageCell.bounds;
-    cellFrame.origin.x = CGRectGetMaxX(self.frame);
-    
-    if (![[NSValue valueWithRange:barrageCell.barrageDescriptor.renderRange] isEqualToValue:[NSValue valueWithRange:NSMakeRange(0, 0)]]) {
-        CGFloat cellHeight = CGRectGetHeight(barrageCell.bounds);
-        CGFloat minOriginY = barrageCell.barrageDescriptor.renderRange.location;
-        CGFloat maxOriginY = barrageCell.barrageDescriptor.renderRange.length;
-        if (maxOriginY > CGRectGetHeight(self.bounds)) {
-            maxOriginY = CGRectGetHeight(self.bounds);
-        }
-        if (minOriginY < 0) {
-            minOriginY = 0;
-        }
-        CGFloat renderHeight = maxOriginY - minOriginY;
-        if (renderHeight < 0) {
-            renderHeight = cellHeight;
-        }
+    barrageCell.trackIndex = -1;
+    CGFloat height = CGRectGetHeight(barrageCell.bounds);
+    CGFloat width = CGRectGetWidth(barrageCell.bounds);
+    CGRect bounds = self.bounds;
+    if (!isfinite(height) || !isfinite(width) || height <= 0 || width <= 0 ||
+        !isfinite(bounds.origin.x) || !isfinite(bounds.origin.y) ||
+        !isfinite(bounds.size.width) || !isfinite(bounds.size.height) ||
+        bounds.size.width <= 0 || bounds.size.height <= 0) {
+        return CGRectNull;
+    }
 
-        int trackCount = floorf(renderHeight/cellHeight);
-        int trackIndex = arc4random_uniform(trackCount);//用户改变行高(比如弹幕文字大小不会引起显示bug, 因为虽然是同一个类, 但是trackCount变小了, 所以不会出现trackIndex*cellHeight超出屏幕边界的情况)
-        
-        dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
-        OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), trackIndex)];
-        if (trackInfo && trackInfo.nextAvailableTime > CACurrentMediaTime()) {//当前行暂不可用
-            
-            NSMutableArray *availableTrackInfos = [NSMutableArray array];
-            for (OCBarrageTrackInfo *info in _trackNextAvailableTime.allValues) {
-                if (CACurrentMediaTime() > info.nextAvailableTime && [info.trackIdentifier containsString:NSStringFromClass([barrageCell class])]) {//只在同类弹幕中判断是否有可用的轨道
-                    [availableTrackInfos addObject:info];
-                }
-            }
-            if (availableTrackInfos.count > 0) {
-                OCBarrageTrackInfo *randomInfo = [availableTrackInfos objectAtIndex:arc4random_uniform((int)availableTrackInfos.count)];
-                trackIndex = randomInfo.trackIndex;
-            } else {
-                if (_trackNextAvailableTime.count < trackCount) {//刚开始不是每一条轨道都跑过弹幕, 还有空轨道
-                    NSMutableArray *numberArray = [NSMutableArray array];
-                    for (int index = 0; index < trackCount; index++) {
-                        OCBarrageTrackInfo *emptyTrackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), index)];
-                        if (!emptyTrackInfo) {
-                            [numberArray addObject:[NSNumber numberWithInt:index]];
-                        }
-                    }
-                    if (numberArray.count > 0) {
-                        trackIndex = [[numberArray objectAtIndex:arc4random_uniform((int)numberArray.count)] intValue];
-                    }
-                }
-                //真的是没有可用的轨道了
+    CGFloat minY = CGRectGetMinY(bounds), maxY = CGRectGetMaxY(bounds);
+    NSRange range = barrageCell.barrageDescriptor.renderRange;
+    BOOL hasRange = !NSEqualRanges(range, NSMakeRange(0, 0));
+    if (hasRange) {
+        // 历史 API 的 length 表示上界，而不是 NSRange 的区间长度。
+        minY = MAX(minY, (CGFloat)range.location);
+        maxY = MIN(maxY, (CGFloat)range.length);
+    }
+    CGFloat availableHeight = maxY - minY;
+    if (availableHeight < height) return CGRectNull;
+    CGRect frame = CGRectMake(CGRectGetMaxX(bounds), minY, width, height);
+    if (!hasRange && self.renderPositionStyle == OCBarrageRenderPositionRandom) {
+        frame.origin.y += (availableHeight - height) * ((double)arc4random() / UINT32_MAX);
+        return frame;
+    }
+    if (!hasRange && self.renderPositionStyle == OCBarrageRenderPositionIncrease) {
+        CGFloat nextY = _lastestCell ? MAX(minY, CGRectGetMaxY(_lastestCell.frame)) : minY;
+        frame.origin.y = nextY + height <= maxY ? nextY : minY;
+        return frame;
+    }
+
+    double count = floor(availableHeight / height);
+    if (!isfinite(count) || count < 1 || count > INT_MAX) return CGRectNull;
+    int trackCount = (int)count, selected = 0;
+    uint32_t ties = 0;
+    CFTimeInterval now = CACurrentMediaTime(), earliest = DBL_MAX;
+    dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
+    NSArray *infos = _trackNextAvailableTime.allValues;
+    for (int index = 0; index < trackCount; index++) {
+        CGFloat y = minY + index * height;
+        CFTimeInterval available = now;
+        for (OCBarrageScheduledTrackInfo *info in infos) {
+            if (info.endTime > now && OCBarrageTracksOverlap(info, barrageCell, y)) {
+                available = MAX(available, info.nextAvailableTime);
             }
         }
-        dispatch_semaphore_signal(_trackInfoLock);
-        
-        barrageCell.trackIndex = trackIndex;
-        cellFrame.origin.y = trackIndex*cellHeight+minOriginY;
-    } else {
-        switch (self.renderPositionStyle) {
-            case OCBarrageRenderPositionRandom: {
-                CGFloat maxY = CGRectGetHeight(self.bounds) - CGRectGetHeight(cellFrame);
-                int originY = floorl(maxY);
-                cellFrame.origin.y = arc4random_uniform(originY);
-            }
-                break;
-            case OCBarrageRenderPositionIncrease: {
-                if (_lastestCell) {
-                    CGRect lastestFrame = _lastestCell.frame;
-                    cellFrame.origin.y = CGRectGetMaxY(lastestFrame);
-                } else {
-                    cellFrame.origin.y = 0.0;
-                }
-            }
-                break;
-            default: {
-                CGFloat renderViewHeight = CGRectGetHeight(self.bounds);
-                CGFloat cellHeight = CGRectGetHeight(barrageCell.bounds);
-                int trackCount = floorf(renderViewHeight/cellHeight);
-                int trackIndex = arc4random_uniform(trackCount);//用户改变行高(比如弹幕文字大小不会引起显示bug, 因为虽然是同一个类, 但是trackCount变小了, 所以不会出现trackIndex*cellHeight超出屏幕边界的情况)
-                
-                dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
-                OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), trackIndex)];
-                if (trackInfo && trackInfo.nextAvailableTime > CACurrentMediaTime()) {//当前行暂不可用
-                    NSMutableArray *availableTrackInfos = [NSMutableArray array];
-                    for (OCBarrageTrackInfo *info in _trackNextAvailableTime.allValues) {
-                        if (CACurrentMediaTime() > info.nextAvailableTime && [info.trackIdentifier containsString:NSStringFromClass([barrageCell class])]) {//只在同类弹幕中判断是否有可用的轨道
-                            [availableTrackInfos addObject:info];
-                        }
-                    }
-                    if (availableTrackInfos.count > 0) {
-                        OCBarrageTrackInfo *randomInfo = [availableTrackInfos objectAtIndex:arc4random_uniform((int)availableTrackInfos.count)];
-                        trackIndex = randomInfo.trackIndex;
-                    } else {
-                        if (_trackNextAvailableTime.count < trackCount) {//刚开始不是每一条轨道都跑过弹幕, 还有空轨道
-                            NSMutableArray *numberArray = [NSMutableArray array];
-                            for (int index = 0; index < trackCount; index++) {
-                                OCBarrageTrackInfo *emptyTrackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), index)];
-                                if (!emptyTrackInfo) {
-                                    [numberArray addObject:[NSNumber numberWithInt:index]];
-                                }
-                            }
-                            if (numberArray.count > 0) {
-                                trackIndex = [[numberArray objectAtIndex:arc4random_uniform((int)numberArray.count)] intValue];
-                            }
-                        }
-                        //真的是没有可用的轨道了
-                    }
-                }
-                dispatch_semaphore_signal(_trackInfoLock);
-                
-                barrageCell.trackIndex = trackIndex;
-                cellFrame.origin.y = trackIndex*cellHeight;
-            }
-                break;
+        if (available < earliest) {
+            earliest = available;
+            selected = index;
+            ties = 1;
+        } else if (available == earliest && arc4random_uniform(++ties) == 0) {
+            selected = index;
         }
     }
-    
-    if (CGRectGetMaxY(cellFrame) > CGRectGetHeight(self.bounds)) {
-        cellFrame.origin.y = 0.0; //超过底部, 回到顶部
-    } else if (cellFrame.origin.y  < 0) {
-        cellFrame.origin.y = 0.0;
-    }
-    
-    return cellFrame;
+    dispatch_semaphore_signal(_trackInfoLock);
+    barrageCell.trackIndex = selected;
+    frame.origin.y = minY + selected * height;
+    return frame;
 }
 
 - (void)clearIdleCells {
@@ -397,79 +385,93 @@
     dispatch_semaphore_signal(_idleCellsLock);
 }
 
-- (void)recordTrackInfoWithBarrageCell:(OCBarrageCell *)barrageCell {
-    NSString *nextAvalibleTimeKey = kNextAvailableTimeKey(NSStringFromClass([barrageCell class]), barrageCell.trackIndex);
-    CFTimeInterval duration = barrageCell.barrageAnimation.duration;
-    NSValue *fromValue = nil;
-    NSValue *toValue = nil;
-    if ([barrageCell.barrageAnimation isKindOfClass:[CABasicAnimation class]]) {
-        fromValue = [(CABasicAnimation *)barrageCell.barrageAnimation fromValue];
-        toValue = [(CABasicAnimation *)barrageCell.barrageAnimation toValue];
-    } else if ([barrageCell.barrageAnimation isKindOfClass:[CAKeyframeAnimation class]]) {
-        fromValue = [[(CAKeyframeAnimation *)barrageCell.barrageAnimation values] firstObject];
-        toValue = [[(CAKeyframeAnimation *)barrageCell.barrageAnimation values] lastObject];
+- (void)recordTrackInfoWithBarrageCell:(OCBarrageCell *)cell {
+    CAAnimation *animation = [cell.barrageAnimation copy];
+    if (!CGPointEqualToPoint(cell.layer.anchorPoint, CGPointMake(0.5, 0.5)) ||
+        !CATransform3DIsIdentity(cell.layer.transform)) return;
+    // 轨道期限以全局秒为单位；自定义祖先速率保留其原始动画时序。
+    for (CALayer *layer = cell.layer; layer; layer = layer.superlayer) {
+        if (layer.speed != 1) return;
+    }
+    if (cell.trackIndex < 0 || ![animation isKindOfClass:[CAPropertyAnimation class]] ||
+        !isfinite(animation.duration) || animation.duration <= 0 ||
+        animation.beginTime != 0 || animation.timeOffset != 0 || animation.speed != 1 ||
+        animation.autoreverses || animation.repeatDuration != 0 ||
+        (animation.repeatCount != 0 && animation.repeatCount != 1) ||
+        !OCBarrageTimingIsLinear(animation.timingFunction) ||
+        cell.layer.speed != 1 || cell.layer.timeOffset != 0) return;
+    CAPropertyAnimation *propertyAnimation = (CAPropertyAnimation *)animation;
+    if (![propertyAnimation.keyPath isEqualToString:@"position"] ||
+        propertyAnimation.additive || propertyAnimation.cumulative || propertyAnimation.valueFunction) return;
+
+    NSValue *fromValue, *toValue;
+    if ([animation isKindOfClass:[CABasicAnimation class]]) {
+        CABasicAnimation *basic = (CABasicAnimation *)animation;
+        if (basic.byValue) return;
+        fromValue = basic.fromValue;
+        toValue = basic.toValue;
+    } else if ([animation isKindOfClass:[CAKeyframeAnimation class]]) {
+        CAKeyframeAnimation *keyframe = (CAKeyframeAnimation *)animation;
+        if (keyframe.path || keyframe.values.count != 2 || keyframe.rotationMode ||
+            ![keyframe.calculationMode isEqualToString:kCAAnimationLinear]) return;
+        if (keyframe.keyTimes && (keyframe.keyTimes.count != 2 ||
+            [keyframe.keyTimes.firstObject doubleValue] != 0 || [keyframe.keyTimes.lastObject doubleValue] != 1)) return;
+        if (keyframe.timingFunctions.count > 1 || !OCBarrageTimingIsLinear(keyframe.timingFunctions.firstObject)) return;
+        fromValue = keyframe.values.firstObject;
+        toValue = keyframe.values.lastObject;
     } else {
-        
-    }
-    const char *fromeValueType = [fromValue objCType];
-    const char *toValueType = [toValue objCType];
-    if (!fromeValueType || !toValueType) {
         return;
     }
-    NSString *fromeValueTypeString = [NSString stringWithCString:fromeValueType encoding:NSUTF8StringEncoding];
-    NSString *toValueTypeString = [NSString stringWithCString:toValueType encoding:NSUTF8StringEncoding];
-    if (![fromeValueTypeString isEqualToString:toValueTypeString]) {
-        return;
-    }
-    if ([fromeValueTypeString containsString:@"CGPoint"]) {
-        CGPoint fromPoint = [fromValue CGPointValue];
-        CGPoint toPoint = [toValue CGPointValue];
-        
-        dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
-        OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:nextAvalibleTimeKey];
-        if (!trackInfo) {
-            trackInfo = [[OCBarrageTrackInfo alloc] init];
-            trackInfo.trackIdentifier = nextAvalibleTimeKey;
-            trackInfo.trackIndex = barrageCell.trackIndex;
+    if (![fromValue isKindOfClass:[NSValue class]] || ![toValue isKindOfClass:[NSValue class]] ||
+        strcmp(fromValue.objCType, @encode(CGPoint)) || strcmp(toValue.objCType, @encode(CGPoint))) return;
+    CGPoint from = fromValue.CGPointValue, to = toValue.CGPointValue;
+    CGFloat width = CGRectGetWidth(cell.bounds);
+    CGFloat entryX = from.x - width / 2, exitX = to.x + width / 2;
+    if (!isfinite(from.x) || !isfinite(from.y) || !isfinite(to.x) || !isfinite(to.y) ||
+        from.x <= to.x || fabs(from.y - to.y) > 0.001 ||
+        fabs(from.y - cell.layer.position.y) > 0.001 ||
+        fabs(entryX - CGRectGetMaxX(self.bounds)) > 0.001 ||
+        fabs(exitX - CGRectGetMinX(self.bounds)) > 0.001) return;
+    CGFloat speed = (from.x - to.x) / animation.duration;
+    if (!isfinite(speed) || speed <= 0) return;
+
+    CGFloat originY = CGRectGetMinY(cell.frame), height = CGRectGetHeight(cell.bounds);
+    CFTimeInterval now = CACurrentMediaTime(), start = now;
+    dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
+    for (NSString *key in _trackNextAvailableTime.allKeys) {
+        OCBarrageScheduledTrackInfo *info = _trackNextAvailableTime[key];
+        if (info.endTime <= now) {
+            [_trackNextAvailableTime removeObjectForKey:key];
+            continue;
         }
-        trackInfo.barrageCount++;
-        
-        trackInfo.nextAvailableTime = CGRectGetWidth(barrageCell.bounds);
-        CGFloat distanceX = fabs(toPoint.x - fromPoint.x);
-        CGFloat distanceY = fabs(toPoint.y - fromPoint.y);
-        CGFloat distance = MAX(distanceX, distanceY);
-        CGFloat speed = distance/duration;
-        if (distanceX == distance) {
-            CFTimeInterval time = CGRectGetWidth(barrageCell.bounds)/speed;
-            trackInfo.nextAvailableTime = CACurrentMediaTime() + time + 0.1;//多加一点时间
-            [_trackNextAvailableTime setValue:trackInfo forKey:nextAvalibleTimeKey];
-        } else if (distanceY == distance) {
-            //            CFTimeInterval time = CGRectGetHeight(barrageCell.bounds)/speed;
-            
-        } else {
-            
-        }
-        dispatch_semaphore_signal(_trackInfoLock);
-        return;
-    } else if ([fromeValueTypeString containsString:@"CGVector"]) {
-        
-        return;
-    } else if ([fromeValueTypeString containsString:@"CGSize"]) {
-        
-        return;
-    } else if ([fromeValueTypeString containsString:@"CGRect"]) {
-        
-        return;
-    } else if ([fromeValueTypeString containsString:@"CGAffineTransform"]) {
-        
-        return;
-    } else if ([fromeValueTypeString containsString:@"UIEdgeInsets"]) {
-        
-        return;
-    } else if ([fromeValueTypeString containsString:@"UIOffset"]) {
-        
-        return;
+        if (!OCBarrageTracksOverlap(info, cell, originY)) continue;
+        // 同时约束入口间距和前车离屏时的间距，避免快弹幕追上慢弹幕。
+        CFTimeInterval clearsEntry = info.startTime + (info.tailStartX - entryX) / info.speed;
+        CFTimeInterval avoidsCatch = info.endTime - (entryX - info.tailEndX) / speed;
+        CFTimeInterval available = MIN(info.endTime, MAX(info.startTime, MAX(clearsEntry, avoidsCatch))) + 0.1;
+        start = MAX(start, available);
     }
+    // 分档打乱行顺序，再加小抖动；同批相邻轨道不会整列齐发。
+    start += 0.05 + ((cell.trackIndex % 8) * 5 % 8) * 0.08 + arc4random_uniform(20001) / 1000000.0;
+    NSString *identifier = [NSString stringWithFormat:@"%@_%.17g_%.17g_%.17g_%.17g",
+                            NSStringFromClass([cell class]), (double)originY, (double)height, (double)entryX, (double)exitX];
+    OCBarrageScheduledTrackInfo *info = [[OCBarrageScheduledTrackInfo alloc] init];
+    info.cellClass = [cell class];
+    info.trackIdentifier = identifier;
+    info.trackIndex = cell.trackIndex;
+    info.originY = originY;
+    info.trackHeight = height;
+    info.tailStartX = from.x + width / 2;
+    info.tailEndX = exitX;
+    info.speed = speed;
+    info.startTime = start;
+    info.endTime = start + animation.duration;
+    info.nextAvailableTime = start + width / speed + 0.1;
+    _trackNextAvailableTime[identifier] = info;
+    dispatch_semaphore_signal(_trackInfoLock);
+
+    animation.beginTime = [cell.layer convertTime:start fromLayer:nil];
+    [cell.layer addAnimation:animation forKey:kBarrageAnimation];
 }
 
 
@@ -499,13 +501,6 @@
         return;
     }
     
-    dispatch_semaphore_wait(_trackInfoLock, DISPATCH_TIME_FOREVER);
-    OCBarrageTrackInfo *trackInfo = [_trackNextAvailableTime objectForKey:kNextAvailableTimeKey(NSStringFromClass([animationedCell class]), animationedCell.trackIndex)];
-    if (trackInfo) {
-        trackInfo.barrageCount--;
-    }
-    dispatch_semaphore_signal(_trackInfoLock);
-    
     [animationedCell removeFromSuperview];
     [animationedCell prepareForReuse];
     
@@ -524,22 +519,26 @@
     if (event.type == UIEventTypeTouches) {
         UITouch *touch = [touches.allObjects firstObject];
         CGPoint touchPoint = [touch locationInView:self];
-        
+        OCBarrageCell *touchedCell = nil;
+
         dispatch_semaphore_wait(_animatingCellsLock, DISPATCH_TIME_FOREVER);
         NSInteger count = self.animatingCells.count;
-        for (int i = 0; i < count; i++) {
+        for (NSInteger i = 0; i < count; i++) {
             OCBarrageCell *barrageCell = [self.animatingCells objectAtIndex:i];
             if ([barrageCell.layer.presentationLayer hitTest:touchPoint]) {
-                if (barrageCell.barrageDescriptor.touchAction) {
-                    barrageCell.barrageDescriptor.touchAction(barrageCell.barrageDescriptor);
-                }
-                if (barrageCell.barrageDescriptor.cellTouchedAction) {
-                    barrageCell.barrageDescriptor.cellTouchedAction(barrageCell.barrageDescriptor, barrageCell);
-                }
+                touchedCell = barrageCell;
                 break;
             }
         }
         dispatch_semaphore_signal(_animatingCellsLock);
+
+        // 回调可能调用 pause、stop 或发送新弹幕，必须在释放活动列表锁后执行。
+        if (touchedCell.barrageDescriptor.touchAction) {
+            touchedCell.barrageDescriptor.touchAction(touchedCell.barrageDescriptor);
+        }
+        if (touchedCell.barrageDescriptor.cellTouchedAction) {
+            touchedCell.barrageDescriptor.cellTouchedAction(touchedCell.barrageDescriptor, touchedCell);
+        }
     }
 }
 

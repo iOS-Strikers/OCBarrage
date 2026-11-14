@@ -436,6 +436,8 @@ dispatch_semaphore_signal(_lock);
             constraintRectBeforeExtended = UIEdgeInsetsInsetRect(rect, container.insets);
             constraintRectBeforeExtended = CGRectStandardize(constraintRectBeforeExtended);
             if (container.isVerticalForm) {
+                // Vertical lines progress right to left: keep the original right edge.
+                rect.origin.x = CGRectGetMaxX(rect) - YYTextContainerMaxSize.width;
                 rect.size.width = YYTextContainerMaxSize.width;
             } else {
                 rect.size.height = YYTextContainerMaxSize.height;
@@ -535,9 +537,7 @@ dispatch_semaphore_signal(_lock);
         
         if (constraintSizeIsExtended) {
             if (isVerticalForm) {
-                if (rect.origin.x + rect.size.width >
-                    constraintRectBeforeExtended.origin.x +
-                    constraintRectBeforeExtended.size.width) break;
+                if (CGRectGetMinX(rect) < CGRectGetMinX(constraintRectBeforeExtended)) break;
             } else {
                 if (rect.origin.y + rect.size.height >
                     constraintRectBeforeExtended.origin.y +
@@ -677,6 +677,9 @@ dispatch_semaphore_signal(_lock);
     }
     
     visibleRange = YYNSRangeFromCFRange(CTFrameGetVisibleStringRange(ctFrame));
+    if (lines.count == 0) {
+        visibleRange = NSMakeRange(range.location, 0);
+    }
     if (needTruncation) {
         YYTextLine *lastLine = lines.lastObject;
         NSRange lastRange = lastLine.range;
@@ -1504,17 +1507,17 @@ fail:
     
     [self _insideComposedCharacterSequences:line position:position block: ^(CGFloat left, CGFloat right, NSUInteger prev, NSUInteger next) {
         if (isVertical) {
-            position = fabs(left - point.y) < fabs(right - point.y) < (right ? prev : next);
+            position = fabs(left - point.y) < fabs(right - point.y) ? prev : next;
         } else {
-            position = fabs(left - point.x) < fabs(right - point.x) < (right ? prev : next);
+            position = fabs(left - point.x) < fabs(right - point.x) ? prev : next;
         }
     }];
     
     [self _insideEmoji:line position:position block: ^(CGFloat left, CGFloat right, NSUInteger prev, NSUInteger next) {
         if (isVertical) {
-            position = fabs(left - point.y) < fabs(right - point.y) < (right ? prev : next);
+            position = fabs(left - point.y) < fabs(right - point.y) ? prev : next;
         } else {
-            position = fabs(left - point.x) < fabs(right - point.x) < (right ? prev : next);
+            position = fabs(left - point.x) < fabs(right - point.x) ? prev : next;
         }
     }];
     

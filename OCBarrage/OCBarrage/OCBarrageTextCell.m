@@ -39,7 +39,12 @@
 }
 
 - (void)layoutContentSubviews {
-    CGRect textFrame = [self.textDescriptor.attributedText.string boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[self.textDescriptor.attributedText attributesAtIndex:0 effectiveRange:NULL] context:nil];
+    NSAttributedString *text = self.textDescriptor.attributedText;
+    if (text.length == 0) {
+        self.textLabel.frame = CGRectZero;
+        return;
+    }
+    CGRect textFrame = [text.string boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[text attributesAtIndex:0 effectiveRange:NULL] context:nil];
     self.textLabel.frame = textFrame;
 }
 
@@ -60,7 +65,7 @@
     }
     
     CGPoint startCenter = CGPointMake(CGRectGetMaxX(self.superview.bounds) + CGRectGetWidth(self.bounds)/2, self.center.y);
-    CGPoint endCenter = CGPointMake(-(CGRectGetWidth(self.bounds)/2), self.center.y);
+    CGPoint endCenter = CGPointMake(CGRectGetMinX(self.superview.bounds) - CGRectGetWidth(self.bounds)/2, self.center.y);
     
     CGFloat animationDuration = self.barrageDescriptor.animationDuration;
     if (self.barrageDescriptor.fixedSpeed > 0.0) {//如果是固定速度那就用固定速度

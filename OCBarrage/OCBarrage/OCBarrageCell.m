@@ -21,6 +21,9 @@
 
 - (void)prepareForReuse {
     [self.layer removeAnimationForKey:kBarrageAnimation];
+    self.layer.speed = 1.0;
+    self.layer.timeOffset = 0.0;
+    self.layer.beginTime = 0.0;
     _barrageDescriptor = nil;
     if (!_idle) {
         _idle = YES;
@@ -82,15 +85,10 @@
 }
 
 - (void)addBorderAttributes {
-    if (self.barrageDescriptor.borderColor) {
-        self.layer.borderColor = self.barrageDescriptor.borderColor.CGColor;
-    }
-    if (self.barrageDescriptor.borderWidth > 0) {
-        self.layer.borderWidth = self.barrageDescriptor.borderWidth;
-    }
-    if (self.barrageDescriptor.cornerRadius > 0) {
-        self.layer.cornerRadius = self.barrageDescriptor.cornerRadius;
-    }
+    // 复用时也应用空值和零值，避免上一条弹幕的外观残留。
+    self.layer.borderColor = self.barrageDescriptor.borderColor.CGColor;
+    self.layer.borderWidth = MAX(0.0, self.barrageDescriptor.borderWidth);
+    self.layer.cornerRadius = MAX(0.0, self.barrageDescriptor.cornerRadius);
 }
 
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate {

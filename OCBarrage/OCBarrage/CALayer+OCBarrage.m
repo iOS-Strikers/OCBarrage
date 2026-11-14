@@ -11,6 +11,10 @@
 @implementation CALayer (OCBarrage)
 
 - (UIImage *)convertContentToImageWithSize:(CGSize)contentSize {
+    if (!isfinite(contentSize.width) || !isfinite(contentSize.height) ||
+        contentSize.width <= 0 || contentSize.height <= 0) {
+        return nil;
+    }
     UIGraphicsBeginImageContextWithOptions(contentSize, 0.0, [UIScreen mainScreen].scale);
     //self为需要截屏的UI控件 即通过改变此参数可以截取特定的UI控件
     [self renderInContext:UIGraphicsGetCurrentContext()];
