@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'OCBarrage'
-  # 待发布版本：尚未创建 2.0.0 tag 或发布对应 Pod。
+  # 对应 GitHub 2.0.0 版本；CocoaPods 发布独立进行。
   s.version = '2.0.0'
   s.summary = 'An extensible Swift iOS barrage renderer with reusable cells.'
   s.homepage = 'https://github.com/ios-strikers/OCBarrage'

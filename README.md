@@ -97,7 +97,7 @@ xcodebuild -project OCBarrage.xcodeproj -scheme OCBarrage \
 
 ### Swift Package Manager
 
-在 Xcode 中添加本地克隆目录作为 Local Package，并选择 **OCBarrage** library。`Package.swift` 只包含 `OCBarrage/OCBarrage/*.swift` 核心实现，依赖 UIKit，不含 Demo、YYKit 或图片资源。当前 Swift 迁移版本尚未发布 tag，不能按已发布的 2.0.0 版本解析依赖。
+在 Xcode 中添加仓库 `https://github.com/iOS-Strikers/OCBarrage.git`，选择 **2.0.0** 版本和 **OCBarrage** library；也可以添加本地克隆目录作为 Local Package。`Package.swift` 只包含 `OCBarrage/OCBarrage/*.swift` 核心实现，依赖 UIKit，不含 Demo、YYKit 或图片资源。发布说明见 [GitHub Release](https://github.com/iOS-Strikers/OCBarrage/releases/tag/2.0.0)。
 
 ```swift
 import OCBarrage
@@ -107,13 +107,13 @@ import OCBarrage
 
 ### CocoaPods
 
-仓库 podspec 的 `2.0.0` 是**待发布定义**，尚未创建 tag、发布 Pod 或执行远程 Pod 安装验收。需要当前本地代码可使用：
+GitHub `2.0.0` 与 CocoaPods 发布是独立的：仓库 podspec 版本为 `2.0.0`，但**尚未发布到 CocoaPods**，也未执行远程 Pod 安装验收。需要当前本地代码可使用：
 
 ```ruby
 pod 'OCBarrage', :path => '../OCBarrage'
 ```
 
-已有公开版本仍是 Objective-C API，普通 `pod 'OCBarrage'` 不代表获得本次 Swift 迁移内容。
+CocoaPods 已有公开版本仍是 Objective-C API，普通 `pod 'OCBarrage'` 不代表获得本次 Swift 迁移内容。
 
 ## 快速接入
 

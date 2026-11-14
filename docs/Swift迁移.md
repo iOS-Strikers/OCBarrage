@@ -1,6 +1,6 @@
 # Swift 迁移指南
 
-当前分支为待发布的 Swift 全量迁移，podspec 版本为 2.0.0；没有发布 tag、Release 或 Pod。原 Objective-C 实现可从 Git 历史读取。
+Swift 全量迁移对应 Git 标签和 GitHub Release `2.0.0`，podspec 版本同为 `2.0.0`；尚未发布到 CocoaPods。原 Objective-C 实现可从 Git 历史读取。
 
 ## 支持范围
 
