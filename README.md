@@ -4,7 +4,35 @@
 
 An extensible iOS barrage renderer with reusable cells and custom Core Animation effects. The demo includes staggered lane playback, vertical text layout, and mixed effects.
 
-## Demo：先看效果
+## 效果预览
+
+<table>
+  <tr>
+    <th>轨道错峰 · 奇慢偶快</th>
+    <th>综合演示 · 图文与 GIF</th>
+    <th>竖排文字 · 静态预览</th>
+  </tr>
+  <tr>
+    <td><img src="OCBarrage/Demonstration/demo-lanes.gif" width="260" alt="奇数轨道慢、偶数轨道快，弹幕逐条进入"></td>
+    <td><img src="OCBarrage/Demonstration/demo-mixed.gif" width="260" alt="优化后的文字、图文、GIF 与礼物综合演示"></td>
+    <td><img src="OCBarrage/Demonstration/demo-vertical.png" width="260" alt="从右向左排列的竖排文字与组合字符"></td>
+  </tr>
+</table>
+
+动态预览来自 iPhone 17 Pro / iOS 26.5 模拟器真实录屏，按原速截取 8 秒，压缩为 12 fps GIF；竖排预览来自 UI 验证截图。GIF 用于展示行为，不能代表 App 的实际帧率。轨道动图展示持续播放阶段，点击开始时仍只发送第一条。
+
+## 功能一览
+
+| 能力 | 说明 |
+| --- | --- |
+| 文字弹幕 | 字体、颜色、描边、阴影、固定速度或指定时长 |
+| 轨道调度 | 范围约束、错峰入场、标准水平动画的速度约束 |
+| 图文与 GIF | 通过自定义 cell 接入 YYKit，支持独立动画视图 |
+| 自定义效果 | 渐变背景、走动横幅、礼物停留、竖向移动 |
+| 交互与生命周期 | 点击回调、暂停、继续、停止、cell 复用 |
+| 竖排排版 | Demo 内置 YYKit 示例，从右向左排列文字列 |
+
+## 运行 Demo
 
 打开 `OCBarrage.xcodeproj`，选择 **OCBarrage** scheme 和 iOS 模拟器运行。启动后直接进入“弹幕实验室”，无需先点中转页面。工程内已包含 Demo 使用的 YYKit 源码，不需要先安装 Pods。
 
@@ -30,7 +58,11 @@ An extensible iOS barrage renderer with reusable cells and custom Core Animation
 
 以上是 [Demo 的配置](OCBarrage/ViewController.m)，不是库对所有调用方强制采用的策略。
 
-综合模式将一秒拆成七个发送时隙，每次最多准备一种效果，避免文字、图片和 GIF 同时生成造成瞬时卡顿。Demo 内固定图片和 GIF 解码资源在页面内复用；动画 view 仍各自独立，不预解码全部 GIF 帧。文字 cell 保留离屏 UILabel 复用，上屏继续使用位图。
+### 综合模式与 GIF
+
+综合模式将约一秒拆成七个发送时隙，每次最多准备一种效果，减少同一回调中的集中绘制。普通文字、渐变文字、竖向移动约每秒发送一次；图文、横幅、GIF、礼物分别约每 2、3、4、5 秒发送一次。繁忙时仍受 Demo 的活动 cell 数量限制，并非严格的实时调度。
+
+固定 PNG 和 GIF 资源在页面内复用，每条弹幕持有独立的动画 view。GIF 按需解码动画帧，不预加载全部帧。
 
 ### 播放控制
 
@@ -144,6 +176,33 @@ text.cellTouchedAction = ^(OCBarrageDescriptor *descriptor, OCBarrageCell *cell)
 
 使用 `cellTouchedAction`，旧 `touchAction` 已标记为弃用。回调在释放活动列表锁后同步执行，可以重入暂停或停止；业务回调仍应避免耗时操作。
 
+### 接入 GIF 弹幕
+
+GIF 是 Demo 的扩展示例，不包含在核心 Pod 的源码目录中。先加入 [`OCBarrageGifCell`](OCBarrage/OtherDescriptorAndCells/OCBarrageGifCell.m)、[`OCBarrageGifDescriptor`](OCBarrage/OtherDescriptorAndCells/OCBarrageGifDescriptor.h) 及 YYKit 依赖，并将 GIF 文件添加到应用资源中。
+
+```objc
+#import "OCBarrageGifCell.h"
+
+// 控制器属性，避免每次发送都重新读取文件和初始化解码器。
+@property (nonatomic, strong) YYImage *barrageGIF;
+
+// manager 已启动、renderView 已设置有效尺寸，在主线程发送：
+if (!self.barrageGIF) {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"xuanzhuan" ofType:@"gif"];
+    NSData *data = path ? [NSData dataWithContentsOfFile:path] : nil;
+    if (data) self.barrageGIF = [YYImage imageWithData:data scale:4];
+}
+if (self.barrageGIF) {
+    OCBarrageGifDescriptor *gif = [[OCBarrageGifDescriptor alloc] init];
+    gif.image = self.barrageGIF;
+    gif.animationDuration = 6;
+    gif.barrageCellClass = [OCBarrageGifCell class];
+    [self.barrageManager renderBarrageDescriptor:gif];
+}
+```
+
+示例中的 `scale:4` 控制图片的显示尺寸，不控制播放速度。图片资源可以共享，`YYAnimatedImageView` 应由各 cell 独立持有。manager 的暂停只冻结弹幕位移；若还需要冻结 GIF 换帧，需在自定义 cell 中同步管理内部动画。
+
 ## 自定义弹幕
 
 1. 继承 `OCBarrageDescriptor` 添加数据；文字类可继承 `OCBarrageTextDescriptor`。
@@ -153,11 +212,34 @@ text.cellTouchedAction = ^(OCBarrageDescriptor *descriptor, OCBarrageCell *cell)
 5. `convertContentToImage` 可将静态内容合成为图片；GIF 等动态内容可保留自己的子视图，并相应重写 `removeSubViewsAndSublayers`。
 6. 需要自定义运动时重写 `addBarrageAnimationWithDelegate:`，正确设置动画代理和动画引用；在 `prepareForReuse` 中调用 `super` 并清理自定义状态。
 
-示例见 [`OtherDescriptorAndCells`](OCBarrage/OtherDescriptorAndCells)。历史效果图保存在仓库内，与当前 Demo 布局不同：
+示例见 [`OtherDescriptorAndCells`](OCBarrage/OtherDescriptorAndCells)。
 
-![历史综合弹幕效果](OCBarrage/Demonstration/demonstration.gif)
+<details>
+<summary>历史效果图：横幅、图文与礼物</summary>
 
-[走动横幅](OCBarrage/Demonstration/walkBarrage.gif) · [图文混排](OCBarrage/Demonstration/mixedImageAndText.gif) · [礼物停留](OCBarrage/Demonstration/stopover.gif)
+这些动图展示原始扩展示例，与当前“弹幕实验室”的布局不同。
+
+| 走动横幅 | 图文混排 | 礼物停留 |
+| --- | --- | --- |
+| ![走动横幅](OCBarrage/Demonstration/walkBarrage.gif) | ![图文混排](OCBarrage/Demonstration/mixedImageAndText.gif) | ![礼物停留](OCBarrage/Demonstration/stopover.gif) |
+
+[查看历史综合效果](OCBarrage/Demonstration/demonstration.gif)
+
+</details>
+
+## 性能优化
+
+- **资源复用**：Demo 的固定 PNG/GIF 只在首次使用时读取和初始化，后续发送复用同一份资源。
+- **标签复用**：文字 cell 保留离屏 UILabel，复用时重挂并重置阴影；布局使用已经设置的富文本，减少重复创建和复制。
+- **错峰准备**：综合模式每次最多准备一种效果，将原先同一回调内的集中工作分散执行。
+
+在同一模拟器、Debug 配置下，固定执行 30 轮“GIF＋图文准备”，每轮停止再开始，包含首次资源加载：
+
+| 指标 | 优化前 | 优化后 |
+| --- | ---: | ---: |
+| 30 轮准备总耗时 | 234.723 ms | 21.094 ms |
+
+以上是本次测试记录的准备代码墙钟耗时，不是平均帧率或掉帧率；随机颜色、系统负载和调度均会影响结果。首次加载仍是同步执行，GIF 后续帧仍按需解码，不能据此宣称所有场景无卡顿。
 
 ## 修复与验证范围
 
@@ -168,13 +250,13 @@ text.cellTouchedAction = ^(OCBarrageDescriptor *descriptor, OCBarrageCell *cell)
 - 标准水平线性动画支持错峰和同类相交轨道的速度约束；暂停／继续同步调度时间，复用重置图层时钟。
 - 修复 Demo 内置 YYKit 的比较表达式和默认竖排容器布局，安全处理空文本及无效栅格化尺寸。
 
-2026-11-14 在上述环境中执行 **21 项单元测试和 1 项 UI 测试，全部通过**。覆盖轨道位置与快慢速度、逐条发送、生命周期、复用、点击重入、默认竖排，以及 Demo 的真实触控操作与模式切换。
+2026-11-14 在上述环境中执行 **25 项单元测试和 1 项 UI 测试，全部通过**。覆盖轨道位置与快慢速度、逐条发送、生命周期、复用、点击重入、默认竖排，Demo 的真实触控操作与模式切换、标签及 GIF 资源复用、综合模式单次发送数量；另包含固定负载耗时记录。
 
 边界：
 
 - 不同 cell 类之间、自定义路径／非线性／竖向动画之间不保证无重叠；不能把 Demo 的快慢规则推广到所有自定义动画。
 - 繁忙轨道可能排队，未新增通用容量控制或丢弃策略。
-- 未完成真机、全尺寸、旧 iOS 实机兼容性或性能基准验证。历史“5000 条弹幕”描述不是本次实测结论。
+- 未完成真机帧率、全尺寸、旧 iOS 实机兼容性或大规模压力测试。历史“5000 条弹幕”描述不是本次实测结论。
 
 ## 文档与许可证
 
