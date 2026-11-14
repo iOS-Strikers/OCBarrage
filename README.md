@@ -1,149 +1,181 @@
 # OCBarrage
 
-A barrage render-engine with high performance for iOS. At the same time, rendering 5000 barrages is also very smooth, lightweight, scalable, you can add animation whatever you want! Ultra high performance, simple and easy to use!
-Underlying `OCBarrage` used `Core Animation` framework to drive, use `Core Graphics` to draw, GPU to render, ultra high performance! You can add animation whatever you want, meet your diverse needs for animation!
+基于 Objective-C、Core Animation 和 Core Graphics 的 iOS 弹幕渲染库，支持文字、图文、GIF 和自定义路径动画。通过描述符配置内容，由渲染器负责布局、动画和 cell 复用。
 
-## Demonstration
+An extensible iOS barrage renderer with reusable cells and custom Core Animation effects. The demo includes staggered lane playback, vertical text layout, and mixed effects.
 
- ![同时渲染5000条弹幕.gif](http://upload-images.jianshu.io/upload_images/1674413-46935364f778e159.gif?imageMogr2/auto-orient/strip)
- 
- ![demonstration.gif](https://github.com/w1531724247/OCBarrage/blob/master/OCBarrage/Demonstration/demonstration.gif?raw=true)
- 
- ![walkBarrage.gif](https://github.com/w1531724247/OCBarrage/blob/master/OCBarrage/Demonstration/walkBarrage.gif?raw=true)
- 
- ![mixedImageAndText.gif](https://github.com/w1531724247/OCBarrage/blob/master/OCBarrage/Demonstration/mixedImageAndText.gif?raw=true)
- 
- ![stopover.gif](https://github.com/w1531724247/OCBarrage/blob/master/OCBarrage/Demonstration/stopover.gif?raw=true)
+## Demo：先看效果
 
+打开 `OCBarrage.xcodeproj`，选择 **OCBarrage** scheme 和 iOS 模拟器运行。启动后直接进入“弹幕实验室”，无需先点中转页面。工程内已包含 Demo 使用的 YYKit 源码，不需要先安装 Pods。
 
-Installation
-==============
+| 模式 | 展示内容 | 播放方式 |
+| --- | --- | --- |
+| 轨道错峰 | 各轨道逐条入场，奇数轨道慢、偶数轨道快 | 点击“开始播放” |
+| 竖排文字 | 默认竖排容器，从右向左排列各列，包含组合字符和 emoji | 静态预览，播放按钮禁用 |
+| 综合演示 | 文字、图文、GIF、礼物和自定义动画 | 点击“开始播放”；不同效果可能重叠 |
+
+### 奇偶轨道速度与逐条入场
+
+轨道按**实际画面从上往下**编号，从 **1** 开始：
+
+| 轨道 | 移动速度 | 标识与颜色 |
+| --- | --- | --- |
+| 第 1、3、5、7 条 | **60 pt/s** | “01 慢”等，暖黄色 |
+| 第 2、4、6、8 条 | **110 pt/s** | “02 快”等，浅绿色 |
+
+- 点击开始时只发送第 1 条弹幕，之后每隔约 **0.65 秒**向下一条轨道发送一条，轮到最后一条后回到第 1 条。不会一次性把全部轨道填满。
+- 每条轨道占用 **40 pt** 高的行带，按画布高度显示，最多 8 条；轨道位置使用 `renderRange` 固定，速度不会因为渲染器随机选行而交换。
+- 使用固定移动速度，文字长短只影响完整通过画布所需的时间，不改变 pt/s。
+- 0.65 秒是 Demo 的**发送间隔**。渲染器仍会加入短暂入场延迟，并在同类相交轨道繁忙时排队，因此不是保证每条都在该时刻进入可见区域。
+
+以上是 [Demo 的配置](OCBarrage/ViewController.m)，不是库对所有调用方强制采用的策略。
+
+### 播放控制
+
+| 操作 | 行为 |
+| --- | --- |
+| 开始播放 | 立即发送第一条；播放时按钮禁用，防止重复创建发送任务 |
+| 暂停 | 冻结弹幕位移动画，取消后续发送，保留当前发送序列；GIF 等自定义内容的内部动画需自行管理 |
+| 继续播放 | 从暂停位置继续；不立即补发整批弹幕，下一次发送延续原轨道序列 |
+| 停止 | 清空弹幕、取消发送，并将发送序列复位；再次开始从第 1 条轨道开始 |
+| 切换模式 | 先停止并清空旧模式；切到动态模式后需重新点击开始 |
+| 离开页面／进入后台 | 离开页面停止；应用进入非活跃状态时暂停，回来后手动继续 |
+
+播放按钮固定在底部安全区域，内容区支持滚动。竖排模式展示的是**文字排版方向**，与综合模式中“从上往下移动”的动画是两种不同效果。
+
+### 新版 Xcode 运行与测试
+
+项目及 podspec 保留 `iOS 8.0` 部署声明，但本次验证使用 **Xcode 27.2、iPhone 17 Pro / iOS 26.5**。该工具链不支持原 iOS 8 部署目标，需要在本次模拟器构建时覆盖最低版本；这不代表已验证旧系统兼容性。
+
+在仓库根目录执行以下命令，替换为本机可用模拟器的 UDID：
+
+```sh
+# 若 Xcode 不在此路径，请调整；仅影响当前终端会话。
+export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+xcrun simctl list devices available
+
+xcodebuild -project OCBarrage.xcodeproj -scheme OCBarrage \
+  -destination 'platform=iOS Simulator,id=YOUR_SIMULATOR_UDID' \
+  IPHONEOS_DEPLOYMENT_TARGET=15.0 CODE_SIGNING_ALLOWED=NO build
+
+xcodebuild -project OCBarrage.xcodeproj -scheme OCBarrage \
+  -destination 'platform=iOS Simulator,id=YOUR_SIMULATOR_UDID' \
+  -only-testing:OCBarrageTests -only-testing:OCBarrageUITests \
+  IPHONEOS_DEPLOYMENT_TARGET=15.0 CODE_SIGNING_ALLOWED=NO test
+```
+
+在 Xcode 界面中运行时，也需为相应构建配置设置当前工具链支持的 Deployment Target。签名关闭参数仅用于这里的模拟器验证，不适用于真机发布。
+
+## 安装到自己的项目
+
+### 使用当前仓库源码
+
+将 [`OCBarrage/OCBarrage`](OCBarrage/OCBarrage) 中的 `.h`、`.m` 文件加入项目，启用 ARC，并导入：
+
+```objc
+#import "OCBarrage.h"
+```
+
+核心库与 Demo 分离：`OtherDescriptorAndCells` 中的扩展示例、图片资源以及内置 YYKit 不属于核心库。使用图文、GIF、竖排示例时，需要一并集成相应实现及依赖。
 
 ### CocoaPods
 
-1. Add `pod 'OCBarrage'` to your Podfile.
-2. Run `pod install` or `pod update`.
-3. Import `OCBarrage.h`.
+```ruby
+pod 'OCBarrage'
+```
 
-### Manually
+执行 `pod install` 后导入 `OCBarrage.h`。**发布版本与当前仓库修改需区分**：仓库 podspec 仍为 `1.0.5`，本轮修改未发布新的 Pod 版本；普通安装不能据此认为已经包含本轮修复。需要当前代码时可先将仓库克隆到本地，再使用路径依赖：
 
-1. Download all the files in the `OCBarrage` subdirectory.
-2. Add the source files to your Xcode project.
-3. Import `OCBarrage.h`.
+```ruby
+pod 'OCBarrage', :path => '../OCBarrage'
+```
 
-Documentation
-==============
-[iOS弹幕库OCBarrage-如何hold住每秒5000条巨量弹幕](http://www.jianshu.com/p/6593778a85e4)
+## 快速接入
 
-Requirements
-==============
-This library requires `iOS 8.0+` and `Xcode 8.0+`.
+在主线程创建并持有 manager，先给渲染视图设置有效大小，再发送弹幕：
 
-License
-==============
-OCBarrage is provided under the MIT license. See LICENSE file for details.
+```objc
+// 控制器属性，保持 manager 的生命周期。
+@property (nonatomic, strong) OCBarrageManager *barrageManager;
 
-## Communities
-QQ group：263384911 
+// 视图初始化时：
+self.barrageManager = [[OCBarrageManager alloc] init];
+self.barrageManager.renderView.frame = CGRectMake(0, 100, 320, 240);
+[self.view addSubview:self.barrageManager.renderView];
+[self.barrageManager start];
 
-<br/><br/>
----
-中文介绍
-==============
-iOS弹幕库OCBarrage, 同时渲染5000条弹幕也不卡, 轻量, 可拓展, 高度自定义动画, 超高性能, 简单易上手. 
-`OCBarrage`底层使用`Core Animation`驱动, `Core Graphics`绘图, GPU渲染, 性能极高, 哪怕是同时渲染5000条弹幕也不会感觉到卡顿. 可以自定义各种属性动画及路径动画, 满足您对动画的多样化需求.
+OCBarrageTextDescriptor *text = [[OCBarrageTextDescriptor alloc] init];
+text.text = @"你好，OCBarrage";
+text.textFont = [UIFont systemFontOfSize:20];
+text.textColor = [UIColor whiteColor];
+text.animationDuration = 6;
+text.barrageCellClass = [OCBarrageTextCell class];
+[self.barrageManager renderBarrageDescriptor:text];
+```
 
-安装
-==============
+尺寸变化时更新 `renderView.frame`。暂停、继续、停止分别调用 manager 的 `pause`、`resume`、`stop`。如果业务侧有定时发送器，也必须同步暂停或取消：**库管理动画，不会替调用方取消自己的计时任务**。
 
-### CocoaPods
+### 配置速度与固定轨道
 
-1. 在 Podfile 中添加  `pod 'OCBarrage'`。
-2. 执行 `pod install` 或 `pod update`。
-3. 导入 "OCBarrage.h"。
+对于标准 `OCBarrageTextCell`：`animationDuration` 控制完整动画时长；`fixedSpeed > 0` 时优先使用固定速度，且最大值会被限制为 100。现有实现的换算为：
 
-### 手动安装
+```text
+实际移动速度（pt/s）= UIScreen.mainScreen.scale × 2 × fixedSpeed
+```
 
-1. 下载 OCBarrage 文件夹内的所有内容。
-2. 将 OCBarrage 内的源文件添加(拖放)到你的工程。
-3. 导入 `OCBarrage.h`。
+例如将弹幕固定到第 2 条 40pt 高的行带，并设置 110 pt/s：
 
-文档
-==============
-你可以在 [iOS弹幕库OCBarrage-如何hold住每秒5000条巨量弹幕](http://www.jianshu.com/p/6593778a85e4) 查看代码结构, 原理及用法.
-有问题大家可以留言!
+```objc
+text.renderRange = NSMakeRange(40, 80);
+text.fixedSpeed = 110.0 / (UIScreen.mainScreen.scale * 2.0);
+```
 
-使用用法
-==============
-- 第一步: 
+**`renderRange` 是历史 API 的特殊约定：`location` 表示 Y 下界，`length` 表示 Y 上界，不是通常 NSRange 的区间长度。** 因此上例表示 `[40, 80]`，不是 `[40, 120]`。`NSMakeRange(0, 0)` 表示使用默认范围；行带必须能容纳整个 cell 的高度。
 
-为新的弹幕类型新建一个数据模型 例如:`OCBarrageWalkBannerDescriptor`. 这个类必须继承自`OCBarrageDescriptor`类.
+### 点击回调
 
-![OCBarrageWalkBannerDescriptor.png](http://upload-images.jianshu.io/upload_images/1674413-0251b7e565efa91d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+```objc
+text.cellTouchedAction = ^(OCBarrageDescriptor *descriptor, OCBarrageCell *cell) {
+    NSLog(@"点击了弹幕：%@", cell);
+};
+```
 
- 这样就创建新的弹幕类型的数据模型类, 我们可以在这个类里面添加新的弹幕属性例如:`bannerLeftImageSrc`, `bannerMiddleColor`, `bannerRightImageSrc`等等.
+使用 `cellTouchedAction`，旧 `touchAction` 已标记为弃用。回调在释放活动列表锁后同步执行，可以重入暂停或停止；业务回调仍应避免耗时操作。
 
-- 第二步:
+## 自定义弹幕
 
-为新的弹幕类型创建建一个数据展示视图例如:`OCBarrageWalkBannerCell`. 这个新的弹幕类型的展示视图必须继承自`OCBarrageTextCell`类. 
+1. 继承 `OCBarrageDescriptor` 添加数据；文字类可继承 `OCBarrageTextDescriptor`。
+2. 继承 `OCBarrageCell` 创建视图；需要复用文字能力时继承 `OCBarrageTextCell`。
+3. 在 `setBarrageDescriptor:` 中调用 `super`，再保存自定义描述符。
+4. 用 `updateSubviewsData` 更新内容，`layoutContentSubviews` 计算布局。
+5. `convertContentToImage` 可将静态内容合成为图片；GIF 等动态内容可保留自己的子视图，并相应重写 `removeSubViewsAndSublayers`。
+6. 需要自定义运动时重写 `addBarrageAnimationWithDelegate:`，正确设置动画代理和动画引用；在 `prepareForReuse` 中调用 `super` 并清理自定义状态。
 
-![OCBarrageWalkBannerCell.png](http://upload-images.jianshu.io/upload_images/1674413-1732637b662eab3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+示例见 [`OtherDescriptorAndCells`](OCBarrage/OtherDescriptorAndCells)。历史效果图保存在仓库内，与当前 Demo 布局不同：
 
-在这个新的展示视图里我们可以添加展示相应数据的子视图,例如:`leftImageView`, `middleImageView`, `rightImageView`.
-并为这个新的视图类添加一个相应的数据模型类的属性`OCBarrageWalkBannerDescriptor *walkBannerDescriptor`来传递数据.
+![历史综合弹幕效果](OCBarrage/Demonstration/demonstration.gif)
 
-- 第三步:
-重写新视图`OCBarrageWalkBannerCell`的`- (void)setBarrageDescriptor:(OCBarrageDescriptor *)barrageDescriptor`方法. 并只能在这个方法里为`walkBannerDescriptor`属性赋值, 在这个方法里必须要调用`[super setBarrageDescriptor:barrageDescriptor]`方法, 不然`barrageDescriptor`属性将没有值, 并且部分属性设置将不生效.`OCBarrageCell`本身有一个`barrageDescriptor`属性引用数据模型. 但是为了方便拓展我们选择在第二步里为`OCBarrageWalkBannerCell`添加一个新的数据属性`walkBannerDescriptor`. 实质上`OCBarrageWalkBannerCell`的`barrageDescriptor`属性和`walkBannerDescriptor`指向的是同一个`walkBannerDescriptor`对象.
+[走动横幅](OCBarrage/Demonstration/walkBarrage.gif) · [图文混排](OCBarrage/Demonstration/mixedImageAndText.gif) · [礼物停留](OCBarrage/Demonstration/stopover.gif)
 
-![setBarrageDescriptor.png](http://upload-images.jianshu.io/upload_images/1674413-b08fa2f3d44ec2a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+## 修复与验证范围
 
-- 第四步:
+当前代码包含：
 
-重写新视图`OCBarrageWalkBannerCell`的`- (void)updateSubviewsData`方法. 渲染引擎在渲染弹幕视图之前会自动调用这个方法. 我们可以在这个方法里为子视图设置数据
+- 修复停止再启动后的闲置清理、复用外观残留，以及点击回调重入导致的锁等待。
+- 修复非法尺寸、旧轨道索引、范围／行高变化及容器坐标问题。
+- 标准水平线性动画支持错峰和同类相交轨道的速度约束；暂停／继续同步调度时间，复用重置图层时钟。
+- 修复 Demo 内置 YYKit 的比较表达式和默认竖排容器布局，安全处理空文本及无效栅格化尺寸。
 
-![updateSubviewsData.png](http://upload-images.jianshu.io/upload_images/1674413-8117e628baf1bf44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240).
+2026-11-14 在上述环境中执行 **21 项单元测试和 1 项 UI 测试，全部通过**。覆盖轨道位置与快慢速度、逐条发送、生命周期、复用、点击重入、默认竖排，以及 Demo 的真实触控操作与模式切换。
 
-- 第五步:
+边界：
 
-在第四步设置好子视图的数据之后就可以计算并设置子视图的大小和位置.重写`- (void)layoutContentSubviews`方法, 并在这个方法里布局子视图的位置.渲染引擎会在调用`- (void)updateSubviewsData`方法之后自动调用`- (void)layoutContentSubviews`方法, 这个方法必须在主线程执行.
+- 不同 cell 类之间、自定义路径／非线性／竖向动画之间不保证无重叠；不能把 Demo 的快慢规则推广到所有自定义动画。
+- 繁忙轨道可能排队，未新增通用容量控制或丢弃策略。
+- 未完成真机、全尺寸、旧 iOS 实机兼容性或性能基准验证。历史“5000 条弹幕”描述不是本次实测结论。
 
-![layoutContentSubviews.png](http://upload-images.jianshu.io/upload_images/1674413-8a1e07313efaa516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+## 文档与许可证
 
-- 第六步:
-
-在布局好子视图的位置之后, 如果想要提高性能可以调用`- (void)convertContentToImage`方法, 将可以图像化的视图合成一张图片展示在cell的layer上, 渲染引擎会在调用`- (void)layoutContentViews`方法之后自动调用`- (void)convertContentToImage`方法, 这个方法必须在主线程执行.
-
-![convertContentToImage.png](http://upload-images.jianshu.io/upload_images/1674413-4e3d9c967a63e610.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-如果不想将子视图的内容转化成图片只需重写`- (void)convertContentToImage`并留空即可:
-
-![convertContentToImage.png](http://upload-images.jianshu.io/upload_images/1674413-4229570c31da70c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-- 第七步:
-
-如果想要进一步优化内存和性能, 可以重写`- (void)removeSubViewsAndSublayers`方法, 删除之前添加的的subView和sublayer, 并将子视图置为`nil`. 
-
-![removeSubViewsAndSublayers.png](http://upload-images.jianshu.io/upload_images/1674413-c97727b51893f69d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-如果既想提高性能, 又有一些无法图片化的内容(例如:gif)需要展示, 可以重写`- (void)removeSubViewsAndSublayers`方法, 但不调用`[super removeSubViewsAndSublayers]`方法, 并选择性的删除一些子视图, 保留一些子视图.
-
- 如果不想删除子视图, 只需重写`- (void)removeSubViewsAndSublayers`方法并留空即可:
-
-![removeSubViewsAndSublayers.png](http://upload-images.jianshu.io/upload_images/1674413-0b672a860c309083.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-系统要求
-==============
-该项目最低支持 `iOS 8.0` 和 `Xcode 8.0`。
-
-
-注意
-==============
-为了保证您在使用的过程中尽量减少不必要的麻烦, 强烈推荐您查看[详细文档](http://www.jianshu.com/p/6593778a85e4)
-
-许可证
-==============
-OCBarrage 使用 MIT 许可证，详情见 LICENSE 文件。
-
-## 社区
-欢迎加群讨论
-QQ群：263384911
+- 历史设计文章：[iOS 弹幕库 OCBarrage](https://www.jianshu.com/p/6593778a85e4)
+- [MIT License](LICENSE)
+- 原项目交流群：263384911
