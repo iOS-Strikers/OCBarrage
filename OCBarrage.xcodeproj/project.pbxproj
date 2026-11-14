@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5767BA4D1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA4A1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m */; };
-		5767BA4E1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */; };
 		5767BA501F5804B800EBA7C1 /* noble_background_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5767BA4F1F5804B800EBA7C1 /* noble_background_image@2x.png */; };
 		5767BA531F580F4F00EBA7C1 /* stopover.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BA521F580F4F00EBA7C1 /* stopover.gif */; };
 		5767BB081F5811D300EBA7C1 /* NSArray+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BA5B1F5811D300EBA7C1 /* NSArray+YYAdd.m */; };
@@ -108,37 +106,24 @@
 		5767BB751F5812CD00EBA7C1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5767BB741F5812CD00EBA7C1 /* libz.tbd */; };
 		5767BB771F5812D300EBA7C1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5767BB761F5812D300EBA7C1 /* libsqlite3.tbd */; };
 		5767BB7B1F5816F900EBA7C1 /* xuanzhuan.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB7A1F5816F900EBA7C1 /* xuanzhuan.gif */; };
-		5767BB801F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BB7F1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m */; };
-		5767BB831F58317000EBA7C1 /* OCBarrageGifCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BB821F58316F00EBA7C1 /* OCBarrageGifCell.m */; };
-		5767BB861F58320900EBA7C1 /* OCBarrageGifDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5767BB851F58320900EBA7C1 /* OCBarrageGifDescriptor.m */; };
 		5767BB881F58361400EBA7C1 /* demoIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB871F58361400EBA7C1 /* demoIcon@2x.png */; };
 		5767BB8E1F583DDD00EBA7C1 /* demonstration.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB8D1F583DDD00EBA7C1 /* demonstration.gif */; };
 		5767BB901F583EB200EBA7C1 /* walkBarrage.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB8F1F583EB200EBA7C1 /* walkBarrage.gif */; };
 		5767BB921F583F6000EBA7C1 /* mixedImageAndText.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5767BB911F583F6000EBA7C1 /* mixedImageAndText.gif */; };
-		577F95E81F55625600B989FA /* CALayer+OCBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95E71F55625600B989FA /* CALayer+OCBarrage.m */; };
-		577F95F81F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F11F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m */; };
-		577F95F91F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F31F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m */; };
-		577F95FA1F5572B700B989FA /* OCBarrageWalkBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F51F5572B700B989FA /* OCBarrageWalkBannerCell.m */; };
-		577F95FB1F5572B700B989FA /* OCBarrageWalkBannerDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 577F95F71F5572B700B989FA /* OCBarrageWalkBannerDescriptor.m */; };
 		577F96031F5587B400B989FA /* chaoren_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 577F96011F5587B400B989FA /* chaoren_left@2x.png */; };
 		577F96041F5587B400B989FA /* chaoren_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 577F96021F5587B400B989FA /* chaoren_right@2x.png */; };
-		57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57969F4F1F4ECC8C0028C955 /* RootViewController.m */; };
-		57B4CEEF1F4FBC52001BF31F /* OCBarrageTrackInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B4CEEE1F4FBC52001BF31F /* OCBarrageTrackInfo.m */; };
-		57D513E71F4E964300B2E8A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513E61F4E964300B2E8A7 /* main.m */; };
-		57D513EA1F4E964300B2E8A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513E91F4E964300B2E8A7 /* AppDelegate.m */; };
-		57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513EC1F4E964300B2E8A7 /* ViewController.m */; };
 		57D513F01F4E964300B2E8A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57D513EE1F4E964300B2E8A7 /* Main.storyboard */; };
 		57D513F51F4E964300B2E8A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57D513F31F4E964300B2E8A7 /* LaunchScreen.storyboard */; };
-		57D514001F4E964300B2E8A7 /* OCBarrageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D513FF1F4E964300B2E8A7 /* OCBarrageTests.m */; };
-		57D5140B1F4E964300B2E8A7 /* OCBarrageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D5140A1F4E964300B2E8A7 /* OCBarrageUITests.m */; };
-		57D514261F4E967700B2E8A7 /* OCBarrageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D5141A1F4E967700B2E8A7 /* OCBarrageCell.m */; };
-		57D514271F4E967700B2E8A7 /* OCBarrageDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D5141C1F4E967700B2E8A7 /* OCBarrageDescriptor.m */; };
-		57D514281F4E967700B2E8A7 /* OCBarrageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D5141F1F4E967700B2E8A7 /* OCBarrageManager.m */; };
-		57D514291F4E967700B2E8A7 /* OCBarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D514211F4E967700B2E8A7 /* OCBarrageRenderView.m */; };
-		57D5142A1F4E967700B2E8A7 /* OCBarrageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D514231F4E967700B2E8A7 /* OCBarrageTextCell.m */; };
-		57D5142B1F4E967700B2E8A7 /* OCBarrageTextDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D514251F4E967700B2E8A7 /* OCBarrageTextDescriptor.m */; };
-		57F8BCB91FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F8BCB81FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m */; };
-		57F8BCBC1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F8BCBB1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m */; };
+		51A7F958DB0E52677E004FB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64C2C82F0BF10BE5BE0F3F /* ViewController.swift */; };
+		C27C212D1CA8EEAD625D5F0B /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4827A48A6DAF72DF3E1607D9 /* RootViewController.swift */; };
+		8CB4BCEBF0441E367A1C3D5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC48C2E0DB1C6FE2EF2D29D7 /* AppDelegate.swift */; };
+		41A4C4A2AF070EE86601EF37 /* OCBarrageDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A17F011A000AD89F5B49540 /* OCBarrageDescriptor.swift */; };
+		02BA8DFC8A05B3696C0E3F1B /* OCBarrageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2997737364E10199EDF882D /* OCBarrageCell.swift */; };
+		5B5FA5559E5ADF959F03A4E1 /* OCBarrageRenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CF199DDC343DA5E1E5403 /* OCBarrageRenderView.swift */; };
+		2DF736197F18145BDFB2B688 /* OCBarrageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA39E31DE1B2B13DC9DE78C /* OCBarrageManager.swift */; };
+		4C3BD4ABC625F22C79BAA77E /* DemoCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77FF04274B18F7C554204B /* DemoCells.swift */; };
+		05E3210075896FABAFBE6819 /* OCBarrageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA99B9F2B86B2AF64CE00C3 /* OCBarrageTests.swift */; };
+		796391835FF456FAC76FB211 /* OCBarrageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E0CB16863446278D7C9700 /* OCBarrageUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,10 +144,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5767BA491F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageBecomeNobleCell.h; sourceTree = "<group>"; };
-		5767BA4A1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageBecomeNobleCell.m; sourceTree = "<group>"; };
-		5767BA4B1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageBecomeNobleDescriptor.h; sourceTree = "<group>"; };
-		5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageBecomeNobleDescriptor.m; sourceTree = "<group>"; };
 		5767BA4F1F5804B800EBA7C1 /* noble_background_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noble_background_image@2x.png"; sourceTree = "<group>"; };
 		5767BA521F580F4F00EBA7C1 /* stopover.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = stopover.gif; sourceTree = "<group>"; };
 		5767BA5A1F5811D300EBA7C1 /* NSArray+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+YYAdd.h"; sourceTree = "<group>"; };
@@ -345,65 +326,30 @@
 		5767BB741F5812CD00EBA7C1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5767BB761F5812D300EBA7C1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		5767BB7A1F5816F900EBA7C1 /* xuanzhuan.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xuanzhuan.gif; sourceTree = "<group>"; };
-		5767BB7E1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageMixedImageAndTextCell.h; sourceTree = "<group>"; };
-		5767BB7F1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageMixedImageAndTextCell.m; sourceTree = "<group>"; };
-		5767BB811F58316F00EBA7C1 /* OCBarrageGifCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGifCell.h; sourceTree = "<group>"; };
-		5767BB821F58316F00EBA7C1 /* OCBarrageGifCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGifCell.m; sourceTree = "<group>"; };
-		5767BB841F58320900EBA7C1 /* OCBarrageGifDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGifDescriptor.h; sourceTree = "<group>"; };
-		5767BB851F58320900EBA7C1 /* OCBarrageGifDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGifDescriptor.m; sourceTree = "<group>"; };
 		5767BB871F58361400EBA7C1 /* demoIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demoIcon@2x.png"; sourceTree = "<group>"; };
 		5767BB8D1F583DDD00EBA7C1 /* demonstration.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = demonstration.gif; sourceTree = "<group>"; };
 		5767BB8F1F583EB200EBA7C1 /* walkBarrage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = walkBarrage.gif; sourceTree = "<group>"; };
 		5767BB911F583F6000EBA7C1 /* mixedImageAndText.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mixedImageAndText.gif; sourceTree = "<group>"; };
-		577F95E61F55625600B989FA /* CALayer+OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+OCBarrage.h"; sourceTree = "<group>"; };
-		577F95E71F55625600B989FA /* CALayer+OCBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+OCBarrage.m"; sourceTree = "<group>"; };
-		577F95F01F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorCell.h; sourceTree = "<group>"; };
-		577F95F11F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGradientBackgroundColorCell.m; sourceTree = "<group>"; };
-		577F95F21F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageGradientBackgroundColorDescriptor.h; sourceTree = "<group>"; };
-		577F95F31F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageGradientBackgroundColorDescriptor.m; sourceTree = "<group>"; };
-		577F95F41F5572B700B989FA /* OCBarrageWalkBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageWalkBannerCell.h; sourceTree = "<group>"; };
-		577F95F51F5572B700B989FA /* OCBarrageWalkBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageWalkBannerCell.m; sourceTree = "<group>"; };
-		577F95F61F5572B700B989FA /* OCBarrageWalkBannerDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageWalkBannerDescriptor.h; sourceTree = "<group>"; };
-		577F95F71F5572B700B989FA /* OCBarrageWalkBannerDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageWalkBannerDescriptor.m; sourceTree = "<group>"; };
 		577F96011F5587B400B989FA /* chaoren_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chaoren_left@2x.png"; sourceTree = "<group>"; };
 		577F96021F5587B400B989FA /* chaoren_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chaoren_right@2x.png"; sourceTree = "<group>"; };
-		57969F4E1F4ECC8C0028C955 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		57969F4F1F4ECC8C0028C955 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		579E33101F507EDD0073C5DC /* OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrage.h; sourceTree = "<group>"; };
-		57B4CEED1F4FBC52001BF31F /* OCBarrageTrackInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTrackInfo.h; sourceTree = "<group>"; };
-		57B4CEEE1F4FBC52001BF31F /* OCBarrageTrackInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTrackInfo.m; sourceTree = "<group>"; };
 		57D513E21F4E964300B2E8A7 /* OCBarrage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCBarrage.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		57D513E61F4E964300B2E8A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		57D513E81F4E964300B2E8A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		57D513E91F4E964300B2E8A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		57D513EB1F4E964300B2E8A7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		57D513EC1F4E964300B2E8A7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		57D513EF1F4E964300B2E8A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		57D513F41F4E964300B2E8A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57D513F61F4E964300B2E8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57D513FB1F4E964300B2E8A7 /* OCBarrageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OCBarrageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		57D513FF1F4E964300B2E8A7 /* OCBarrageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTests.m; sourceTree = "<group>"; };
 		57D514011F4E964300B2E8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57D514061F4E964300B2E8A7 /* OCBarrageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OCBarrageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		57D5140A1F4E964300B2E8A7 /* OCBarrageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBarrageUITests.m; sourceTree = "<group>"; };
 		57D5140C1F4E964300B2E8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		57D514191F4E967700B2E8A7 /* OCBarrageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageCell.h; sourceTree = "<group>"; };
-		57D5141A1F4E967700B2E8A7 /* OCBarrageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageCell.m; sourceTree = "<group>"; };
-		57D5141B1F4E967700B2E8A7 /* OCBarrageDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageDescriptor.h; sourceTree = "<group>"; };
-		57D5141C1F4E967700B2E8A7 /* OCBarrageDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageDescriptor.m; sourceTree = "<group>"; };
-		57D5141D1F4E967700B2E8A7 /* OCBarrageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageHeader.h; sourceTree = "<group>"; };
-		57D5141E1F4E967700B2E8A7 /* OCBarrageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageManager.h; sourceTree = "<group>"; };
-		57D5141F1F4E967700B2E8A7 /* OCBarrageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageManager.m; sourceTree = "<group>"; };
-		57D514201F4E967700B2E8A7 /* OCBarrageRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageRenderView.h; sourceTree = "<group>"; };
-		57D514211F4E967700B2E8A7 /* OCBarrageRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageRenderView.m; sourceTree = "<group>"; };
-		57D514221F4E967700B2E8A7 /* OCBarrageTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTextCell.h; sourceTree = "<group>"; };
-		57D514231F4E967700B2E8A7 /* OCBarrageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTextCell.m; sourceTree = "<group>"; };
-		57D514241F4E967700B2E8A7 /* OCBarrageTextDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTextDescriptor.h; sourceTree = "<group>"; };
-		57D514251F4E967700B2E8A7 /* OCBarrageTextDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTextDescriptor.m; sourceTree = "<group>"; };
-		57F8BCB71FFF707F00D3897B /* OCBarrageVerticalAnimationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCBarrageVerticalAnimationCell.h; sourceTree = "<group>"; };
-		57F8BCB81FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBarrageVerticalAnimationCell.m; sourceTree = "<group>"; };
-		57F8BCBA1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCBarrageVerticalTextDescriptor.h; sourceTree = "<group>"; };
-		57F8BCBB1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBarrageVerticalTextDescriptor.m; sourceTree = "<group>"; };
+		1E64C2C82F0BF10BE5BE0F3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrage/ViewController.swift"; sourceTree = SOURCE_ROOT; };
+		4827A48A6DAF72DF3E1607D9 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrage/RootViewController.swift"; sourceTree = SOURCE_ROOT; };
+		DC48C2E0DB1C6FE2EF2D29D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrage/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
+		5A17F011A000AD89F5B49540 /* OCBarrageDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrage/OCBarrage/OCBarrageDescriptor.swift"; sourceTree = SOURCE_ROOT; };
+		D2997737364E10199EDF882D /* OCBarrageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrage/OCBarrage/OCBarrageCell.swift"; sourceTree = SOURCE_ROOT; };
+		003CF199DDC343DA5E1E5403 /* OCBarrageRenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrage/OCBarrage/OCBarrageRenderView.swift"; sourceTree = SOURCE_ROOT; };
+		CFA39E31DE1B2B13DC9DE78C /* OCBarrageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrage/OCBarrage/OCBarrageManager.swift"; sourceTree = SOURCE_ROOT; };
+		9C77FF04274B18F7C554204B /* DemoCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrage/OtherDescriptorAndCells/DemoCells.swift"; sourceTree = SOURCE_ROOT; };
+		9AA99B9F2B86B2AF64CE00C3 /* OCBarrageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrageTests/OCBarrageTests.swift"; sourceTree = SOURCE_ROOT; };
+		88E0CB16863446278D7C9700 /* OCBarrageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCBarrageUITests/OCBarrageUITests.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -769,28 +715,6 @@
 		579E33111F507FF30073C5DC /* OtherDescriptorAndCells */ = {
 			isa = PBXGroup;
 			children = (
-				577F95F01F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.h */,
-				577F95F11F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m */,
-				577F95F21F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.h */,
-				577F95F31F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m */,
-				577F95F41F5572B700B989FA /* OCBarrageWalkBannerCell.h */,
-				577F95F51F5572B700B989FA /* OCBarrageWalkBannerCell.m */,
-				577F95F61F5572B700B989FA /* OCBarrageWalkBannerDescriptor.h */,
-				577F95F71F5572B700B989FA /* OCBarrageWalkBannerDescriptor.m */,
-				5767BA491F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.h */,
-				5767BA4A1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m */,
-				5767BA4B1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.h */,
-				5767BA4C1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m */,
-				5767BB7E1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.h */,
-				5767BB7F1F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m */,
-				5767BB811F58316F00EBA7C1 /* OCBarrageGifCell.h */,
-				5767BB821F58316F00EBA7C1 /* OCBarrageGifCell.m */,
-				5767BB841F58320900EBA7C1 /* OCBarrageGifDescriptor.h */,
-				5767BB851F58320900EBA7C1 /* OCBarrageGifDescriptor.m */,
-				57F8BCB71FFF707F00D3897B /* OCBarrageVerticalAnimationCell.h */,
-				57F8BCB81FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m */,
-				57F8BCBA1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.h */,
-				57F8BCBB1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m */,
 			);
 			path = OtherDescriptorAndCells;
 			sourceTree = "<group>";
@@ -798,6 +722,16 @@
 		57D513D91F4E964300B2E8A7 = {
 			isa = PBXGroup;
 			children = (
+				1E64C2C82F0BF10BE5BE0F3F /* ViewController.swift */,
+				4827A48A6DAF72DF3E1607D9 /* RootViewController.swift */,
+				DC48C2E0DB1C6FE2EF2D29D7 /* AppDelegate.swift */,
+				5A17F011A000AD89F5B49540 /* OCBarrageDescriptor.swift */,
+				D2997737364E10199EDF882D /* OCBarrageCell.swift */,
+				003CF199DDC343DA5E1E5403 /* OCBarrageRenderView.swift */,
+				CFA39E31DE1B2B13DC9DE78C /* OCBarrageManager.swift */,
+				9C77FF04274B18F7C554204B /* DemoCells.swift */,
+				9AA99B9F2B86B2AF64CE00C3 /* OCBarrageTests.swift */,
+				88E0CB16863446278D7C9700 /* OCBarrageUITests.swift */,
 				57D513E41F4E964300B2E8A7 /* OCBarrage */,
 				57D513FE1F4E964300B2E8A7 /* OCBarrageTests */,
 				57D514091F4E964300B2E8A7 /* OCBarrageUITests */,
@@ -824,12 +758,6 @@
 				577F96001F5587B400B989FA /* Sources */,
 				579E33111F507FF30073C5DC /* OtherDescriptorAndCells */,
 				57D514181F4E967700B2E8A7 /* OCBarrage */,
-				57D513E81F4E964300B2E8A7 /* AppDelegate.h */,
-				57D513E91F4E964300B2E8A7 /* AppDelegate.m */,
-				57969F4E1F4ECC8C0028C955 /* RootViewController.h */,
-				57969F4F1F4ECC8C0028C955 /* RootViewController.m */,
-				57D513EB1F4E964300B2E8A7 /* ViewController.h */,
-				57D513EC1F4E964300B2E8A7 /* ViewController.m */,
 				57D513E51F4E964300B2E8A7 /* Supporting Files */,
 			);
 			path = OCBarrage;
@@ -841,7 +769,6 @@
 				57D513F61F4E964300B2E8A7 /* Info.plist */,
 				57D513EE1F4E964300B2E8A7 /* Main.storyboard */,
 				57D513F31F4E964300B2E8A7 /* LaunchScreen.storyboard */,
-				57D513E61F4E964300B2E8A7 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -849,7 +776,6 @@
 		57D513FE1F4E964300B2E8A7 /* OCBarrageTests */ = {
 			isa = PBXGroup;
 			children = (
-				57D513FF1F4E964300B2E8A7 /* OCBarrageTests.m */,
 				57D514011F4E964300B2E8A7 /* Info.plist */,
 			);
 			path = OCBarrageTests;
@@ -858,7 +784,6 @@
 		57D514091F4E964300B2E8A7 /* OCBarrageUITests */ = {
 			isa = PBXGroup;
 			children = (
-				57D5140A1F4E964300B2E8A7 /* OCBarrageUITests.m */,
 				57D5140C1F4E964300B2E8A7 /* Info.plist */,
 			);
 			path = OCBarrageUITests;
@@ -867,24 +792,6 @@
 		57D514181F4E967700B2E8A7 /* OCBarrage */ = {
 			isa = PBXGroup;
 			children = (
-				577F95E61F55625600B989FA /* CALayer+OCBarrage.h */,
-				577F95E71F55625600B989FA /* CALayer+OCBarrage.m */,
-				57D514191F4E967700B2E8A7 /* OCBarrageCell.h */,
-				57D5141A1F4E967700B2E8A7 /* OCBarrageCell.m */,
-				57D5141B1F4E967700B2E8A7 /* OCBarrageDescriptor.h */,
-				57D5141C1F4E967700B2E8A7 /* OCBarrageDescriptor.m */,
-				57D5141D1F4E967700B2E8A7 /* OCBarrageHeader.h */,
-				57D5141E1F4E967700B2E8A7 /* OCBarrageManager.h */,
-				57D5141F1F4E967700B2E8A7 /* OCBarrageManager.m */,
-				57B4CEED1F4FBC52001BF31F /* OCBarrageTrackInfo.h */,
-				57B4CEEE1F4FBC52001BF31F /* OCBarrageTrackInfo.m */,
-				57D514201F4E967700B2E8A7 /* OCBarrageRenderView.h */,
-				57D514211F4E967700B2E8A7 /* OCBarrageRenderView.m */,
-				57D514241F4E967700B2E8A7 /* OCBarrageTextDescriptor.h */,
-				57D514251F4E967700B2E8A7 /* OCBarrageTextDescriptor.m */,
-				57D514221F4E967700B2E8A7 /* OCBarrageTextCell.h */,
-				57D514231F4E967700B2E8A7 /* OCBarrageTextCell.m */,
-				579E33101F507EDD0073C5DC /* OCBarrage.h */,
 			);
 			path = OCBarrage;
 			sourceTree = "<group>";
@@ -1031,35 +938,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51A7F958DB0E52677E004FB0 /* ViewController.swift in Sources */,
+				C27C212D1CA8EEAD625D5F0B /* RootViewController.swift in Sources */,
+				8CB4BCEBF0441E367A1C3D5C /* AppDelegate.swift in Sources */,
+				41A4C4A2AF070EE86601EF37 /* OCBarrageDescriptor.swift in Sources */,
+				02BA8DFC8A05B3696C0E3F1B /* OCBarrageCell.swift in Sources */,
+				5B5FA5559E5ADF959F03A4E1 /* OCBarrageRenderView.swift in Sources */,
+				2DF736197F18145BDFB2B688 /* OCBarrageManager.swift in Sources */,
+				4C3BD4ABC625F22C79BAA77E /* DemoCells.swift in Sources */,
 				5767BB091F5811D300EBA7C1 /* NSBundle+YYAdd.m in Sources */,
-				57F8BCB91FFF707F00D3897B /* OCBarrageVerticalAnimationCell.m in Sources */,
 				5767BB531F5811D300EBA7C1 /* YYSentinel.m in Sources */,
 				5767BB121F5811D300EBA7C1 /* NSObject+YYAddForKVO.m in Sources */,
 				5767BB421F5811D300EBA7C1 /* NSAttributedString+YYText.m in Sources */,
-				577F95E81F55625600B989FA /* CALayer+OCBarrage.m in Sources */,
-				577F95F91F5572B700B989FA /* OCBarrageGradientBackgroundColorDescriptor.m in Sources */,
 				5767BB411F5811D300EBA7C1 /* YYTextSelectionView.m in Sources */,
-				5767BB831F58317000EBA7C1 /* OCBarrageGifCell.m in Sources */,
-				57D514281F4E967700B2E8A7 /* OCBarrageManager.m in Sources */,
 				5767BB161F5811D300EBA7C1 /* CALayer+YYAdd.m in Sources */,
 				5767BB261F5811D300EBA7C1 /* YYCache.m in Sources */,
-				577F95F81F5572B700B989FA /* OCBarrageGradientBackgroundColorCell.m in Sources */,
 				5767BB1D1F5811D300EBA7C1 /* UIDevice+YYAdd.m in Sources */,
 				5767BB301F5811D300EBA7C1 /* YYFrameImage.m in Sources */,
 				5767BB561F5811D300EBA7C1 /* YYTimer.m in Sources */,
 				5767BB251F5811D300EBA7C1 /* UIView+YYAdd.m in Sources */,
-				577F95FB1F5572B700B989FA /* OCBarrageWalkBannerDescriptor.m in Sources */,
 				5767BB231F5811D300EBA7C1 /* UITableView+YYAdd.m in Sources */,
 				5767BB3D1F5811D300EBA7C1 /* YYTextKeyboardManager.m in Sources */,
 				5767BB2A1F5811D300EBA7C1 /* _YYWebImageSetter.m in Sources */,
 				5767BB551F5811D300EBA7C1 /* YYThreadSafeDictionary.m in Sources */,
-				57D5142A1F4E967700B2E8A7 /* OCBarrageTextCell.m in Sources */,
 				5767BB4E1F5811D300EBA7C1 /* YYDispatchQueuePool.m in Sources */,
 				5767BB501F5811D300EBA7C1 /* YYGestureRecognizer.m in Sources */,
-				57D514291F4E967700B2E8A7 /* OCBarrageRenderView.m in Sources */,
 				5767BB1F1F5811D300EBA7C1 /* UIGestureRecognizer+YYAdd.m in Sources */,
-				57D514261F4E967700B2E8A7 /* OCBarrageCell.m in Sources */,
-				5767BA4D1F57FA7000EBA7C1 /* OCBarrageBecomeNobleCell.m in Sources */,
 				5767BB1C1F5811D300EBA7C1 /* UIControl+YYAdd.m in Sources */,
 				5767BB511F5811D300EBA7C1 /* YYKeychain.m in Sources */,
 				5767BB281F5811D300EBA7C1 /* YYKVStorage.m in Sources */,
@@ -1067,7 +971,6 @@
 				5767BB241F5811D300EBA7C1 /* UITextField+YYAdd.m in Sources */,
 				5767BB081F5811D300EBA7C1 /* NSArray+YYAdd.m in Sources */,
 				5767BB0C1F5811D300EBA7C1 /* NSDictionary+YYAdd.m in Sources */,
-				5767BB801F58185800EBA7C1 /* OCBarrageMixedImageAndTextCell.m in Sources */,
 				5767BB111F5811D300EBA7C1 /* NSObject+YYAddForARC.m in Sources */,
 				5767BB141F5811D300EBA7C1 /* NSThread+YYAdd.m in Sources */,
 				5767BB321F5811D300EBA7C1 /* YYImageCache.m in Sources */,
@@ -1075,58 +978,47 @@
 				5767BB351F5811D300EBA7C1 /* YYWebImageManager.m in Sources */,
 				5767BB3C1F5811D300EBA7C1 /* YYTextInput.m in Sources */,
 				5767BB2B1F5811D300EBA7C1 /* CALayer+YYWebImage.m in Sources */,
-				57969F501F4ECC8C0028C955 /* RootViewController.m in Sources */,
 				5767BB311F5811D300EBA7C1 /* YYImage.m in Sources */,
 				5767BB4C1F5811D300EBA7C1 /* YYTextView.m in Sources */,
-				5767BB861F58320900EBA7C1 /* OCBarrageGifDescriptor.m in Sources */,
 				5767BB2C1F5811D300EBA7C1 /* MKAnnotationView+YYWebImage.m in Sources */,
 				5767BB191F5811D300EBA7C1 /* UIBarButtonItem+YYAdd.m in Sources */,
 				5767BB401F5811D300EBA7C1 /* YYTextMagnifier.m in Sources */,
-				57D513ED1F4E964300B2E8A7 /* ViewController.m in Sources */,
 				5767BB381F5811D300EBA7C1 /* YYClassInfo.m in Sources */,
 				5767BB1A1F5811D300EBA7C1 /* UIBezierPath+YYAdd.m in Sources */,
 				5767BB291F5811D300EBA7C1 /* YYMemoryCache.m in Sources */,
 				5767BB181F5811D300EBA7C1 /* UIApplication+YYAdd.m in Sources */,
 				5767BB471F5811D300EBA7C1 /* YYTextParser.m in Sources */,
-				577F95FA1F5572B700B989FA /* OCBarrageWalkBannerCell.m in Sources */,
 				5767BB521F5811D300EBA7C1 /* YYReachability.m in Sources */,
 				5767BB151F5811D300EBA7C1 /* NSTimer+YYAdd.m in Sources */,
 				5767BB211F5811D300EBA7C1 /* UIScreen+YYAdd.m in Sources */,
 				5767BB491F5811D300EBA7C1 /* YYTextRunDelegate.m in Sources */,
-				57D5142B1F4E967700B2E8A7 /* OCBarrageTextDescriptor.m in Sources */,
 				5767BB221F5811D300EBA7C1 /* UIScrollView+YYAdd.m in Sources */,
-				57F8BCBC1FFF70AD00D3897B /* OCBarrageVerticalTextDescriptor.m in Sources */,
 				5767BB4B1F5811D300EBA7C1 /* YYLabel.m in Sources */,
 				5767BB3A1F5811D300EBA7C1 /* YYTextDebugOption.m in Sources */,
 				5767BB361F5811D300EBA7C1 /* YYWebImageOperation.m in Sources */,
 				5767BB481F5811D300EBA7C1 /* YYTextRubyAnnotation.m in Sources */,
 				5767BB101F5811D300EBA7C1 /* NSObject+YYAdd.m in Sources */,
 				5767BB541F5811D300EBA7C1 /* YYThreadSafeArray.m in Sources */,
-				57D514271F4E967700B2E8A7 /* OCBarrageDescriptor.m in Sources */,
 				5767BB451F5811D300EBA7C1 /* YYTextArchiver.m in Sources */,
 				5767BB581F5811D300EBA7C1 /* YYWeakProxy.m in Sources */,
 				5767BB4F1F5811D300EBA7C1 /* YYFileHash.m in Sources */,
 				5767BB0B1F5811D300EBA7C1 /* NSDate+YYAdd.m in Sources */,
-				57D513EA1F4E964300B2E8A7 /* AppDelegate.m in Sources */,
 				5767BB4D1F5811D300EBA7C1 /* YYAsyncLayer.m in Sources */,
 				5767BB0F1F5811D300EBA7C1 /* NSNumber+YYAdd.m in Sources */,
 				5767BB1E1F5811D300EBA7C1 /* UIFont+YYAdd.m in Sources */,
 				5767BB0A1F5811D300EBA7C1 /* NSData+YYAdd.m in Sources */,
 				5767BB0D1F5811D300EBA7C1 /* NSKeyedUnarchiver+YYAdd.m in Sources */,
-				57B4CEEF1F4FBC52001BF31F /* OCBarrageTrackInfo.m in Sources */,
 				5767BB3B1F5811D300EBA7C1 /* YYTextEffectWindow.m in Sources */,
 				5767BB2D1F5811D300EBA7C1 /* UIButton+YYWebImage.m in Sources */,
 				5767BB2E1F5811D300EBA7C1 /* UIImageView+YYWebImage.m in Sources */,
 				5767BB0E1F5811D300EBA7C1 /* NSNotificationCenter+YYAdd.m in Sources */,
 				5767BB2F1F5811D300EBA7C1 /* YYAnimatedImageView.m in Sources */,
-				5767BA4E1F57FA7000EBA7C1 /* OCBarrageBecomeNobleDescriptor.m in Sources */,
 				5767BB4A1F5811D300EBA7C1 /* YYTextUtilities.m in Sources */,
 				5767BB1B1F5811D300EBA7C1 /* UIColor+YYAdd.m in Sources */,
 				5767BB341F5811D300EBA7C1 /* YYSpriteSheetImage.m in Sources */,
 				5767BB571F5811D300EBA7C1 /* YYTransaction.m in Sources */,
 				5767BB441F5811D300EBA7C1 /* UIPasteboard+YYText.m in Sources */,
 				5767BB391F5811D300EBA7C1 /* YYTextContainerView.m in Sources */,
-				57D513E71F4E964300B2E8A7 /* main.m in Sources */,
 				5767BB271F5811D300EBA7C1 /* YYDiskCache.m in Sources */,
 				5767BB461F5811D300EBA7C1 /* YYTextAttribute.m in Sources */,
 				5767BB431F5811D300EBA7C1 /* NSParagraphStyle+YYText.m in Sources */,
@@ -1142,7 +1034,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57D514001F4E964300B2E8A7 /* OCBarrageTests.m in Sources */,
+				05E3210075896FABAFBE6819 /* OCBarrageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1150,7 +1042,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57D5140B1F4E964300B2E8A7 /* OCBarrageUITests.m in Sources */,
+				796391835FF456FAC76FB211 /* OCBarrageUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1192,6 +1084,10 @@
 		57D5140D1F4E964300B2E8A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1230,7 +1126,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1241,6 +1137,9 @@
 		57D5140E1F4E964300B2E8A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_VERSION = 6.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1273,7 +1172,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1284,11 +1183,32 @@
 		57D514101F4E964300B2E8A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OBJC_BRIDGING_HEADER = "OCBarrage/OCBarrage-Bridging-Header.h";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/Foundation",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/Quartz",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/UIKit",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Cache",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Image",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Image/Categories",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Model",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text/Component",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text/String",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Utility",
+				);
+				DEFINES_MODULE = YES;
+				SWIFT_VERSION = 6.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 4K5N79DF8Y;
 				INFOPLIST_FILE = OCBarrage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lfc.OCBarrage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1298,10 +1218,30 @@
 		57D514111F4E964300B2E8A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_OBJC_BRIDGING_HEADER = "OCBarrage/OCBarrage-Bridging-Header.h";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/Foundation",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/Quartz",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/UIKit",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Cache",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Image",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Image/Categories",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Model",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text/Component",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text/String",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Utility",
+				);
+				DEFINES_MODULE = YES;
+				SWIFT_VERSION = 6.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4K5N79DF8Y;
 				INFOPLIST_FILE = OCBarrage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lfc.OCBarrage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1311,6 +1251,27 @@
 		57D514131F4E964300B2E8A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OBJC_BRIDGING_HEADER = "OCBarrage/OCBarrage-Bridging-Header.h";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/Foundation",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/Quartz",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/UIKit",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Cache",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Image",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Image/Categories",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Model",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text/Component",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text/String",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Utility",
+				);
+				DEFINES_MODULE = YES;
+				SWIFT_VERSION = 6.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = OCBarrageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1323,6 +1284,26 @@
 		57D514141F4E964300B2E8A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_OBJC_BRIDGING_HEADER = "OCBarrage/OCBarrage-Bridging-Header.h";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/Foundation",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/Quartz",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Base/UIKit",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Cache",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Image",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Image/Categories",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Model",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text/Component",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Text/String",
+					"$(SRCROOT)/OCBarrage/ThirdPartyLibraries/YYKit/Utility",
+				);
+				DEFINES_MODULE = YES;
+				SWIFT_VERSION = 6.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = OCBarrageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1335,6 +1316,10 @@
 		57D514161F4E964300B2E8A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
 				INFOPLIST_FILE = OCBarrageUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quanmin.OCBarrageUITests;
@@ -1346,6 +1331,9 @@
 		57D514171F4E964300B2E8A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_VERSION = 6.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
 				INFOPLIST_FILE = OCBarrageUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quanmin.OCBarrageUITests;

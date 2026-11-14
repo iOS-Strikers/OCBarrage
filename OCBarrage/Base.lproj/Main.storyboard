@@ -28,7 +28,7 @@
         <!--Root View Controller-->
         <scene sceneID="wOH-5h-aPz">
             <objects>
-                <viewController id="a9k-IA-0sX" customClass="RootViewController" sceneMemberID="viewController">
+                <viewController id="a9k-IA-0sX" customClass="RootViewController" customModule="OCBarrage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6L9-aM-u0a"/>
                         <viewControllerLayoutGuide type="bottom" id="SXX-oe-i6Y"/>
