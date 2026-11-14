@@ -50,6 +50,8 @@ static UIFont *OCBarrageDemoFont(CGFloat size, OCBarrageDemoWeight weight) {
 @property (nonatomic, strong) UIButton *stopButton;
 @property (nonatomic, assign) NSUInteger emissionTick;
 @property (nonatomic, assign) int stopY;
+@property (nonatomic, strong) YYImage *demoIconImage;
+@property (nonatomic, strong) YYImage *demoGifImage;
 @end
 
 @implementation ViewController
@@ -194,7 +196,7 @@ static UIFont *OCBarrageDemoFont(CGFloat size, OCBarrageDemoWeight weight) {
         [self emitDemoBarrage];
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(emissionHeartbeat) object:nil];
-    [self performSelector:@selector(emissionHeartbeat) withObject:nil afterDelay:self.modeControl.selectedSegmentIndex == 0 ? 0.65 : 0.5];
+    [self performSelector:@selector(emissionHeartbeat) withObject:nil afterDelay:self.modeControl.selectedSegmentIndex == 0 ? 0.65 : 1.0 / 7.0];
     [self updateControls];
 }
 
@@ -202,9 +204,8 @@ static UIFont *OCBarrageDemoFont(CGFloat size, OCBarrageDemoWeight weight) {
     if (!self.view.window || self.barrageManager.renderView.renderStatus != OCBarrageRenderStarted) return;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(emissionHeartbeat) object:nil];
     self.emissionTick++;
-    NSUInteger interval = self.modeControl.selectedSegmentIndex == 0 ? 1 : 2;
-    if (self.emissionTick % interval == 0) [self emitDemoBarrage];
-    [self performSelector:@selector(emissionHeartbeat) withObject:nil afterDelay:self.modeControl.selectedSegmentIndex == 0 ? 0.65 : 0.5];
+    [self emitDemoBarrage];
+    [self performSelector:@selector(emissionHeartbeat) withObject:nil afterDelay:self.modeControl.selectedSegmentIndex == 0 ? 0.65 : 1.0 / 7.0];
 }
 
 - (void)emitDemoBarrage {
@@ -226,13 +227,17 @@ static UIFont *OCBarrageDemoFont(CGFloat size, OCBarrageDemoWeight weight) {
         descriptor.barrageCellClass = [OCBarrageTextCell class];
         [self.barrageManager renderBarrageDescriptor:descriptor];
     } else if (self.modeControl.selectedSegmentIndex == 2) {
-        [self addNormalBarrage];
-        [self addFixedSpeedAnimationCell];
-        if (self.emissionTick % 4 == 0) [self addMixedImageAndTextBarrage];
-        if (self.emissionTick % 6 == 0) [self addWalkBannerBarrage];
-        if (self.emissionTick % 8 == 0) [self addGifBarrage];
-        if (self.emissionTick % 10 == 0) [self addStopoverBarrage];
-        [self addVerticalAnimationCell];
+        // 一秒分七个时隙，每次最多准备一种效果，避免同一帧集中绘制和解码。
+        NSUInteger cycle = self.emissionTick / 7;
+        switch (self.emissionTick % 7) {
+            case 0: [self addNormalBarrage]; break;
+            case 1: [self addFixedSpeedAnimationCell]; break;
+            case 2: [self addVerticalAnimationCell]; break;
+            case 3: if (cycle % 2 == 0) [self addMixedImageAndTextBarrage]; break;
+            case 4: if (cycle % 3 == 0) [self addWalkBannerBarrage]; break;
+            case 5: if (cycle % 4 == 0) [self addGifBarrage]; break;
+            case 6: if (cycle % 5 == 0) [self addStopoverBarrage]; break;
+        }
     }
 }
 
@@ -333,19 +338,19 @@ static UIFont *OCBarrageDemoFont(CGFloat size, OCBarrageDemoWeight weight) {
 - (void)addMixedImageAndTextBarrage {
     OCBarrageTextDescriptor *imageAndTextDescriptor = [[OCBarrageTextDescriptor alloc] init];
     
-    CGFloat rate = 7.0;
-    NSString *path = [[NSBundle mainBundle] pathForScaledResource:@"demoIcon" ofType:@"png"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    YYImage *image = [YYImage imageWithData:data scale:rate];
-    image.preloadAllAnimatedImageFrames = YES;
+    // 同一资源只解码一次；每条弹幕仍使用独立 view，避免抢占 attachment。
+    if (!self.demoIconImage) {
+        NSString *path = [[NSBundle mainBundle] pathForScaledResource:@"demoIcon" ofType:@"png"];
+        self.demoIconImage = [YYImage imageWithData:[NSData dataWithContentsOfFile:path] scale:7];
+    }
+    YYImage *image = self.demoIconImage;
     YYAnimatedImageView *imageView = [[YYAnimatedImageView alloc] initWithImage:image];
     
     NSMutableAttributedString *mAttributedString = [NSMutableAttributedString attachmentStringWithContent:imageView contentMode:UIViewContentModeCenter attachmentSize:imageView.size alignToFont:[UIFont boldSystemFontOfSize:25.0] alignment:YYTextVerticalAlignmentCenter];
     
     [mAttributedString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"~OCBarrage~"] attributes:@{NSForegroundColorAttributeName:kRandomColor}]];
     
-    YYImage *image2 = [YYImage imageWithData:data scale:rate];
-    image2.preloadAllAnimatedImageFrames = YES;
+    YYImage *image2 = image;
     YYAnimatedImageView *imageView2 = [[YYAnimatedImageView alloc] initWithImage:image2];
     
     NSMutableAttributedString *attachText2 = [NSMutableAttributedString attachmentStringWithContent:imageView2 contentMode:UIViewContentModeCenter attachmentSize:imageView2.size alignToFont:[UIFont boldSystemFontOfSize:25.0] alignment:YYTextVerticalAlignmentCenter];
@@ -353,8 +358,6 @@ static UIFont *OCBarrageDemoFont(CGFloat size, OCBarrageDemoWeight weight) {
     
     [mAttributedString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"~OCBarrage~"] attributes:@{NSForegroundColorAttributeName:kRandomColor}]];
     
-    YYImage *image3 = [YYImage imageWithData:data scale:rate];
-    image3.preloadAllAnimatedImageFrames = YES;
     YYAnimatedImageView *imageView3 = [[YYAnimatedImageView alloc] initWithImage:image2];
     
     NSMutableAttributedString *attachText3 = [NSMutableAttributedString attachmentStringWithContent:imageView3 contentMode:UIViewContentModeCenter attachmentSize:imageView3.size alignToFont:[UIFont boldSystemFontOfSize:25.0] alignment:YYTextVerticalAlignmentCenter];
@@ -389,10 +392,11 @@ static UIFont *OCBarrageDemoFont(CGFloat size, OCBarrageDemoWeight weight) {
 - (void)addGifBarrage {
     OCBarrageGifDescriptor *gifDescriptor = [[OCBarrageGifDescriptor alloc] init];
     
-    NSString *path = [[NSBundle mainBundle] pathForScaledResource:@"xuanzhuan" ofType:@"gif"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    YYImage *image = [YYImage imageWithData:data scale:4];
-    gifDescriptor.image = image;
+    if (!self.demoGifImage) {
+        NSString *path = [[NSBundle mainBundle] pathForScaledResource:@"xuanzhuan" ofType:@"gif"];
+        self.demoGifImage = [YYImage imageWithData:[NSData dataWithContentsOfFile:path] scale:4];
+    }
+    gifDescriptor.image = self.demoGifImage;
     gifDescriptor.positionPriority = OCBarragePositionHigh;
     gifDescriptor.animationDuration = arc4random()%5 + 5;
     gifDescriptor.barrageCellClass = [OCBarrageGifCell class];

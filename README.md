@@ -30,6 +30,8 @@ An extensible iOS barrage renderer with reusable cells and custom Core Animation
 
 以上是 [Demo 的配置](OCBarrage/ViewController.m)，不是库对所有调用方强制采用的策略。
 
+综合模式将一秒拆成七个发送时隙，每次最多准备一种效果，避免文字、图片和 GIF 同时生成造成瞬时卡顿。Demo 内固定图片和 GIF 解码资源在页面内复用；动画 view 仍各自独立，不预解码全部 GIF 帧。文字 cell 保留离屏 UILabel 复用，上屏继续使用位图。
+
 ### 播放控制
 
 | 操作 | 行为 |

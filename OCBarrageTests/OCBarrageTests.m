@@ -4,6 +4,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "../OCBarrage/OtherDescriptorAndCells/OCBarrageGifCell.h"
 #import "../OCBarrage/ViewController.h"
 #import "../OCBarrage/OCBarrage/OCBarrageManager.h"
 
@@ -11,6 +12,9 @@
 - (void)startBarrage;
 - (void)pasueBarrage;
 - (void)stopBarrage;
+- (void)addGifBarrage;
+- (void)emitDemoBarrage;
+- (void)addMixedImageAndTextBarrage;
 @end
 #import "../OCBarrage/OCBarrage/OCBarrageRenderView.h"
 #import "../OCBarrage/OCBarrage/OCBarrageTextCell.h"
@@ -763,6 +767,85 @@
     [controller stopBarrage];
     window.hidden = YES;
     [previous makeKeyAndVisible];
+}
+
+- (void)testTextCellReusesLabelAndResetsShadow {
+    OCBarrageTextCell *cell = [[OCBarrageTextCell alloc] init];
+    OCBarrageTextDescriptor *first = [[OCBarrageTextDescriptor alloc] init];
+    first.text = @"shadow";
+    first.textShadowOpened = YES;
+    cell.barrageDescriptor = first;
+    [cell updateSubviewsData];
+    UILabel *label = cell.textLabel;
+    [cell layoutContentSubviews];
+    [cell convertContentToImage];
+    [cell removeSubViewsAndSublayers];
+    XCTAssertNil(label.superview);
+    [cell prepareForReuse];
+    OCBarrageTextDescriptor *second = [[OCBarrageTextDescriptor alloc] init];
+    second.text = @"plain";
+    cell.barrageDescriptor = second;
+    [cell updateSubviewsData];
+    XCTAssertEqual(cell.textLabel, label, @"复用 cell 时不应重新创建 UILabel");
+    XCTAssertEqual(cell.textLabel.superview, cell);
+    XCTAssertEqual(cell.textLabel.layer.shadowOpacity, 0);
+    XCTAssertEqualObjects(cell.textLabel.attributedText.string, @"plain");
+}
+
+- (void)testDemoReusesDecodedGif {
+    ViewController *controller = [[ViewController alloc] init];
+    [controller loadViewIfNeeded];
+    [controller.view layoutIfNeeded];
+    OCBarrageManager *manager = [controller valueForKey:@"barrageManager"];
+    manager.renderView.frame = CGRectMake(0, 0, 400, 600);
+    [manager start];
+    [controller addGifBarrage];
+    OCBarrageGifCell *first = (id)manager.renderView.animatingCells.lastObject;
+    [controller addGifBarrage];
+    OCBarrageGifCell *second = (id)manager.renderView.animatingCells.lastObject;
+    XCTAssertNotNil(first.gifDescriptor.image);
+    XCTAssertEqual(first.gifDescriptor.image, second.gifDescriptor.image);
+    [controller stopBarrage];
+}
+
+- (void)testPerformanceRepeatedDemoPreparation {
+    ViewController *controller = [[ViewController alloc] init];
+    [controller loadViewIfNeeded];
+    [controller.view layoutIfNeeded];
+    OCBarrageManager *manager = [controller valueForKey:@"barrageManager"];
+    manager.renderView.frame = CGRectMake(0, 0, 400, 600);
+    [manager start];
+    // 固定重复负载，包含首次加载；逐轮停止以排除动画数量差异。
+    CFTimeInterval start = CACurrentMediaTime();
+    for (NSUInteger i = 0; i < 30; i++) {
+        @autoreleasepool {
+            [controller addGifBarrage];
+            [controller addMixedImageAndTextBarrage];
+            [manager stop];
+            [manager start];
+        }
+    }
+    NSLog(@"PERF_DEMO_30_MS=%.3f", (CACurrentMediaTime() - start) * 1000);
+    [controller stopBarrage];
+}
+
+- (void)testMixedDemoPreparesAtMostOneCellPerTick {
+    ViewController *controller = [[ViewController alloc] init];
+    [controller loadViewIfNeeded];
+    [controller.view layoutIfNeeded];
+    OCBarrageManager *manager = [controller valueForKey:@"barrageManager"];
+    manager.renderView.frame = CGRectMake(0, 0, 400, 600);
+    UISegmentedControl *mode = [controller valueForKey:@"modeControl"];
+    mode.selectedSegmentIndex = 2;
+    [manager start];
+    for (NSUInteger tick = 0; tick < 7; tick++) {
+        [controller setValue:@(tick) forKey:@"emissionTick"];
+        NSUInteger before = manager.renderView.animatingCells.count;
+        [controller emitDemoBarrage];
+        XCTAssertEqual(manager.renderView.animatingCells.count, before + 1,
+                       @"综合模式首轮应分七次发送，每次只准备一种效果");
+    }
+    [controller stopBarrage];
 }
 
 @end

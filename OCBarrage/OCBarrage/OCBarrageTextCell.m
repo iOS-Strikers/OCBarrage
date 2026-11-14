@@ -25,9 +25,10 @@
 }
 
 - (void)updateSubviewsData {
-    if (!_textLabel) {
+    if (self.textLabel.superview != self) {
         [self addSubview:self.textLabel];
     }
+    self.textLabel.layer.shadowOpacity = 0;
     if (self.textDescriptor.textShadowOpened) {
         self.textLabel.layer.shadowColor = self.textDescriptor.shadowColor.CGColor;
         self.textLabel.layer.shadowOffset = self.textDescriptor.shadowOffset;
@@ -39,7 +40,7 @@
 }
 
 - (void)layoutContentSubviews {
-    NSAttributedString *text = self.textDescriptor.attributedText;
+    NSAttributedString *text = self.textLabel.attributedText;
     if (text.length == 0) {
         self.textLabel.frame = CGRectZero;
         return;
@@ -56,7 +57,7 @@
 - (void)removeSubViewsAndSublayers {
     [super removeSubViewsAndSublayers];
     
-    _textLabel = nil;
+    // 保留离屏 label 供下一条复用；已上屏的 cell 仍只保留位图。
 }
 
 - (void)addBarrageAnimationWithDelegate:(id<CAAnimationDelegate>)animationDelegate {
